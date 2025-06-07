@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>il bAzAr LaMuBy</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #6e3b6e;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+    header p {
+      margin: 0.5rem 0 0;
+      font-style: italic;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .product {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .product h3 {
+      margin: 0.5rem 0;
+    }
+    .contact-button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.5rem 1.5rem;
+      background-color: #6e3b6e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.25);
+      z-index: 1000;
+      max-width: 90%;
+    }
+    .modal.active {
+      display: block;
+    }
+    .modal h3 {
+      margin-top: 0;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    .overlay.active {
+      display: block;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ddd;
+      font-size: 0.9rem;
+    }
+    .piva {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>il bAzAr LaMuBy</h1>
+    <p>- -Vendita di articoli usati- -</p>
+  </header>
+
+  <div class="container">
+    <h2>I nostri articoli</h2>
+    <div class="products">
+      <div class="product">
+        <img src="https://www.tecnosell.com/media/catalog/product/cache/60c31028333b516fd0f8945d994bb7aa/f/i/fisic2.jpg">
+        <h2>PlayStation 5</h2>
+        <p>Console PlayStation 5 con lettore disco usata poco e bene.</p>
+    <h2>Info</h2>    
+	<h2>Clicca su Contattaci</h2>
+	<h4>in fondo alla pagina</h4>
+	<p>articolo per esempio sito dimostrativo</p>
+      </div>
+      <div class="product">
+        <img src="https://media.adeo.com/mkp/70f0abcb924fffa6eaa0e0c398be0315/media.jpg?width=650&height=650&format=jpg&quality=80&fit=bounds">
+        <h2>TV 100 pollici</h2>
+        <p>TV 100 pollici usata pochissimo ...quasi mai accesa.</p>
+	<h2>Info</h2>    
+	<h2>Clicca su Contattaci</h2>
+	<h4>in fondo alla pagina</h4>
+	<p>articolo per esempio sito dimostrativo</p>
+      </div>
+      <div class="product">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg">
+        <h2>T-Shirt personalizzata</h2>
+        <p>T-Shirt persanalizzabile come vuoi tu.</p>
+	<h2>Info</h2>    
+	<h2>Clicca su Contattaci</h2>
+	<h4>in fondo alla pagina</h4>
+	<p>articolo per esempio sito dimostrativo</p>
+      </div>
+      <div class="product">
+        <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15">
+        <h2>Articolo 4</h2>
+        <p>Descrizione breve dell'articolo 4.</p>
+	<h2>Info</h2>    
+	<h2>Clicca su Contattaci</h2>
+	<h4>in fondo alla pagina</h4>
+	<p>articolo per esempio sito dimostrativo</p>
+      </div>
+      <div class="product">
+        <img src="https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg">
+        <h3>Prossimamente....</h3>
+        <p>Altri articoli nuovi...ma usati!.</p>
+	<h2>Torna a farci visita!!</h2>    
+      </div>
+    </div>
+
+    <button class="contact-button" onclick="toggleModal()">Contattaci</button>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="toggleModal()"></div>
+  <div class="modal" id="modal">
+    <h3>Chi siamo</h3>
+    <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
+    <p>Contattaci per maggiori informazioni!</p>
+    <p>Telefono: 33500000000</p>
+    <p>Email: laura............@gmail.com</p>
+  </div>
+  </div>
+
+  <footer>
+    &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
+    <div class="piva">P.IVA 04692000989</div>
+  </footer>
+
+  <script>
+    function toggleModal() {
+      document.getElementById('modal').classList.toggle('active');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
