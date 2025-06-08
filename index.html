@@ -116,42 +116,98 @@
       font-size: 0.8rem;
       color: #555;
     }
+    .highlight-blink {
+	 background-color: #ffeb3b;
+	color: #6e3b6e;
+	font-weight: bold;
+	padding: 0.3rem 0.6rem;
+	border-radius: 5px;
+	display: inline-block;
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+  background-color: #fff;
+}
+
+.animated-title {
+  overflow: hidden;
+  border-right: .15em solid white;
+  white-space: nowrap;
+  animation: typing 3s steps(20, end), blink-caret .75s step-end infinite;
+  font-size: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white }
+}
+
   </style>
 </head>
 <body>
   <header>
-    <h1>il bAzAr LaMuBy</h1>
-    <p>- -Vendita di articoli usati- -</p>
-  </header>
+  <div class="header-content">
+    <img src="lamuby_logo_bigtext.png" alt="Logo LaMuBy" class="logo">
+    <div>
+      <h1 class="animated-title">il bAzAr LaMuBy</h1>
+      <p>- - Vendita di articoli usati - -</p>
+    </div>
+  </div>
+</header>
+
 
   <div class="container">
     <h2>I nostri articoli</h2>
     <div class="products">
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/VYwKKYwK/fisic2.jpg', 'https://i.ibb.co/Y4f8NQGd/PS5-01.webp')">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/VYwKKYwK/fisic2.jpg', 'https://i.ibb.co/Y4f8NQGd/PS5-01.webp')">
         <img src="https://i.ibb.co/VYwKKYwK/fisic2.jpg" alt="PlayStation 5">
         <h2>PlayStation 5</h2>
         <p>Console PlayStation 5 con lettore disco usata poco e bene.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp', 'https://i.ibb.co/ccn1mGdg/samsung-ue65cu7090uxzt-tv-led-65-crystal-uhd-4k-smart-tv.jpg')">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp', 'https://i.ibb.co/ccn1mGdg/samsung-ue65cu7090uxzt-tv-led-65-crystal-uhd-4k-smart-tv.jpg')">
         <img src="https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp" alt="TV 65 pollici">
         <h2>TV 65 pollici</h2>
         <p>TV 65 pollici usata pochissimo ...quasi mai accesa.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg')">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg')">
         <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg" alt="T-Shirt personalizzata">
         <h2>T-Shirt personalizzata</h2>
         <p>T-Shirt personalizzabile come vuoi tu.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Articolo 4', 'Descrizione breve dell\'articolo 4..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15')">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Articolo 4', 'Descrizione breve dell\'articolo 4..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15')">
         <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15" alt="Articolo 4">
         <h2>Articolo 4</h2>
         <p>Descrizione breve dell'articolo 4.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
- <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Prossimamente....', 'Torna a farci visita!!', 'https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg', 'https://')">
+ <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Prossimamente....', 'Torna a farci visita!!', 'https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg')">
         <img src="https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg">
         <h2>Prossimamente...<br>altri articoli nuovi...ma usati!</h2>
         <p><br><b>Torna a farci visita!!</p>
@@ -174,14 +230,14 @@
     <button class="contact-button" onclick="toggleModal()">Contattaci</button>
   </div>
 
-  <div class="overlay" id="overlay" onclick="toggleModal()"></div>
-  <div class="modal" id="modal">
-    <h3>Chi siamo</h3>
-    <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
-    <p>Contattaci per maggiori informazioni sui prodotti!</p>
-    <p><b>Telefono: 33500000000</p>
-    <p><b>Email: lamuby........@gmail.com</p>
-  </div>
+  <div class="modal" id="modal" onclick="toggleModal()">
+  <h3>Chi siamo</h3>
+  <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
+  <p>Contattaci per maggiori informazioni sui prodotti!</p>
+  <p><b>Telefono: 33500000000</b></p>
+  <p><b>Email: lamuby........@gmail.com</b></p>
+</div>
+
 
   <footer>
     &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
