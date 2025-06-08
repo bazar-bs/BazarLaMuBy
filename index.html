@@ -42,6 +42,8 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
     }
     .product img {
       max-width: 100%;
@@ -49,8 +51,14 @@
       object-fit: cover;
       border-radius: 4px;
     }
-    .product h3 {
+    .product h3, .product h2 {
       margin: 0.5rem 0;
+    }
+    .product:hover,
+    .product.highlight {
+      background-color: #eee;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transform: scale(1.02);
     }
     .contact-button {
       display: block;
@@ -79,9 +87,6 @@
     .modal.active {
       display: block;
     }
-    .modal h3 {
-      margin-top: 0;
-    }
     .overlay {
       display: none;
       position: fixed;
@@ -94,6 +99,11 @@
     }
     .overlay.active {
       display: block;
+    }
+    #dettaglio-articolo img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
     }
     footer {
       text-align: center;
@@ -117,48 +127,48 @@
   <div class="container">
     <h2>I nostri articoli</h2>
     <div class="products">
-      <div class="product">
-        <a href="https://ibb.co/GQHhhQHh"><img src="https://i.ibb.co/VYwKKYwK/fisic2.jpg" alt="fisic2" border="0"></a>
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/VYwKKYwK/fisic2.jpg', 'https://i.ibb.co/Y4f8NQGd/PS5-01.webp')">
+        <img src="https://i.ibb.co/VYwKKYwK/fisic2.jpg" alt="PlayStation 5">
         <h2>PlayStation 5</h2>
-        <p>Console PlayStation 5 con lettore disco usata poco e bene.</p>
-    <h2>Info</h2>    
-	<h2>Clicca su Contattaci</h2>
-	<h4>in fondo alla pagina</h4>
-	<p>articolo per esempio sito dimostrativo</p>
+        <p>Console PlayStation 5 con lettore disco usata poco e bene.<br><br>articoli esempio sito dimostrativo</p>
       </div>
-      <div class="product">
-        <a href="https://ibb.co/mFGYT1JG"><img src="https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp" alt="Sony-KD-65-X85-LAEP-385036" border="0"></a>
+
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp', 'https://i.ibb.co/ccn1mGdg/samsung-ue65cu7090uxzt-tv-led-65-crystal-uhd-4k-smart-tv.jpg')">
+        <img src="https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp" alt="TV 65 pollici">
         <h2>TV 65 pollici</h2>
-        <p>TV 65 pollici usata pochissimo ...quasi mai accesa.</p>
-	<h2>Info</h2>    
-	<h2>Clicca su Contattaci</h2>
-	<h4>in fondo alla pagina</h4>
-	<p>articolo per esempio sito dimostrativo</p>
+        <p>TV 65 pollici usata pochissimo ...quasi mai accesa.<br><br>articoli esempio sito dimostrativo</p>
       </div>
-      <div class="product">
-        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg">
+
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg')">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg" alt="T-Shirt personalizzata">
         <h2>T-Shirt personalizzata</h2>
-        <p>T-Shirt persanalizzabile come vuoi tu.</p>
-	<h2>Info</h2>    
-	<h2>Clicca su Contattaci</h2>
-	<h4>in fondo alla pagina</h4>
-	<p>articolo per esempio sito dimostrativo</p>
+        <p>T-Shirt personalizzabile come vuoi tu.<br><br>articoli esempio sito dimostrativo</p>
       </div>
-      <div class="product">
-        <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15">
+
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Articolo 4', 'Descrizione breve dell\'articolo 4..<br><br><b>Info clicca su Contattaci<br>in fondo alla pagina', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15')">
+        <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15" alt="Articolo 4">
         <h2>Articolo 4</h2>
-        <p>Descrizione breve dell'articolo 4.</p>
-	<h2>Info</h2>    
-	<h2>Clicca su Contattaci</h2>
-	<h4>in fondo alla pagina</h4>
-	<p>articolo per esempio sito dimostrativo</p>
+        <p>Descrizione breve dell'articolo 4.<br><br>articoli esempio sito dimostrativo</p>
       </div>
-      <div class="product">
+
+ <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Prossimamente....', 'Torna a farci visita!!', 'https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg', 'https://')">
         <img src="https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg">
-        <h3>Prossimamente....</h3>
-        <p>Altri articoli nuovi...ma usati!.</p>
-	<h2>Torna a farci visita!!</h2>    
+        <h2>Prossimamente...<br>altri articoli nuovi...ma usati!</h2>
+        <p><br><b>Torna a farci visita!!</p>
       </div>
+
+    </div>
+
+
+
+    <!-- Dettaglio Articolo -->
+    <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;">
+      <h2 id="titolo-articolo"></h2>
+      <p id="descrizione-articolo"></p>
+      <img id="foto1-articolo" src="">
+      <img id="foto2-articolo" src="">
+      <br>
+      <button onclick="tornaAllaHome()" class="contact-button">Torna alla home</button>
     </div>
 
     <button class="contact-button" onclick="toggleModal()">Contattaci</button>
@@ -168,10 +178,9 @@
   <div class="modal" id="modal">
     <h3>Chi siamo</h3>
     <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
-    <p>Contattaci per maggiori informazioni sui i prodotti!</p>
-    <p>Telefono: 33500000000</p>
-    <p>Email: lamuby........@gmail.com</p>
-  </div>
+    <p>Contattaci per maggiori informazioni sui prodotti!</p>
+    <p><b>Telefono: 33500000000</p>
+    <p><b>Email: lamuby........@gmail.com</p>
   </div>
 
   <footer>
@@ -183,6 +192,27 @@
     function toggleModal() {
       document.getElementById('modal').classList.toggle('active');
       document.getElementById('overlay').classList.toggle('active');
+    }
+
+    function mostraDettaglio(titolo, descrizione, img1, img2) {
+      document.querySelector('.products').style.display = 'none';
+      document.getElementById('dettaglio-articolo').style.display = 'block';
+      document.getElementById('titolo-articolo').textContent = titolo;
+      document.getElementById('descrizione-articolo').innerHTML = descrizione;
+      document.getElementById('foto1-articolo').src = img1;
+      document.getElementById('foto2-articolo').src = img2;
+    }
+
+    function tornaAllaHome() {
+      document.getElementById('dettaglio-articolo').style.display = 'none';
+      document.querySelector('.products').style.display = 'grid';
+    }
+
+    function evidenzia(el) {
+      el.classList.add("highlight");
+      setTimeout(() => {
+        el.classList.remove("highlight");
+      }, 300);
     }
   </script>
 </body>
