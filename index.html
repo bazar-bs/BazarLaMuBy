@@ -5,81 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>il bAzAr LaMuBy</title>
   <style>
-
-input {
-    width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-
-#btn-svuota, #btn-procedi {
-    width: 50%;
-    padding: 0.8rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    margin: 0.5rem 0;
-    background: #6e3b6e; /* Stesso colore del pulsante "Chiudi" */
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#modal-spedizione {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    z-index: 1000;
-    max-width: 400px;
-    width: 90%;
-}
-
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    z-index: 1000;
-    max-width: 600px; /* Aumentato da 90% a 600px */
-    width: 70%;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-
-.modal.active, .overlay.active {
-    display: block;
-}
-
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -241,37 +166,9 @@ form {
   50% { border-color: white }
 }
 
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
-#carrello-btn {
-    display: inline-block;
-    margin: 10px auto;
-    padding: 1rem 2rem;
-    background-color: #6e3b6e;
-    color: white;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: center;
-    animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
-}
-
-#carrello-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-}
-
-
   </style>
 </head>
 <body>
-
-
   <header>
   <div class="header-content">
     <img src="lamuby_logo_bigtext.png" alt="Logo LaMuBy" class="logo">
@@ -282,118 +179,50 @@ form {
   </div>
 </header>
 
-<!-- Pulsante per aprire il carrello -->
-<button onclick="mostraCarrello()" id="carrello-btn" style="display: block; margin: 1rem auto; padding: 1rem 2rem; background-color: #6e3b6e; color: white; font-size: 1.2rem; border: none; border-radius: 8px; cursor: pointer;">
-    Carrello (<span id="contatore-carrello">0</span>)
-</button>
 
   <div class="container">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
-  <h2>I nostri articoli</h2>
-
-<!-- Overlay oscurante -->
-<div id="overlay-carrello" class="overlay"></div>
-
-<!-- Finestra centrale del carrello -->
-<div id="modal-carrello" class="modal">
-    <p style="text-align: center; font-size: 0.9rem;">Salvare 3516100235 nella rubrica per completare l'ordine</p>
-    <h2 style="text-align: center;">Il tuo carrello</h2>
-    <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
-    <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 10px;">Totale: €0.00</p>
-    <button id="btn-svuota" <button onclick="svuotaCarrello()" style="background: #d9534f; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 1rem auto;">Svuota Carrello</button>
-    <button id="btn-procedi"<button onclick="mostraModuloSpedizione()" style="background: #28a745; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;">Procedi</button>
-    <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;margin-top: 1.3rem;">Chiudi</button>
-</div>
-
-<!-- Finestra Modulo Spedizione -->
-<div id="modal-spedizione" class="modal">
-    <h2>Inserisci i dati di spedizione</h2>
-    <form id="form-spedizione">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" required>
-
-        <label for="indirizzo">Indirizzo:</label>
-        <input type="text" id="indirizzo" required>
-
-        <label for="telefono">Telefono:</label>
-        <input type="tel" id="telefono" required>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
-
-
-<!-- Pulsante per inviare l'ordine via WhatsApp -->
-    <button type="button" onclick="inviaOrdineWhatsApp()" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px;">
-         Invia Ordine via WhatsApp
-    </button>
-    
-    </form>
-    <button onclick="chiudiModuloSpedizione()" style="background: #d9534f; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;">Chiudi</button>
-</div>
-
-<!-- Popup di conferma ordine -->
-<div id="popup-conferma" class="modal">
-    <h2>✅ Ordine Confermato!</h2>
-    <p>Grazie per il tuo acquisto! Ti contatteremo a breve per il pagamento e la spedizione.</p>
-    <button onclick="chiudiPopupConferma()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;">Chiudi</button>
-</div>
-
-
-  </div>
+    <h2>I nostri articoli</h2>
     <div class="products">
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'ps51.jpg', 'ps52.webp', 'Prezzo: €350')">
-        <img src="ps51.jpg" alt="PlayStation 5">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/VYwKKYwK/fisic2.jpg', 'https://i.ibb.co/Y4f8NQGd/PS5-01.webp')">
+        <img src="https://i.ibb.co/VYwKKYwK/fisic2.jpg" alt="PlayStation 5">
         <h2>PlayStation 5</h2>
-	<p class="price"><strong>Prezzo: €350</strong></p>
         <p>Console PlayStation 5 con lettore disco usata poco e bene.<br><br>articoli esempio sito dimostrativo</p>
- 
-
-
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'tv1.webp', 'tv2.jpg', 'Prezzo: €400')">
-        <img src="tv1.webp" alt="TV 65 pollici">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp', 'https://i.ibb.co/ccn1mGdg/samsung-ue65cu7090uxzt-tv-led-65-crystal-uhd-4k-smart-tv.jpg')">
+        <img src="https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp" alt="TV 65 pollici">
         <h2>TV 65 pollici</h2>
-	<p class="price"><strong>Prezzo: €400</strong></p>
         <p>TV 65 pollici usata pochissimo ...quasi mai accesa.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'maglia1.png', 'maglia1.png', 'Prezzo: €15')">
-        <img src="maglia1.png" alt="T-Shirt personalizzata">
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg')">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg" alt="T-Shirt personalizzata">
         <h2>T-Shirt personalizzata</h2>
-	<p class="price"><strong>Prezzo: €15</strong></p>
         <p>T-Shirt personalizzabile come vuoi tu.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Tutina Sangallo (Cintura Inclusa)', 'Completo estivo per bambina elegante e fresco di colore verde acqua.<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'bambina1.jpg', 'bambina2.webp', 'Prezzo: €24.90')">
-        <img src="bambina1.jpg" alt="Tutina bambina (Cintura Inclusa)">
-        <h2>Tutina bambina</h2>
-	<p class="price"><strong>Prezzo: €24.90</strong></p>
-        <p>Completo estivo per bambina elegante e fresco di colore verde acqua.<br><br>articoli esempio sito dimostrativo</p>
+      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Articolo 4', 'Descrizione breve dell\'articolo 4..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15')">
+        <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15" alt="Articolo 4">
+        <h2>Articolo 4</h2>
+        <p>Descrizione breve dell'articolo 4.<br><br>articoli esempio sito dimostrativo</p>
       </div>
 
-
-<!articolo succesivo -->
-
-
-
+ <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Prossimamente....', 'Torna a farci visita!!', 'https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg')">
+        <img src="https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg">
+        <h2>Prossimamente...<br>altri articoli nuovi...ma usati!</h2>
+        <p><br><b>Torna a farci visita!!</p>
+      </div>
 
     </div>
+
+
 
     <!-- Dettaglio Articolo -->
     <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;">
       <h2 id="titolo-articolo"></h2>
-      <p id="prezzo-articolo" class="price" style="font-weight: bold; font-size: 1.2rem;"></p>
       <p id="descrizione-articolo"></p>
       <img id="foto1-articolo" src="">
       <img id="foto2-articolo" src="">
-
-<!-- Nuovo bottone per aggiungere al carrello -->
-  <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button">Aggiungi al Carrello</button>
-
-<p id="conferma-aggiunta" style="display: none; color: #6e3b6e; font-weight: bold; text-align: center;"></p>
-
-
       <br>
       <button onclick="tornaAllaHome()" class="contact-button">Torna alla home</button>
     </div>
@@ -405,11 +234,9 @@ form {
   <h3>Chi siamo</h3>
   <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
   <p>Contattaci per maggiori informazioni sui prodotti!</p>
-  <p><b>Telefono: 3516100235</b></p>
-  <p><b>Email: laura.piovanelli1984@gmail.com</b></p>
+  <p><b>Telefono: 33500000000</b></p>
+  <p><b>Email: lamuby........@gmail.com</b></p>
 </div>
-
-
 
 
   <footer>
@@ -418,30 +245,24 @@ form {
   </footer>
 
   <script>
-
     function toggleModal() {
       document.getElementById('modal').classList.toggle('active');
       document.getElementById('overlay').classList.toggle('active');
     }
 
-    function mostraDettaglio(titolo, descrizione, img1, img2, prezzo) {
-  window.scrollTo(0, 0); // Porta subito la pagina all'inizio  	
-  document.querySelector('.products').style.display = 'none';
-  document.getElementById('dettaglio-articolo').style.display = 'block';
-  document.getElementById('titolo-articolo').textContent = titolo;
-  document.getElementById('descrizione-articolo').innerHTML = descrizione;
-  document.getElementById('foto1-articolo').src = img1;
-  document.getElementById('foto2-articolo').src = img2;
-  document.getElementById('prezzo-articolo').textContent = prezzo;
+    function mostraDettaglio(titolo, descrizione, img1, img2) {
+      document.querySelector('.products').style.display = 'none';
+      document.getElementById('dettaglio-articolo').style.display = 'block';
+      document.getElementById('titolo-articolo').textContent = titolo;
+      document.getElementById('descrizione-articolo').innerHTML = descrizione;
+      document.getElementById('foto1-articolo').src = img1;
+      document.getElementById('foto2-articolo').src = img2;
+    }
 
-}
-
-
-   function tornaAllaHome() {
-    document.getElementById('dettaglio-articolo').style.display = 'none';
-    document.querySelector('.products').style.display = 'grid';
-    window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina
-}
+    function tornaAllaHome() {
+      document.getElementById('dettaglio-articolo').style.display = 'none';
+      document.querySelector('.products').style.display = 'grid';
+    }
 
     function evidenzia(el) {
       el.classList.add("highlight");
@@ -449,245 +270,6 @@ form {
         el.classList.remove("highlight");
       }, 300);
     }
-
-let carrello = [];
-
-function aggiungiAlCarrello(nome, prezzo) {
-    let prezzoNumerico = parseFloat(prezzo.replace(/[^\d.]/g, "")); // Rimuove simboli e converte in numero
-
-    let articolo = carrello.find(item => item.nome === nome);
-    if (articolo) {
-        articolo.quantita++;
-    } else {
-        carrello.push({ nome, prezzo: prezzoNumerico, quantita: 1 });
-    }
-    salvaCarrelloLocalmente();
-    aggiornaCarrello();
-    // Mostra conferma (Corretta)
-    let conferma = document.getElementById("conferma-aggiunta");
-    conferma.textContent = `${nome} aggiunto al carrello!`;
-    conferma.style.display = "block";
-
-    setTimeout(() => {
-        conferma.style.display = "none";
-    }, 2000);
-}
-
-function salvaCarrelloLocalmente() {
-    if (carrello.length > 0) {
-        localStorage.setItem("carrello", JSON.stringify(carrello));
-    }
-}
-
-
-
-function aggiornaCarrello() {
-    let carrelloContainer = document.getElementById("lista-carrello");
-    carrelloContainer.innerHTML = "";
-
-    let totalePrezzo = 0;
-
-    carrello.forEach(item => {
-        if (!isNaN(item.prezzo)) { // Controlla che il prezzo sia valido
-            totalePrezzo += item.prezzo * item.quantita;
-        }
-
-        let li = document.createElement("li");
-        li.innerHTML = `${item.nome} - €${item.prezzo.toFixed(2)} (x${item.quantita}) 
-                        <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 10px;">️</button>`;
-        carrelloContainer.appendChild(li);
-    });
-
-
-    document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
-
-    document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;
-    
-    // Mostra o nasconde i pulsanti in base al contenuto del carrello
-    let btnSvuota = document.getElementById("btn-svuota");
-    let btnProcedi = document.getElementById("btn-procedi");
-    
-    if (carrello.length === 0) {
-        btnSvuota.style.display = "none";
-        btnProcedi.style.display = "none";
-    } else {
-        btnSvuota.style.display = "block";
-        btnProcedi.style.display = "block";
-    }
-}
-
-function salvaOrdineSuFile() {
-    let nome = document.getElementById("nome").value.trim();
-    let indirizzo = document.getElementById("indirizzo").value.trim();
-    let telefono = document.getElementById("telefono").value.trim();
-    let email = document.getElementById("email").value.trim();
-
-    // Verifica che tutti i dati siano compilati
-    if (!nome || !indirizzo || !telefono || !email) {
-        alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
-        return;
-    }
-
-    let carrelloSalvato = localStorage.getItem("carrello");
-    if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
-        alert("Il carrello è vuoto, impossibile salvare l'ordine!");
-        return;
-    }
-
-    let ordine = JSON.parse(carrelloSalvato);
-    let dataOra = new Date().toLocaleString();
-    let totalePrezzo = ordine.reduce((sum, item) => sum + item.prezzo * item.quantita, 0); // Calcola il totale
-
-    let testoOrdine = `Ordine confermato\n====================\nData e ora: ${dataOra}\nDati di spedizione:\nNome: ${nome}\nIndirizzo: ${indirizzo}\nTelefono: ${telefono}\nEmail: ${email}\n--------------------\n`;
-
-    ordine.forEach(item => {
-        testoOrdine += `Prodotto: ${item.nome}\nPrezzo: €${item.prezzo.toFixed(2)}\nQuantità: ${item.quantita}\n--------------------\n`;
-    });
-
-    // Aggiungi il totale alla fine del file
-    testoOrdine += `\n Totale dell'ordine: €${totalePrezzo.toFixed(2)}\n====================`;
-
-   /* // Creazione del file di testo
-    let blob = new Blob([testoOrdine], { type: "text/plain" });
-    let link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "ordine.txt";
-
-    // Simula il clic per scaricare il file
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-*/
-    // Svuota il carrello dopo la conferma
-    svuotaCarrello();
-
-    // Mostra conferma visiva
-    mostraPopupConferma();
-
-    // Aggiorna il sito dopo 2 secondi
-    /*setTimeout(() => {
-        location.reload();
-    }, 2000);*/
-}
-
-
-
-function inviaOrdineWhatsApp() {
-    let nome = document.getElementById("nome").value.trim();
-    let indirizzo = document.getElementById("indirizzo").value.trim();
-    let telefono = document.getElementById("telefono").value.trim();
-    let email = document.getElementById("email").value.trim();
-
-    if (!nome || !indirizzo || !telefono || !email) {
-        alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
-        return;
-    }
-
-    let carrelloSalvato = localStorage.getItem("carrello");
-    if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
-        alert("Il carrello è vuoto, impossibile inviare l'ordine!");
-        return;
-    }
-
-    let ordine = JSON.parse(carrelloSalvato);
-    let totalePrezzo = ordine.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
-
-    let messaggio = `✅ *Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n✉️ Email: ${email}\n\n *Prodotti Ordinati:* \n`;
-
-    ordine.forEach(item => {
-        messaggio += `- ${item.nome} | €${item.prezzo.toFixed(2)} x ${item.quantita}\n`;
-    });
-
-    messaggio += `\n *Totale Ordine:* €${totalePrezzo.toFixed(2)}\n\nGrazie per l'acquisto! `;
-
-    let numeroWhatsApp = "3516100235"; // Sostituisci con il numero destinatario
-    let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
-
-    // Apri automaticamente WhatsApp
-    window.open(urlWhatsApp, "_blank");
-
-    // Mostra il popup di conferma ordine
-    mostraPopupConferma();
-
-    // Svuota il carrello dopo l'invio
-    svuotaCarrello();
-
-    // Aggiorna il sito dopo 2 secondi
-    /*setTimeout(() => {
-        location.reload();
-    }, 2000);*/
-}
-
-
-
-
-function mostraCarrello() {
-    document.getElementById("modal-carrello").classList.add("active");
-    document.getElementById("overlay-carrello").classList.add("active");
-}
-
-function chiudiCarrello() {
-    document.getElementById("modal-carrello").classList.remove("active");
-    document.getElementById("overlay-carrello").classList.remove("active");
-}
-
-
-function svuotaCarrello() {
-    carrello = [];
-    localStorage.removeItem("carrello"); // Cancella i dati salvati
-    aggiornaCarrello();
-}
-
-  
-
-function rimuoviDalCarrello(nome) {
-    let articolo = carrello.find(item => item.nome === nome);
-    if (articolo) {
-        if (articolo.quantita > 1) {
-            articolo.quantita--;
-        } else {
-            carrello = carrello.filter(item => item.nome !== nome);
-        }
-    }
-    salvaCarrelloLocalmente();
-    aggiornaCarrello();
-}
-
-function caricaCarrello() {
-    localStorage.removeItem("carrello"); // Cancella i dati salvati all'avvio
-    carrello = []; // Resetta la variabile
-    aggiornaCarrello(); // Assicura che i pulsanti siano gestiti correttamente
-}
-
-
-
-window.onload = function() {
-    localStorage.removeItem("carrello"); // Cancella il carrello salvato
-    carrello = []; // Azzeriamo la variabile
-    aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
-};
-
-function mostraModuloSpedizione() {
-    document.getElementById("modal-spedizione").style.display = "block";
-}
-
-
-function chiudiModuloSpedizione() {
-    document.getElementById("modal-spedizione").style.display = "none";
-}
-
-function mostraPopupConferma() {
-    document.getElementById("popup-conferma").style.display = "block";
-}
-
-function chiudiPopupConferma() {
-    svuotaCarrello(); // Svuota il carrello quando si chiude il popup
-    location.reload(); // Ricarica la pagina manualmente
-}
-
-
-
-
   </script>
 </body>
 </html>
