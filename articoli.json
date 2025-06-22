@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "titolo": "Tutina bambina",
+    "descrizione": "Completo estivo per bambina elegante e fresco di colore verde acqua (cintura inclusa).",
+    "prezzo": "€24.90",
+    "foto1": "foto1-articolo1.jpg",
+    "foto2": "foto2-articolo1.webp",
+    "badge": "Articolo 1"
+  },
+  {
+    "id": 2,
+    "titolo": "Vestito a balze bambina",
+    "descrizione": "Vestito a balze con rouches, maniche corte, tinta unita.",
+    "prezzo": "€15.99",
+    "foto1": "foto1-articolo2.jpg",
+    "foto2": "foto2-articolo2.jpg",
+    "badge": "Articolo 2"
+  },
+  {
+    "id": 3,
+    "titolo": "Completo Uomo",
+    "descrizione": "Abito monopetto Primavera/Estate Blu 100% Lino.",
+    "prezzo": "€450",
+    "foto1": "foto1-articolo3.webp",
+    "foto2": "foto2-articolo3.jpg",
+    "badge": "Articolo 3"
+  },
+  {
+    "id": 4,
+    "titolo": "adidas Originals T-shirt basic",
+    "descrizione": "ORANGE TEE UNISEX - T-shirt basic - earth strata.",
+    "prezzo": "€24.59",
+    "foto1": "foto1-articolo4.webp",
+    "foto2": "foto2-articolo4.webp",
+    "badge": "Articolo 4"
+  }
+]
