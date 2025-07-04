@@ -534,10 +534,12 @@ function toggleAppModal() {
 }
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log("Service Worker registrato!", reg))
-      .catch(err => console.error("Errore Service Worker", err));
-  }
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/BazarLaMuBy/service-worker.js')
+          .then(reg => console.log('Service Worker registrato', reg))
+          .catch(err => console.error('Errore Service Worker', err));
+      });
+    }
 
 const canvas = document.getElementById("fireworks-canvas");
 const ctx = canvas.getContext("2d");
