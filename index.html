@@ -535,7 +535,7 @@ function toggleAppModal() {
 
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/BazarLaMuBy/service-worker.js')
+        navigator.serviceWorker.register('./service-worker.js')
           .then(reg => console.log('Service Worker registrato', reg))
           .catch(err => console.error('Errore Service Worker', err));
       });
