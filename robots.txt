@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://bazar-bs.github.io/BazarLaMuBy/sitemap.xml
