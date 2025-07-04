@@ -1,0 +1,506 @@
+<style>
+	.animated-subtitle {
+	  font-family: 'Caveat', cursive;
+	} 
+
+	body {
+		background: url('wood-pattern.webp');
+		background-size: cover;
+		background-attachment: fixed;
+		margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+	}
+	
+	input {
+    	width: 100%;
+    	padding: 0.5rem;
+    	margin: 0.5rem 0;
+    	border: 1px solid #ddd;
+		border-radius: 5px;
+	}
+
+	form {
+    	display: flex;
+    	flex-direction: column;
+    	gap: 0.8rem;
+	}
+
+	#popup-annullato {
+    	position: fixed;
+    	top: 50%;
+    	left: 50%;
+    	transform: translate(-50%, -50%);
+    	background: white;
+    	padding: 1.5rem;
+    	border-radius: 10px;
+    	box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    	z-index: 9999; /* Assicura che sia sopra ogni altro elemento */
+	}
+
+	#btn-svuota, #btn-procedi {
+    	width: 50%;
+    	padding: 0.8rem;
+    	font-size: 1rem;
+    	border-radius: 5px;
+    	margin: 0.5rem 0;
+    	background: #6e3b6e; /* Stesso colore del pulsante "Chiudi" */
+    	color: white;
+    	border: none;
+    	cursor: pointer;
+	}
+
+	#modal-spedizione input {
+		width: 100%;
+		padding: 0.6rem;
+		margin: 0.5rem 0;
+		border: 2px solid #6e3b6e;
+		border-radius: 6px;
+		background-color: #fff8fc;
+		box-shadow: 0 0 6px rgba(110, 59, 110, 0.2);
+		font-weight: bold;
+		color: #333;
+		transition: all 0.3s ease;
+	}
+
+	#modal-spedizione input:focus {
+		outline: none;
+		border-color: #d32fa0;
+		background-color: #fff0fa;
+		box-shadow: 0 0 10px rgba(211, 47, 160, 0.5);
+	}
+
+	.modal {
+    	display: none;
+    	position: fixed;
+    	top: 50%;
+    	left: 50%;
+    	transform: translate(-50%, -50%);
+    	background: white;
+    	padding: 2rem;
+    	border-radius: 10px;
+    	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    	z-index: 1000;
+    	max-width: 600px; /* Aumentato da 90% a 600px */
+    	width: 70%;
+    	max-height: 90vh;         /* Limita l'altezza al 90% della viewport */
+    	overflow-y: auto;         /* Mostra la scrollbar solo se serve */
+    	text-align: center;
+	}
+
+	.modal.active, .overlay.active {
+    	display: block;
+	}
+    
+    header {
+      background-color: #6e3b6e;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      text-transform: uppercase;
+    }
+    
+    header p {
+      margin: 0.5rem 0 0;
+      font-style: italic;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .product {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .product img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .product h3, .product h2 {
+      margin: 0.5rem 0;
+    }
+    
+    .product:hover,
+    .product.highlight {
+      background-color: #eee;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transform: scale(1.02);
+    }
+    
+    .contact-button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.5rem 1.5rem;
+      background-color: #6e3b6e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    
+   
+    .modal.active {
+      display: block;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+    
+    .overlay.active {
+      display: block;
+    }
+    
+    #dettaglio-articolo img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #ddd;
+      font-size: 0.9rem;
+    }
+    
+    .piva {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    
+    .highlight-blink {
+		background-color: #ffeb3b;
+		color: #6e3b6e;
+		font-weight: bold;
+		padding: 0.3rem 0.6rem;
+		border-radius: 5px;
+		display: inline-block;
+		animation: blink 1s infinite;
+	}
+
+	@keyframes blink {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.3; }
+	}
+	
+	.header-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.logo {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid white;
+		background-color: #fff;
+	}
+
+	.animated-title {
+		overflow: hidden;
+		border-right: .15em solid white;
+		white-space: nowrap;
+		animation: typing 3s steps(20, end), blink-caret .75s step-end infinite;
+		font-size: 2rem;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	@keyframes typing {
+		from { width: 0 }
+		to { width: 100% }
+	}
+
+	@keyframes blink-caret {
+		from, to { border-color: transparent }
+		50% { border-color: white }
+	}
+
+	@keyframes bounce {
+		 0%, 100% { transform: translateY(0); }
+    	50% { transform: translateY(-5px); }
+	}
+
+	#carrello-btn {
+    	display: inline-block;
+		margin: 10px auto;
+    	padding: 1rem 2rem;
+    	background-color: #6e3b6e;
+    	color: white;
+    	font-size: 1.2rem;
+    	border: none;
+    	border-radius: 8px;
+    	cursor: pointer;
+    	text-align: center;
+    	animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+	}
+
+	#carrello-btn:hover {
+    	transform: scale(1.05);
+    	box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    	transition: all 0.3s ease;
+	}
+
+
+	.modal button {
+	    	padding: 0.8rem;
+	    	background: #6e3b6e;
+	    	color: white;
+	    	border: none;
+	    	border-radius: 5px;
+	    	cursor: pointer;
+	}
+
+	#lista-carrello {
+	    	font-weight: bold;
+	}
+
+	.evidenziato {
+	    	font-size: 32px; /* Aumenta la grandezza */
+	    	color: blue; /* Cambia il colore */
+	    	font-weight: bold; /* Rendi il testo in grassetto */
+	    	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Aggiunge un effetto di ombra */
+	}
+
+	/* Stile per il toast notification */
+	#toast-confirm {
+			position: fixed;
+	    	bottom: 20px;
+	    	right: 20px;
+	    	background-color: #28a745;
+		    color: white;
+		    padding: 15px;
+		    border-radius: 5px;
+		    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+		    font-size: 16px;
+		    display: none;
+		    z-index: 1000;
+		    animation: fadeInOut 3s ease-in-out;
+	}
+
+/* Fade-in e fade-out del toast */
+	@keyframes fadeInOut {
+		    0% { opacity: 0; transform: translateX(30px); }
+		    10% { opacity: 1; transform: translateX(0); }
+		    90% { opacity: 1; transform: translateX(0); }
+		    100% { opacity: 0; transform: translateX(30px); }
+	}
+
+	#dettaglio-articolo {
+		    opacity: 0;
+		    transform: scale(0.95);
+		    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+	}
+
+	#dettaglio-articolo.active {
+		    opacity: 1;
+		    transform: scale(1);
+	}
+
+	.nome-antimo {
+	    	animation: glow 1.5s infinite alternate;
+		    color: #ff6f00;
+		    font-weight: bold;
+		    text-shadow: 0 0 5px #ffca28, 0 0 10px #ffc107;
+		    display: inline-block;
+    }
+
+    @keyframes glow {
+      from {
+        transform: scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: scale(1.15);
+        opacity: 0.8;
+      }
+    }
+    
+	.animated-subtitle {
+		  font-size: 1.2rem;
+		  opacity: 0;
+		  transform: translateY(20px);
+		  animation: fadeUp 1.2s ease-out forwards;
+	}
+
+	@keyframes fadeUp {
+		  to {
+		    opacity: 1;
+		    transform: translateY(0);
+		  }
+	} 
+	
+#toast-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: #fff;
+  width: 100%;
+  animation: shrinkBar 3s linear forwards;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+@keyframes shrinkBar {
+  from { width: 100%; }
+  to { width: 0%; }
+}	
+
+.icona-animata-carrello {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 2rem;
+  color: #6e3b6e;
+  animation: bounceCart 1.5s infinite ease-in-out;
+  z-index: 1001;
+}
+
+@keyframes bounceCart {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.contenitore-spedizione {
+  position: fixed;
+  top: 20px;
+  left: -100px; /* parte fuori dallo schermo a sinistra */
+  z-index: 1001;
+  animation: attraversaSchermo 10s linear infinite;
+}
+
+.icona-animata-spedizione {
+  font-size: 2.5rem;
+  color: #28a745;
+  position: relative;
+}
+
+.nuvoletta {
+  position: absolute;
+  left: -20px;
+  bottom: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  box-shadow:
+    -6px 0 0 2px #ccc,
+    -12px 2px 0 4px #ccc,
+    -18px 1px 0 3px #ccc;
+  opacity: 0.8;
+  animation: sciaFumo 1.5s ease-out infinite;
+}
+
+/* Animazione che sposta il furgone da sinistra a destra */
+@keyframes attraversaSchermo {
+  0% {
+    left: -100px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 110vw; /* va oltre lo schermo */
+    opacity: 0;
+  }
+}
+
+/* Animazione scia della nuvoletta */
+@keyframes sciaFumo {
+  0% {
+    opacity: 0.8;
+    transform: scale(1) translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) translateX(-30px);
+  }
+}
+
+
+/* Posiziona in alto a sinistra dello schermo */
+.contenitore-carrello-pagina {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 9999;
+}
+
+/* Contenitore interno relativo per posizionare il badge */
+.contenitore-carrello {
+  position: relative;
+  display: inline-block;
+}
+
+/* Icona animata */
+.icona-animata-carrello {
+  position: absolute;
+  top: -15px;
+  right: -20px;
+  font-size: 2rem;
+  animation: bounce 1.5s infinite;
+  color: #6e3b6e;
+}
+
+/* Badge */
+#contatore-carrello-modal {
+  position: absolute;
+  top: -20px;
+  right: -25px;
+  background: #6e3b6e;
+  animation: bounce 1.5s infinite;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 0 0 2px white;
+  line-height: 1;
+}
+</style>

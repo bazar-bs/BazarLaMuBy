@@ -1,268 +1,313 @@
+<!--data ultima modifica 22/06/2025 ore 9 versione con qrcode in contattaci e tasto home restyling spedizione e restyling del sito in generale aggiunta animazione ester egg aggiunto tasto top aggiunta la scritta sito in manutenzione e app rivista aggiunto contatore visite aggiunta anche la sezione Privacy Policy aggiunta badge articolo 1 2 3 ecc e icona al tasto chiudi e posizionato correttamente aggiunto animazione popup aggiunta articolo al carrello-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
+
+<link rel="icon" type="image/png" href="favicon.png">
+
+<link rel="manifest" href="/manifest.json">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=2">
+
+<!--  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"> -->
+
   <meta charset="UTF-8">
+  <meta name="description" content="Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.">
+  <meta name="keywords" content="bazar online, articoli usati, oggetti usati, offerte usato, articoli vintage, occasioni, mercatino, LaMuBy, compra usato, oggetti da collezione">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>il bAzAr LaMuBy</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    header {
-      background-color: #6e3b6e;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      text-transform: uppercase;
-    }
-    header p {
-      margin: 0.5rem 0 0;
-      font-style: italic;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-    .product {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .product img {
-      max-width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-    .product h3, .product h2 {
-      margin: 0.5rem 0;
-    }
-    .product:hover,
-    .product.highlight {
-      background-color: #eee;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transform: scale(1.02);
-    }
-    .contact-button {
-      display: block;
-      margin: 2rem auto 0;
-      padding: 0.5rem 1.5rem;
-      background-color: #6e3b6e;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.25);
-      z-index: 1000;
-      max-width: 90%;
-    }
-    .modal.active {
-      display: block;
-    }
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-    }
-    .overlay.active {
-      display: block;
-    }
-    #dettaglio-articolo img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #ddd;
-      font-size: 0.9rem;
-    }
-    .piva {
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-      color: #555;
-    }
-    .highlight-blink {
-	 background-color: #ffeb3b;
-	color: #6e3b6e;
-	font-weight: bold;
-	padding: 0.3rem 0.6rem;
-	border-radius: 5px;
-	display: inline-block;
-	animation: blink 1s infinite;
-}
+  
+<link rel="stylesheet" href="style.css">	
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-  background-color: #fff;
-}
-
-.animated-title {
-  overflow: hidden;
-  border-right: .15em solid white;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end), blink-caret .75s step-end infinite;
-  font-size: 2rem;
-  margin: 0;
-  text-transform: uppercase;
-}
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: white }
-}
-
-  </style>
 </head>
+
+	<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
+
 <body>
-  <header>
-  <div class="header-content">
-    <img src="lamuby_logo_bigtext.png" alt="Logo LaMuBy" class="logo">
-    <div>
-      <h1 class="animated-title">il bAzAr LaMuBy</h1>
-      <p>- - Vendita di articoli usati - -</p>
-    </div>
-  </div>
+
+	<div id="popup-annullato" class="modal">
+		    <h2>❌ Ordine Annullato</h2>
+		    <p>Hai annullato il tuo ordine!! Torna al Carrello. <!--Se desideri riprovare, puoi tornare alla selezione degli articoli.</p>-->
+		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
+		        <i class="fas fa-times-circle"></i> Chiudi</button>
+	</div>
+
+	<div id="easter-egg-modal" class="modal">
+		    <h2>Scoperto Easter Egg!</h2>
+		    <p class="evidenziato">
+		        <span class="nome-antimo">Antimo</span> è il creatore del sito!
+		    </p>
+		    <button onclick="chiudiModal()"><i class="fas fa-times-circle"></i> Chiudi</button>
+	</div>
+
+<header>
+	  <div class="header-content">
+		    <img src="lamuby_logo_bigtext.avif" alt="Logo LaMuBy" class="logo">
+		    <div>
+		      <h1 class="animated-title">il bAzAr LaMuBy</h1>
+		      <p class="animated-subtitle">-Articoli usati Occasioni online-</p>
+		    </div>
+	  </div>
 </header>
 
+	<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">
+		<!-- Pulsante Home -->
+		<button onclick="tornaAllaHome()" id="home-btn" style="
+			  padding: 1rem 1rem;
+			  height: 50px;
+			  margin-top: 12px;
+			  margin-left: 5px; /*  aggiunto */
+			  margin-right: 1px; /* aggiunto */
+			  background-color: #6e3b6e;
+			  color: white;
+			  font-size: 1.2rem;
+			  border: none;
+			  border-radius: 8px;
+			  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+			  cursor: pointer;">
+			  <i class="fas fa-home"></i>
+		</button>
+
+		<!-- Pulsante Carrello -->
+		<button onclick="mostraCarrello()" id="carrello-btn" style="
+			  padding: 1rem 2rem;
+			  background-color: #6e3b6e;
+			  color: white;
+			  font-size: 1.2rem;
+			  border: none;
+			  border-radius: 8px;
+			  cursor: pointer;">
+			  <i class="fas fa-shopping-cart"></i> Carrello (<span id="contatore-carrello">0</span>)
+		</button>
+	</div>
 
   <div class="container">
-    <h2>I nostri articoli</h2>
-    <div class="products">
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('PlayStation 5', 'Console PlayStation 5 con lettore disco usata poco e bene.<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/VYwKKYwK/fisic2.jpg', 'https://i.ibb.co/Y4f8NQGd/PS5-01.webp')">
-        <img src="https://i.ibb.co/VYwKKYwK/fisic2.jpg" alt="PlayStation 5">
-        <h2>PlayStation 5</h2>
-        <p>Console PlayStation 5 con lettore disco usata poco e bene.<br><br>articoli esempio sito dimostrativo</p>
-      </div>
+		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0rem;">
+		<h2 id="titolo-home" style="margin-top: 0;">I nostri articoli</h2>
+	
+		<!-- Overlay oscurante -->
+		<div id="overlay-carrello" class="overlay"></div>
+	
+		<!-- Finestra centrale del carrello -->
+		<div id="modal-carrello" class="modal">
+		<div class="contenitore-carrello-pagina">
+  <div class="contenitore-carrello">
+    <i class="fas fa-shopping-basket icona-animata-carrello"></i>
+    <span id="contatore-carrello-modal">0</span>
+  </div>
+</div>
+<p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
+  Salvare <strong style="background-color: yellow; padding: 2px;"><span id="telefonocarrello"></span></strong> nella tua rubrica per completare l'ordine
+</p>
+    <h2 style="text-align: center;">Il tuo carrello</h2>
+    <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
+    <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 10px;">Totale: €0.00</p>
+  <button id="btn-svuota" onclick="svuotaCarrello()" style="background: #d9534f; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 1rem auto;">
+    <i class="fas fa-trash"></i> Svuota
+</button>
+    <button id="btn-procedi" onclick="mostraModuloSpedizione()" style="background: #28a745; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;">
+    <i class="fas fa-arrow-right"></i> Procedi
+</button>
+    <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;margin-top: 1.3rem;"><i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('TV 65 pollici', 'TV 65 pollici usata pochissimo ...quasi mai accesa..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp', 'https://i.ibb.co/ccn1mGdg/samsung-ue65cu7090uxzt-tv-led-65-crystal-uhd-4k-smart-tv.jpg')">
-        <img src="https://i.ibb.co/Tqkn2pck/Sony-KD-65-X85-LAEP-385036.webp" alt="TV 65 pollici">
-        <h2>TV 65 pollici</h2>
-        <p>TV 65 pollici usata pochissimo ...quasi mai accesa.<br><br>articoli esempio sito dimostrativo</p>
-      </div>
+<!-- Finestra Modulo Spedizione -->
+<div id="modal-spedizione" class="modal">
+<div class="contenitore-spedizione">
+  <i class="fas fa-truck icona-animata-spedizione"></i>
+  <div class="nuvoletta"></div>
+</div>
+    <h2 style="margin-bottom: 2px;">Inserisci i dati di spedizione</h2>
+<h4 style="margin-top: 2px;">(se invio ordine non va a buon fine usare Contattaci)</h4>
+    <form id="form-spedizione">
+    <input type="text" id="nome" placeholder="Nome e Cognome" required>
+    <input type="text" id="indirizzo" placeholder="Indirizzo (via, civico, città, provincia, CAP)" required>
+    <input type="tel" id="telefono" placeholder="Telefono" required>
+    <input type="email" id="email" placeholder="Email" required>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('T-Shirt personalizzata', 'T-Shirt personalizzabile come vuoi tu..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg', 'https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg')">
-        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/7564587/1288243092.jpg" alt="T-Shirt personalizzata">
-        <h2>T-Shirt personalizzata</h2>
-        <p>T-Shirt personalizzabile come vuoi tu.<br><br>articoli esempio sito dimostrativo</p>
-      </div>
+<!-- Pulsante per inviare l'ordine via WhatsApp -->
+    <button type="button" onclick="inviaOrdineWhatsApp()" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
+    <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
+</button>    
+    </form>
+    <button onclick="chiudiModuloSpedizione()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
 
-      <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Articolo 4', 'Descrizione breve dell\'articolo 4..<br><br><span class=\'highlight-blink\'>Info clicca su Contattaci<br>in fondo alla pagina', 'https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15')">
-        <img src="https://3215442d15.cbaul-cdnwnd.com/b4fa21eb524d32be39e0ffe4e3d4df3a/200000146-427b0427b2/3_40937a.webp?ph=3215442d15" alt="Articolo 4">
-        <h2>Articolo 4</h2>
-        <p>Descrizione breve dell'articolo 4.<br><br>articoli esempio sito dimostrativo</p>
-      </div>
-
- <div class="product" ontouchstart="evidenzia(this)" onclick="mostraDettaglio('Prossimamente....', 'Torna a farci visita!!', 'https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg')">
-        <img src="https://scatolificioitalianospada.it/wp-content/uploads/APERTA-TIPO-13.jpg">
-        <h2>Prossimamente...<br>altri articoli nuovi...ma usati!</h2>
-        <p><br><b>Torna a farci visita!!</p>
-      </div>
-
+<!-- Popup di conferma ordine -->
+<div id="popup-conferma" class="modal">
+    <h2>✅ Ordine Confermato!</h2>
+    <p>Grazie per il tuo acquisto! Ti contatteremo a breve per il pagamento e la spedizione.</p>
+    <button onclick="chiudiPopupConferma()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;"><i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
+  </div>
+    <div class="products">  
     </div>
-
-
 
     <!-- Dettaglio Articolo -->
-    <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;">
+    <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;position: relative;">   
+      <div id="badge-articolo" style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;"></div>
       <h2 id="titolo-articolo"></h2>
+      <p id="prezzo-articolo" class="price" style="font-weight: bold; font-size: 1.2rem;"></p>
       <p id="descrizione-articolo"></p>
-      <img id="foto1-articolo" src="">
-      <img id="foto2-articolo" src="">
-      <br>
-      <button onclick="tornaAllaHome()" class="contact-button">Torna alla home</button>
+      <p style="margin: 1rem 0; text-align: left;">
+      <span class="highlight-blink">Info e disponibilità usa Contattaci<br>in fondo alla pagina</span>
+      </p>
+      <img id="foto1-articolo" src="" loading="lazy" alt="Foto principale dell'articolo">
+      <img id="foto2-articolo" src="" loading="lazy" alt="Foto aggiuntiva dell'articolo">
+
+<!-- Nuovo bottone per aggiungere al carrello -->
+  <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button">
+    <i class="fas fa-shopping-cart"></i> Aggiungi al Carrello
+</button>
+
+<p id="conferma-aggiunta" style="display: none; color: #6e3b6e; font-weight: bold; text-align: center;"></p>
+
+<button onclick="tornaAllaHome()" class="contact-button">
+    <i class="fas fa-home"></i> Torna alla home
+</button>
     </div>
 
-    <button class="contact-button" onclick="toggleModal()">Contattaci</button>
+<button class="contact-button" onclick="toggleModal()">
+    <i class="fas fa-envelope"></i> Contattaci
+</button>
   </div>
+  
+<!--nuovo pulsante per installare app-->  
+<button class="contact-button" onclick="toggleAppModal()">
+  <i class="fas fa-mobile-alt"></i> App
+</button>
 
   <div class="modal" id="modal" onclick="toggleModal()">
   <h3>Chi siamo</h3>
-  <p>Siamo un piccolo bazar online dedicato alla compravendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
+  <!-- Inserimento QR Code sopra le informazioni di contatto -->
+  <div style="text-align: center; margin-top: 1rem;">
+      <img src="qr-lamuby.png" alt="QR Code LaMuBy" style="width: 120px; height: 120px;">
+  </div>
+  <p>Siamo un piccolo bazar online dedicato alla vendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
   <p>Contattaci per maggiori informazioni sui prodotti!</p>
-  <p><b>Telefono: 33500000000</b></p>
-  <p><b>Email: lamuby........@gmail.com</b></p>
+  <p><b><i class="fab fa-whatsapp"></i> Telefono: <span id="telefonopersonale"></span></b></p>
+  <p><b><i class="fas fa-envelope"></i> Email: <span id="emailpersonale"></span></b></p>
+
+<!-- Pulsante per aprire il modale privacy -->
+<button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
+  <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
+</button>
+
 </div>
 
+<!-- Modale Privacy Policy -->
+<div id="modal-policy" class="modal">
+  <h3>Privacy & Cookie Policy</h3>
+  <p><strong>Raccolta dati:</strong><br>
+    Non raccogliamo dati personali automaticamente. Gli ordini inviati via WhatsApp sono gestiti manualmente e non vengono salvati sul sito.
+  </p>
+  <p><strong>Ordini via WhatsApp:</strong><br>
+    Se invii un ordine tramite WhatsApp, i tuoi dati saranno visibili solo a noi (la titolare del bAzAr LaMuBy) per finalità legate alla spedizione. Non saranno condivisi o archiviati digitalmente.
+  </p>
+  <p><strong>Cookie:</strong><br>
+    Il sito può utilizzare cookie tecnici per migliorare la navigazione. Non vengono usati cookie di profilazione o pubblicità.
+  </p>
+  <button onclick="togglePolicyModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
+    <i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
 
-  <footer>
-    &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
-    <div class="piva">P.IVA 04692000989</div>
-  </footer>
+<!-- Overlay per la policy -->
+<div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
 
-  <script>
-    function toggleModal() {
-      document.getElementById('modal').classList.toggle('active');
-      document.getElementById('overlay').classList.toggle('active');
-    }
+<!--tasto app -->
+<div id="app-modal" class="modal">
+  <h3>Come installare l'app</h3>
+  <p><strong>Su Android (Chrome):</strong><br>
+    1. Apri il sito nel browser<br>
+    2. Tocca ⋮ in alto a destra<br>
+    3. Seleziona <em>"Aggiungi a schermata Home"</em><br>
+    4. Conferma. Fatto! ✅
+  </p>
+  <p><strong>Su iPhone (Safari):</strong><br>
+    1. Apri il sito nel browser Safari<br>
+    2. Tocca l'icona <span style="font-size:1.2em;">⬆️</span> in basso<br>
+    3. Seleziona <em>"Aggiungi alla schermata Home"</em><br>
+    4. Tocca "Aggiungi". Tutto fatto! ✅
+  </p>
+  <button onclick="toggleAppModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;"><i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
 
-    function mostraDettaglio(titolo, descrizione, img1, img2) {
-      document.querySelector('.products').style.display = 'none';
-      document.getElementById('dettaglio-articolo').style.display = 'block';
-      document.getElementById('titolo-articolo').textContent = titolo;
-      document.getElementById('descrizione-articolo').innerHTML = descrizione;
-      document.getElementById('foto1-articolo').src = img1;
-      document.getElementById('foto2-articolo').src = img2;
-    }
+<div id="app-overlay" class="overlay" onclick="toggleAppModal()"></div>
 
-    function tornaAllaHome() {
-      document.getElementById('dettaglio-articolo').style.display = 'none';
-      document.querySelector('.products').style.display = 'grid';
-    }
+<button onclick="scrollToTop()" id="scroll-top-btn" style="
+  position: fixed;
+  bottom: 70px;
+  left: 10px;
+  padding: 1rem;
+  background-color: #6e3b6e;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+">
+  <i class="fas fa-arrow-up"></i>
+</button>
+  
+<footer style="font-weight: bold; background-color: #f4f0ff; font-size: 16px;">
+  &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
+  <div class="piva">P.IVA 04692000989</div>
+		
+</footer>
+  
+<script>
+  
+document.getElementById("home-btn").style.display = "none";
+  
+function toggleModal() {
+  document.getElementById('modal').classList.toggle('active');
+  document.getElementById('overlay').classList.toggle('active');
+}
+
+    function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
+		window.scrollTo(0, 0); // Porta subito la pagina all'inizio
+		document.getElementById("titolo-home").style.display = "none";
+		document.getElementById("home-btn").style.display = "inline-block";
+		document.querySelector('.products').style.display = 'none';
+		
+		 let dettaglio = document.getElementById('dettaglio-articolo');
+    dettaglio.style.display = 'block';
+
+    // Aggiunge l'animazione
+    setTimeout(() => {
+        dettaglio.classList.add('active');
+    }, 50);
+			
+		document.getElementById('dettaglio-articolo').style.display = 'block';
+		document.getElementById('titolo-articolo').textContent = titolo;
+		document.getElementById('badge-articolo').textContent = badge;
+		document.getElementById('descrizione-articolo').innerHTML = descrizione;
+		document.getElementById('foto1-articolo').src = img1;
+		document.getElementById('foto2-articolo').src = img2;
+		document.getElementById('prezzo-articolo').textContent = prezzo;		
+	}
+
+ function tornaAllaHome() {
+    document.getElementById("home-btn").style.display = "none";
+    let dettaglio = document.getElementById('dettaglio-articolo');
+    
+    // Rimuove gradualmente l'animazione prima di nascondere il dettaglio
+    dettaglio.classList.remove('active');
+
+    setTimeout(() => {
+        dettaglio.style.display = 'none';
+        document.querySelector('.products').style.display = 'grid';
+    }, 500);
+
+    document.getElementById("titolo-home").style.display = "block";
+    window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina
+	}
 
     function evidenzia(el) {
       el.classList.add("highlight");
@@ -270,6 +315,354 @@
         el.classList.remove("highlight");
       }, 300);
     }
-  </script>
+
+let carrello = [];
+
+function aggiungiAlCarrello(nome, prezzo) {
+    let prezzoNumerico = parseFloat(prezzo.replace(/[^\d.]/g, "")); // Rimuove simboli e converte in numero
+
+    let articolo = carrello.find(item => item.nome === nome);
+    if (articolo) {
+        articolo.quantita++;
+    } else {
+        carrello.push({ nome, prezzo: prezzoNumerico, quantita: 1 });
+    }
+    salvaCarrelloLocalmente();
+    aggiornaCarrello();
+// Mostra toast notification
+    let toast = document.getElementById("toast-confirm");
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${nome} aggiunto al carrello!`;
+    toast.style.display = "block";
+    toast.innerHTML += '<div id="toast-progress-bar"></div>';
+
+    // Nasconde il toast dopo 3 secondi
+    setTimeout(() => {
+        toast.style.display = "none";
+    }, 3000);
+
+    // Effetto animazione su icona carrello
+    let carrelloBtn = document.getElementById("carrello-btn");
+    carrelloBtn.style.animation = "bounce 1s ease-in-out 2";
+    setTimeout(() => {
+        carrelloBtn.style.animation = "";
+    }, 2000);
+}
+
+function salvaCarrelloLocalmente() {
+    if (carrello.length > 0) {
+        localStorage.setItem("carrello", JSON.stringify(carrello));
+    }
+}
+
+function aggiornaCarrello() {
+    let carrelloContainer = document.getElementById("lista-carrello");
+    carrelloContainer.innerHTML = "";
+
+    let totalePrezzo = 0;
+
+    carrello.forEach(item => {
+        if (!isNaN(item.prezzo)) { // Controlla che il prezzo sia valido
+            totalePrezzo += item.prezzo * item.quantita;
+        }
+
+        let li = document.createElement("li");
+        li.innerHTML = `${item.nome} - €${item.prezzo.toFixed(2)} (x${item.quantita}) 
+                        <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+    <i class="fas fa-trash-alt"></i>
+</button>`;
+        carrelloContainer.appendChild(li);
+    });
+
+    document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
+    
+    document.getElementById("contatore-carrello-modal").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
+    
+
+    document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;
+    
+    // Mostra o nasconde i pulsanti in base al contenuto del carrello
+    let btnSvuota = document.getElementById("btn-svuota");
+    let btnProcedi = document.getElementById("btn-procedi");
+    
+    if (carrello.length === 0) {
+        btnSvuota.style.display = "none";
+        btnProcedi.style.display = "none";
+    } else {
+        btnSvuota.style.display = "block";
+        btnProcedi.style.display = "block";
+    }
+}
+
+function inviaOrdineWhatsApp() {
+    let nome = document.getElementById("nome").value.trim();
+    let indirizzo = document.getElementById("indirizzo").value.trim();
+    let telefono = document.getElementById("telefono").value.trim();
+    let email = document.getElementById("email").value.trim();
+
+    if (!nome || !indirizzo || !telefono || !email) {
+        alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
+        return;
+    }
+
+    let carrelloSalvato = localStorage.getItem("carrello");
+    if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
+        alert("Il carrello è vuoto, impossibile inviare l'ordine!");
+        return;
+    }
+
+    let ordine = JSON.parse(carrelloSalvato);
+    let totalePrezzo = ordine.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
+
+    let messaggio = `*Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
+
+    ordine.forEach(item => {
+        messaggio += `- ${item.nome} | €${item.prezzo.toFixed(2)} x ${item.quantita}\n`;
+    });
+
+    messaggio += `\n *Totale Ordine:* €${totalePrezzo.toFixed(2)}\n\n Grazie per l'acquisto! `;
+
+    let numeroWhatsApp = "3516100235"; // Sostituisci con il numero destinatario
+    let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
+
+    // Apri automaticamente WhatsApp
+    window.open(urlWhatsApp, "_blank");
+
+    // Mostra il popup di conferma ordine
+    mostraPopupConferma();
+
+    // Svuota il carrello dopo l'invio
+    svuotaCarrello();
+}
+
+function mostraCarrello() {
+    document.getElementById("modal-carrello").classList.add("active");
+    document.getElementById("overlay-carrello").classList.add("active");
+}
+
+function chiudiCarrello() {
+    document.getElementById("modal-carrello").classList.remove("active");
+    document.getElementById("overlay-carrello").classList.remove("active");
+}
+
+function svuotaCarrello() {
+    carrello = [];
+    localStorage.removeItem("carrello"); // Cancella i dati salvati
+    aggiornaCarrello();
+}
+
+function rimuoviDalCarrello(nome) {
+    let articolo = carrello.find(item => item.nome === nome);
+    if (articolo) {
+        if (articolo.quantita > 1) {
+            articolo.quantita--;
+        } else {
+            carrello = carrello.filter(item => item.nome !== nome);
+        }
+    }
+    salvaCarrelloLocalmente();
+    aggiornaCarrello();
+}
+
+function caricaCarrello() {
+    localStorage.removeItem("carrello"); // Cancella i dati salvati all'avvio
+    carrello = []; // Resetta la variabile
+    aggiornaCarrello(); // Assicura che i pulsanti siano gestiti correttamente
+}
+
+window.onload = function() {
+    localStorage.removeItem("carrello"); // Cancella il carrello salvato
+    carrello = []; // Azzeriamo la variabile
+    aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
+};
+
+function mostraModuloSpedizione() {
+    document.getElementById("modal-spedizione").style.display = "block";
+}
+
+function chiudiModuloSpedizione() {
+    document.getElementById("modal-spedizione").style.display = "none";
+    document.getElementById("popup-annullato").style.display = "block";
+}
+
+function mostraPopupConferma() {
+    // Chiudi il carrello
+    document.getElementById("modal-carrello").classList.remove("active");
+    document.getElementById("overlay-carrello").classList.remove("active");
+
+    // Chiudi la finestra di spedizione
+    document.getElementById("modal-spedizione").style.display = "none";
+
+    // Mostra la conferma dell'ordine
+    document.getElementById("popup-conferma").style.display = "block";
+    document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
+}
+
+function chiudiPopupAnnullato() {
+    document.getElementById("popup-annullato").style.display = "none";
+}
+
+function chiudiPopupConferma() {
+    svuotaCarrello(); // Svuota il carrello quando si chiude il popup
+    document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
+    location.reload(); // Ricarica la pagina manualmente
+}
+
+
+let clickCounter = 0;
+const logo = document.querySelector(".logo");
+const modal = document.getElementById("easter-egg-modal");
+
+logo.addEventListener("click", function() {
+    clickCounter++;
+    
+    if (clickCounter === 5) {
+    modal.style.display = "block";
+    document.getElementById("overlay-easteregg").classList.add("active");
+    startFireworks(); //  AVVIO
+    clickCounter = 0;
+}
+});
+
+function chiudiModal() {
+    modal.style.display = "none";
+    document.getElementById("overlay-easteregg").classList.remove("active");
+}
+
+function toggleAppModal() {
+  document.getElementById("app-modal").classList.toggle("active");
+  document.getElementById("app-overlay").classList.toggle("active");
+}
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log("Service Worker registrato!", reg))
+      .catch(err => console.error("Errore Service Worker", err));
+  }
+
+const canvas = document.getElementById("fireworks-canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let fireworks = [];
+
+function createFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    const colors = ["#ff0043", "#00ffae", "#ffff00", "#00aaff", "#ff9900"];
+    for (let i = 0; i < 50; i++) {
+        fireworks.push({
+            x,
+            y,
+            radius: Math.random() * 2 + 1,
+            angle: Math.random() * 2 * Math.PI,
+            speed: Math.random() * 5 + 1,
+            alpha: 1,
+            color: colors[Math.floor(Math.random() * colors.length)]
+        });
+    }
+}
+
+function updateFireworks() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fireworks.forEach((f, i) => {
+        f.x += Math.cos(f.angle) * f.speed;
+        f.y += Math.sin(f.angle) * f.speed;
+        f.alpha -= 0.01;
+        if (f.alpha <= 0) fireworks.splice(i, 1);
+        else {
+            ctx.globalAlpha = f.alpha;
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = f.color;
+            ctx.fill();
+        }
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(updateFireworks);
+}
+
+function startFireworks() {
+    canvas.style.display = "block";
+    const interval = setInterval(createFirework, 400);
+    updateFireworks();
+    setTimeout(() => {
+        clearInterval(interval);
+        setTimeout(() => canvas.style.display = "none", 2000);
+    }, 3000);
+}
+
+// Mostra il tasto solo quando si scrolla verso il basso
+window.addEventListener("scroll", function() {
+  const btn = document.getElementById("scroll-top-btn");
+  btn.style.display = (window.scrollY > 300) ? "block" : "none";
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+function togglePolicyModal() {
+  document.getElementById("modal-policy").classList.toggle("active");
+  document.getElementById("policy-overlay").classList.toggle("active");
+}
+
+fetch('articoli.json')
+  .then(response => response.json())
+  .then(articoli => {
+    const container = document.querySelector('.products');
+    articoli.forEach(articolo => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.style.position = 'relative';
+      div.setAttribute('ontouchstart', 'evidenzia(this)');
+      div.setAttribute('onclick', `mostraDettaglio('${articolo.titolo}', '${articolo.descrizione.replace(/'/g, "\\'")}', '${articolo.foto1}', '${articolo.foto2}', '${articolo.prezzo}', '${articolo.badge}')`);
+
+      div.innerHTML = `
+        <div style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;">${articolo.badge}</div>
+        <img src="${articolo.foto1}" alt="${articolo.titolo}" loading="lazy">
+        <h2>${articolo.titolo}</h2>
+        <p class="price"><strong>${articolo.prezzo}</strong></p>
+        <p>${articolo.descrizione}</p>
+     `;
+      container.appendChild(div);
+    });
+  })
+  .catch(error => console.error('Errore nel caricamento articoli:', error));
+
+ window.addEventListener("DOMContentLoaded", () => {
+    const emailBase64 = "bGF1cmEucGlvdmFuZWxsaTE5ODRAZ21haWwuY29t";
+    const telefonoBase64 = "MzUxNjEwMDIzNQ==";
+
+    const email = atob(emailBase64);
+    const telefono = atob(telefonoBase64);
+
+    const emailEl = document.getElementById("emailpersonale");
+    const telefonoEl = document.getElementById("telefonopersonale");
+    const telCarrello = document.getElementById("telefonocarrello");
+
+
+    if (emailEl && telefonoEl) {
+      emailEl.textContent = email;
+      telefonoEl.textContent = telefono;
+    } else {
+      console.warn("Elementi contatto non trovati nel DOM.");
+    }
+    
+    if (telCarrello) {
+		telCarrello.textContent = telefono;
+	}
+    
+  });
+
+</script>
+ 
+<div id="overlay-easteregg" class="overlay"></div> 
+<div id="overlay-conferma" class="overlay"></div>
+<div id="overlay" class="overlay"></div>
+<div id="toast-confirm"></div>
+<div id="toast-progress-bar"></div>
+ 
 </body>
 </html>
