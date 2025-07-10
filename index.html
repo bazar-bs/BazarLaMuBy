@@ -1,4 +1,3 @@
-<!--data ultima modifica 22/06/2025 ore 9 versione con qrcode in contattaci e tasto home restyling spedizione e restyling del sito in generale aggiunta animazione ester egg aggiunto tasto top aggiunta la scritta sito in manutenzione e app rivista aggiunto contatore visite aggiunta anche la sezione Privacy Policy aggiunta badge articolo 1 2 3 ecc e icona al tasto chiudi e posizionato correttamente aggiunto animazione popup aggiunta articolo al carrello-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,8 +7,6 @@
 <link rel="manifest" href="./manifest.json">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=2">
-
-<!--  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"> -->
 
   <meta charset="UTF-8">
   <meta name="description" content="Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.">
@@ -27,6 +24,25 @@
 	<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 
 <body>
+
+<div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
+  ❤️
+</div>
+
+<!-- Sidebar destra -->
+<div id="sidebar" class="sidebar">
+  <button id="close-sidebar" class="close-btn">&times;</button>
+  <nav class="sidebar-menu">    
+  </nav>
+  <!-- ✅ Qui va la lista dei preferiti -->
+  <div class="preferiti-box">
+    <h4>I tuoi preferiti ❤️</h4>
+    <ul id="lista-preferiti"></ul>
+  </div>
+</div>
+
+<!-- Overlay per chiudere cliccando fuori -->
+<div id="sidebar-overlay" class="sidebar-overlay"></div>
 
 	<div id="popup-annullato" class="modal">
 		    <h2>❌ Ordine Annullato</h2>
@@ -52,8 +68,8 @@
 		    </div>
 	  </div>
 </header>
-	
-<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">		
+
+	<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">		
 		<!-- Pulsante Home -->
 		<button onclick="tornaAllaHome()" id="home-btn" style="
 			  padding: 0rem 1rem;
@@ -262,7 +278,8 @@
 </footer>
   
 <script>
-  
+ 
+let ultimaPosizioneScroll = 0; 
 document.getElementById("home-btn").style.display = "none";
   
 function toggleModal() {
@@ -271,6 +288,7 @@ function toggleModal() {
 }
 
     function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
+		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
 		window.scrollTo(0, 0); // Porta subito la pagina all'inizio
 		document.getElementById("titolo-home").style.display = "none";
 		document.getElementById("home-btn").style.display = "inline-block";
@@ -302,8 +320,9 @@ function toggleModal() {
 
     setTimeout(() => {
         dettaglio.style.display = 'none';
-        document.querySelector('.products').style.display = 'grid';
-    }, 500);
+        document.querySelector('.products').style.display = 'grid'; 
+		window.scrollTo({ top: ultimaPosizioneScroll, behavior: 'auto' }); // Torna dove eri
+  }, 500);
 
     document.getElementById("titolo-home").style.display = "block";
     window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina
@@ -614,6 +633,8 @@ fetch('articoli.json')
   .then(response => response.json())
   .then(articoli => {
     const container = document.querySelector('.products');
+    const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
+
     articoli.forEach(articolo => {
       const div = document.createElement('div');
       div.className = 'product';
@@ -621,17 +642,92 @@ fetch('articoli.json')
       div.setAttribute('ontouchstart', 'evidenzia(this)');
       div.setAttribute('onclick', `mostraDettaglio('${articolo.titolo}', '${articolo.descrizione.replace(/'/g, "\\'")}', '${articolo.foto1}', '${articolo.foto2}', '${articolo.prezzo}', '${articolo.badge}')`);
 
+      // Crea il pulsante preferito
+      const isPreferito = preferiti.includes(articolo.titolo);
+      const cuore = isPreferito ? '❤️' : '🤍';
+
       div.innerHTML = `
         <div style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;">${articolo.badge}</div>
+        <button class="btn-preferito" style="position: absolute; top: 5px; right: 5px; background: none; border: none; font-size: 1.4rem; cursor: pointer; z-index: 10;">${cuore}</button>
         <img src="${articolo.foto1}" alt="${articolo.titolo}" loading="lazy">
         <h2>${articolo.titolo}</h2>
         <p class="price"><strong>${articolo.prezzo}</strong></p>
         <p>${articolo.descrizione}</p>
-     `;
+      `;
+
+      const btn = div.querySelector('.btn-preferito');
+      btn.addEventListener('click', function (e) {
+  e.stopPropagation();
+
+  const index = preferiti.indexOf(articolo.titolo);
+  const toggleBtn = document.getElementById('toggle-sidebar');
+
+  if (index > -1) {
+    // Rimuovi dai preferiti
+    preferiti.splice(index, 1);
+    btn.textContent = '🤍';
+  } else {
+    // Aggiungi ai preferiti
+    preferiti.push(articolo.titolo);
+    btn.textContent = '❤️';
+
+    // ✨ Fai pulsare il cuore
+    if (toggleBtn) {
+      toggleBtn.classList.add('pulsante-pulsante');
+      setTimeout(() => {
+        toggleBtn.classList.remove('pulsante-pulsante');
+      }, 600); // durata dell'animazione
+    }
+  }
+
+  localStorage.setItem('preferiti', JSON.stringify(preferiti));
+  aggiornaStatoCuore();
+  aggiornaListaPreferiti(articoli);
+});
+
       container.appendChild(div);
     });
+
+    aggiornaListaPreferiti(articoli);
   })
   .catch(error => console.error('Errore nel caricamento articoli:', error));
+
+
+function aggiornaListaPreferiti(articoli) {
+  const lista = document.getElementById('lista-preferiti');
+  if (!lista) return;
+
+  const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
+  lista.innerHTML = '';
+
+  preferiti.forEach(titolo => {
+    const articolo = articoli.find(a => a.titolo === titolo);
+    if (articolo) {
+      const li = document.createElement('li');
+      li.textContent = articolo.titolo;
+      li.style.cursor = 'pointer';
+      li.style.color = '#fff';
+
+      li.addEventListener('click', () => {
+        mostraDettaglio(
+          articolo.titolo,
+          articolo.descrizione,
+          articolo.foto1,
+          articolo.foto2,
+          articolo.prezzo,
+          articolo.badge
+        );
+		// Chiudi sidebar e overlay
+		document.getElementById('sidebar').classList.remove('active');
+		document.getElementById('sidebar-overlay').classList.remove('active');
+
+		});
+
+      lista.appendChild(li);
+    }
+  });
+}
+
 
  window.addEventListener("DOMContentLoaded", () => {
     const emailBase64 = "bGF1cmEucGlvdmFuZWxsaTE5ODRAZ21haWwuY29t";
@@ -657,6 +753,61 @@ fetch('articoli.json')
 	}
     
   });
+
+  const toggleSidebar = document.getElementById('toggle-sidebar');
+  const sidebar = document.getElementById('sidebar');
+  const closeSidebar = document.getElementById('close-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+
+  toggleSidebar.addEventListener('click', () => {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+  });
+
+  closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+  });
+
+document.addEventListener("DOMContentLoaded", function () {
+    aggiornaStatoCuore();
+	const dettaglio = document.getElementById("dettaglio-articolo");
+    const toggleBtn = document.getElementById("toggle-sidebar");
+
+    if (dettaglio && toggleBtn) {
+      const observer = new MutationObserver(() => {
+        if (dettaglio.classList.contains("active")) {
+          toggleBtn.style.display = "none";
+        } else {
+          toggleBtn.style.display = "block";
+        }
+      });
+
+      observer.observe(dettaglio, { attributes: true });
+    }
+  });
+
+function aggiornaStatoCuore() {
+  const toggleBtn = document.getElementById('toggle-sidebar');
+  const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
+
+  if (toggleBtn) {
+    if (preferiti.length > 0) {
+      toggleBtn.classList.remove('vuoto');
+      toggleBtn.classList.add('pieno');
+      toggleBtn.textContent = '❤️';
+    } else {
+      toggleBtn.classList.remove('pieno');
+      toggleBtn.classList.add('vuoto');
+      toggleBtn.textContent = '🤍';
+    }
+  }
+}
 
 </script>
  

@@ -503,4 +503,137 @@
   box-shadow: 0 0 0 2px white;
   line-height: 1;
 }
+
+/* Pulsante preferiti */
+.toggle-sidebar {
+  position: fixed;
+  top: 80px;
+  right: 10px;
+  font-size: 1.3rem;
+  padding: 0.4rem 0.6rem;
+  background: #6e3b6e;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+.toggle-sidebar.vuoto {
+  color: #ccc; /* grigio chiaro */
+}
+
+.toggle-sidebar.pieno {
+  color: #ff4d4d; /* rosso acceso */
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 200px;
+  height: 100vh;
+  background-color: rgba(110, 59, 110, 0.85); /* Viola con trasparenza */
+  backdrop-filter: blur(6px); /* Effetto sfocato dietro */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Ombra morbida */
+  transition: right 0.3s ease;
+  z-index: 1002;
+  padding: 1rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mostra sidebar */
+.sidebar.active {
+  right: 0;
+}
+
+/* Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 1000;
+}
+
+.sidebar-overlay.active {
+  display: block;
+}
+
+/* Pulsante chiudi */
+.close-btn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #6e3b6e;
+  cursor: pointer;
+}
+
+/* Menu link */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.sidebar-menu a {
+  text-decoration: none;
+  color: white;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s ease;
+}
+
+.sidebar-menu a:hover {
+  color: #ffeb3b;
+}
+
+.preferiti-box {
+  margin-top: 1.5rem;
+  padding: 0 1rem;
+  color: white;
+}
+
+.preferiti-box h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.preferiti-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.preferiti-box li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.9rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
+  }
+}
+
+.pulsante-pulsante {
+  animation: pulse 0.6s ease-in-out;
+}
+
 </style>
