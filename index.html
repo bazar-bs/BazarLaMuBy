@@ -489,8 +489,19 @@ function caricaCarrello() {
 }
 
 window.onload = function() {
-    localStorage.removeItem("carrello"); // Cancella il carrello salvato
-    carrello = []; // Azzeriamo la variabile
+    <!-- localStorage.removeItem("carrello"); // Cancella il carrello salvato -->
+    <!-- carrello = []; // Azzeriamo la variabile -->
+	const salvato = localStorage.getItem("carrello");
+  if (salvato) {
+    try {
+      carrello = JSON.parse(salvato);
+    } catch (e) {
+      console.error("Errore nel parsing del carrello:", e);
+      carrello = [];
+    }
+  } else {
+    carrello = [];
+  }
     aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
 };
 
@@ -634,6 +645,30 @@ fetch('articoli.json')
   .then(articoli => {
     const container = document.querySelector('.products');
     const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
+	    // Leggi il carrello salvato
+    let carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
+
+    // Crea una lista dei titoli validi
+    const titoliDisponibili = articoli.map(a => a.titolo);
+
+    // Filtra il carrello mantenendo solo gli articoli ancora presenti
+    carrelloSalvato = carrelloSalvato.filter(item => titoliDisponibili.includes(item.nome));
+
+    // Salva di nuovo il carrello filtrato
+    localStorage.setItem("carrello", JSON.stringify(carrelloSalvato));
+
+    // Aggiorna la variabile globale carrello (se serve)
+    carrello = carrelloSalvato;
+
+    // Aggiorna la UI
+    aggiornaCarrello();
+let preferitiPuliti = preferiti.filter(titolo => titoliDisponibili.includes(titolo));
+localStorage.setItem('preferiti', JSON.stringify(preferitiPuliti));
+preferiti.length = 0;
+preferiti.push(...preferitiPuliti);
+// Aggiorna l’icona cuore (🤍/❤️) in alto a destra
+aggiornaStatoCuore();
+aggiornaListaPreferiti(articoli);
 
     articoli.forEach(articolo => {
       const div = document.createElement('div');
