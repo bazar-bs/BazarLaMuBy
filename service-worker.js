@@ -1,25 +1,40 @@
-self.addEventListener('fetch', (event) => {
+const CACHE_NAME = 'offline-cache-v2';
+const ASSETS = [
+  'index.html',
+  'offline.html',
+  'style.css',
+  // aggiungi eventuali immagini o font qui
+];
+
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+  );
+});
+
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      )
+    )
+  );
+});
+
+self.addEventListener('fetch', event => {
   if (!navigator.onLine) {
     event.respondWith(
-      new Response("<h1>Questa app funziona solo online</h1>", {
-        headers: { "Content-Type": "text/html" }
+      caches.match(event.request).then(cachedResponse => {
+        return cachedResponse || caches.match('offline.html');
       })
     );
   } else {
     event.respondWith(
-      fetch(event.request, { cache: "no-store" }).catch(() => {
-        return caches.open('offline-cache').then(cache => {
-          return cache.match('offline.html');
-        });
-      })
+      fetch(event.request, { cache: 'no-store' }).catch(() =>
+        caches.match('offline.html')
+      )
     );
   }
 });
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open('offline-cache').then(cache => {
-      return cache.addAll(['offline.html']);
-    })
-  );
-});
