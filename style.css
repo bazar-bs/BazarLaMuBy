@@ -579,7 +579,7 @@
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: -2rem;
 }
 
 .sidebar-menu a {
@@ -613,7 +613,7 @@
 
 .preferiti-box li {
   padding: 0.3rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255);
   font-size: 0.9rem;
 }
 
