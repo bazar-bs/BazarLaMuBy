@@ -326,14 +326,16 @@ function toggleModal() {
 	}
 	
 document.getElementById("share-btn").onclick = function () {
+  const sito = 'Il bAzAr LaMuBy'
   const titolo = document.getElementById("titolo-articolo").textContent.trim();
   const descrizione = document.getElementById("descrizione-articolo").textContent.trim();
   const prezzo = document.getElementById("prezzo-articolo").textContent.trim();
+  
 
   // Link al dettaglio dell'articolo con parametro ?item=
   const url = `${window.location.origin}${window.location.pathname}?item=${encodeURIComponent(titolo)}`;
 
-  const messaggio = `🛍️ *${titolo}*\n\n💬 ${descrizione}\n💶 Prezzo: ${prezzo}\n🔗 ${url}`;
+  const messaggio = `*${sito}*\n\n🛍️ *${titolo}*\n\n💬 ${descrizione}\n💶 Prezzo: ${prezzo}\n🔗 ${url}`;
 
   if (navigator.share) {
     navigator.share({
