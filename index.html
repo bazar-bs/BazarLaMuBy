@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>il bAzAr LaMuBy</title>
   
-<link rel="stylesheet" href="style.css?v=1.0">	
+<link rel="stylesheet" href="style.css?v=1.0">
 
 </head>
 
@@ -28,6 +28,8 @@
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
+<!-- <div id="toast-preferiti">I tuoi preferiti</div> -->
+
 
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
@@ -102,8 +104,15 @@
 
   <div class="container">
 		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0rem;">
-		<h2 id="titolo-home" style="margin-top: 0;">I nostri articoli</h2>
-	
+		<div class="search-container" style="display: flex; flex-direction: row; align-items: flex-start; position: relative;">
+  <h2 id="titolo-home">I nostri articoli&nbsp;&nbsp;</h2>
+  <div class="search-wrapper">
+    <input type="text" id="search" placeholder="🔍Cerca articoli..." />
+    <span id="clear-search" title="Cancella" style="display:none;">&times;</span>
+  </div>
+</div>
+
+	    
 		<!-- Overlay oscurante -->
 		<div id="overlay-carrello" class="overlay"></div>
 	
@@ -165,7 +174,10 @@
     <!-- Dettaglio Articolo -->
     <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;position: relative;">   
       <div id="badge-articolo" style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;"></div>
-      <h2 id="titolo-articolo"></h2>
+      <button id="share-btn" title="Condividi" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 1.3rem; color: #6e3b6e; padding: 10px; cursor: pointer;">
+      <i class="fas fa-share-alt"></i>
+      </button>
+	  <h2 id="titolo-articolo"></h2>
       <p id="prezzo-articolo" class="price" style="font-weight: bold; font-size: 1.2rem;"></p>
       <p id="descrizione-articolo"></p>
       <p style="margin: 1rem 0; text-align: left;">
@@ -290,6 +302,7 @@ function toggleModal() {
     function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
 		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
 		window.scrollTo(0, 0); // Porta subito la pagina all'inizio
+		document.getElementById('search').style.display = 'none'; // nascondi la barra
 		document.getElementById("titolo-home").style.display = "none";
 		document.getElementById("home-btn").style.display = "inline-block";
 		document.querySelector('.products').style.display = 'none';
@@ -310,9 +323,33 @@ function toggleModal() {
 		document.getElementById('foto2-articolo').src = img2;
 		document.getElementById('prezzo-articolo').textContent = prezzo;		
 	}
+	
+document.getElementById("share-btn").onclick = function () {
+  const titolo = document.getElementById("titolo-articolo").textContent.trim();
+  const descrizione = document.getElementById("descrizione-articolo").textContent.trim();
+  const prezzo = document.getElementById("prezzo-articolo").textContent.trim();
+
+  // Link al dettaglio dell'articolo con parametro ?item=
+  const url = `${window.location.origin}${window.location.pathname}?item=${encodeURIComponent(titolo)}`;
+
+  const messaggio = `🛍️ *${titolo}*\n\n💬 ${descrizione}\n💶 Prezzo: ${prezzo}\n🔗 ${url}`;
+
+  if (navigator.share) {
+    navigator.share({
+      title: `Articolo: ${titolo}`,
+      text: messaggio
+    }).catch(err => console.error("Errore condivisione:", err));
+  } else {
+    prompt("Copia e condividi questo messaggio:", messaggio);
+  }
+};
+
+
+
 
  function tornaAllaHome() {
-    document.getElementById("home-btn").style.display = "none";
+    document.getElementById('search').style.display = 'block'; // mostra la barra
+	document.getElementById("home-btn").style.display = "none";
     let dettaglio = document.getElementById('dettaglio-articolo');
     
     // Rimuove gradualmente l'animazione prima di nascondere il dettaglio
@@ -670,6 +707,25 @@ preferiti.push(...preferitiPuliti);
 aggiornaStatoCuore();
 aggiornaListaPreferiti(articoli);
 
+// 🔗 Mostra dettaglio articolo se URL contiene ?item=
+const urlParams = new URLSearchParams(window.location.search);
+const articoloRichiesto = urlParams.get("item");
+
+if (articoloRichiesto) {
+  const articolo = articoli.find(a => a.titolo === articoloRichiesto);
+  if (articolo) {
+    mostraDettaglio(
+      articolo.titolo,
+      articolo.descrizione,
+      articolo.foto1,
+      articolo.foto2,
+      articolo.prezzo,
+      articolo.badge
+    );
+  }
+}
+
+
     articoli.forEach(articolo => {
       const div = document.createElement('div');
       div.className = 'product';
@@ -843,6 +899,58 @@ function aggiornaStatoCuore() {
     }
   }
 }
+
+const searchInput = document.getElementById('search');
+
+searchInput.addEventListener('keyup', function () {
+  const query = searchInput.value.toLowerCase();
+  
+  // Scrolla il campo in alto
+  const topOffset = searchInput.getBoundingClientRect().top + window.scrollY;
+  window.scrollTo({ top: topOffset - 20, behavior: 'smooth' }); // -20 è il margine
+
+  document.querySelectorAll('.product').forEach(prod => {
+    const text = prod.textContent.toLowerCase();
+
+    if (text.includes(query)) {
+      prod.style.display = 'block';
+    } else {
+      prod.style.display = 'none';
+    }
+  });
+});
+
+const searchField = document.getElementById('search');
+const clearBtn = document.getElementById('clear-search');
+
+searchField.addEventListener('input', () => {
+  clearBtn.style.display = searchField.value ? 'block' : 'none';
+});
+
+clearBtn.addEventListener('click', () => {
+  searchField.value = '';
+  clearBtn.style.display = 'none';
+
+  // Trigger manualmente l’evento keyup per riattivare il filtro prodotti
+  const event = new Event('keyup');
+  searchField.dispatchEvent(event);
+});
+
+<!-- window.addEventListener("DOMContentLoaded", () => { -->
+  <!-- const title = document.querySelector('.animated-title'); -->
+  <!-- const toast = document.getElementById('toast-preferiti'); -->
+
+  <!-- // Mostra il toast dopo 3.2 secondi, in sincronia con fine animazione del titolo -->
+  <!-- setTimeout(() => { -->
+    <!-- toast.classList.add('show'); -->
+
+    <!-- // Nascondi dopo 3 secondi -->
+    <!-- setTimeout(() => { -->
+      <!-- toast.classList.remove('show'); -->
+    <!-- }, 3000); -->
+  <!-- }, 3200); // tempo leggermente superiore a typing 3s -->
+<!-- }); -->
+
 
 </script>
  
