@@ -370,7 +370,7 @@ document.getElementById("share-btn").onclick = function () {
 	
 	// ✅ Rimuove ?item=... dall'URL senza ricaricare la pagina
   if (window.history.replaceState) {
-    const baseUrl = window.location.origin + window.location.pathname;
+    const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '');
     window.history.replaceState({}, document.title, baseUrl);
   }
 	}
