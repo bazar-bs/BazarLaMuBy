@@ -303,6 +303,7 @@ function toggleModal() {
 		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
 		window.scrollTo(0, 0); // Porta subito la pagina all'inizio
 		document.getElementById('search').style.display = 'none'; // nascondi la barra
+		document.getElementById('clear-search').style.display = 'none'; // nascondi la x
 		document.getElementById("titolo-home").style.display = "none";
 		document.getElementById("home-btn").style.display = "inline-block";
 		document.querySelector('.products').style.display = 'none';
@@ -349,6 +350,7 @@ document.getElementById("share-btn").onclick = function () {
 
  function tornaAllaHome() {
     document.getElementById('search').style.display = 'block'; // mostra la barra
+	document.getElementById('clear-search').style.display = 'block'; // mostra la x
 	document.getElementById("home-btn").style.display = "none";
     let dettaglio = document.getElementById('dettaglio-articolo');
     
