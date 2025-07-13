@@ -38,7 +38,8 @@
   </nav>
   <!-- ✅ Qui va la lista dei preferiti -->
   <div class="preferiti-box">
-    <h4>I tuoi preferiti ❤️</h4>
+    <h2 id="messaggio-bentornato"><span id="nome-utente" style="cursor:pointer;">Benvenuto Utente</span></h2>
+	<h4>I tuoi preferiti ❤️</h4>
     <ul id="lista-preferiti"></ul>
   </div>
 </div>
@@ -852,6 +853,22 @@ function aggiornaListaPreferiti(articoli) {
     if (telCarrello) {
 		telCarrello.textContent = telefono;
 	}
+	
+	 // 🔽 Il tuo codice qui sotto
+  const nomeEl = document.getElementById("nome-utente");
+  const nomeSalvato = localStorage.getItem("nomeUtente");
+
+  if (nomeSalvato) {
+    nomeEl.textContent = `Bentornato ${nomeSalvato}`;
+  }
+
+  nomeEl.addEventListener("click", () => {
+    const nuovoNome = prompt("Inserisci il tuo nome:");
+    if (nuovoNome) {
+      localStorage.setItem("nomeUtente", nuovoNome);
+      nomeEl.textContent = `Bentornato ${nuovoNome}`;
+    }
+  });
     
   });
 
