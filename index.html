@@ -859,14 +859,14 @@ function aggiornaListaPreferiti(articoli) {
   const nomeSalvato = localStorage.getItem("nomeUtente");
 
   if (nomeSalvato) {
-    nomeEl.textContent = `Bentornato ${nomeSalvato}`;
+    nomeEl.textContent = `Bentornatə ${nomeSalvato}`;
   }
 
   nomeEl.addEventListener("click", () => {
     const nuovoNome = prompt("Inserisci il tuo nome:");
     if (nuovoNome) {
       localStorage.setItem("nomeUtente", nuovoNome);
-      nomeEl.textContent = `Bentornato ${nuovoNome}`;
+      nomeEl.textContent = `Bentornatə ${nuovoNome}`;
     }
   });
     
