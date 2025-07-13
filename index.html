@@ -367,6 +367,12 @@ document.getElementById("share-btn").onclick = function () {
 
     document.getElementById("titolo-home").style.display = "block";
     window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina
+	
+	// ✅ Rimuove ?item=... dall'URL senza ricaricare la pagina
+  if (window.history.replaceState) {
+    const baseUrl = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, baseUrl);
+  }
 	}
 
     function evidenzia(el) {
