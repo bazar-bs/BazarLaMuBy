@@ -348,12 +348,10 @@ document.getElementById("share-btn").onclick = function () {
   }
 };
 
-
-
-
  function tornaAllaHome() {
     document.getElementById('search').style.display = 'block'; // mostra la barra
-	document.getElementById('clear-search').style.display = 'block'; // mostra la x
+	aggiornaClearBtn(); //  la X sarà visibile se c'è testo
+	<!-- document.getElementById('clear-search').style.display = 'block'; // mostra la x -->
 	document.getElementById("home-btn").style.display = "none";
     let dettaglio = document.getElementById('dettaglio-articolo');
     
@@ -962,6 +960,11 @@ clearBtn.addEventListener('click', () => {
   const event = new Event('keyup');
   searchField.dispatchEvent(event);
 });
+
+function aggiornaClearBtn() {
+  clearBtn.style.display = searchField.value ? 'block' : 'none';
+}
+
 
 <!-- window.addEventListener("DOMContentLoaded", () => { -->
   <!-- const title = document.querySelector('.animated-title'); -->
