@@ -83,7 +83,7 @@
 			  border-radius: 8px;
 			  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
 			  cursor: pointer;">
-		  <i class="fas fa-long-arrow-alt-up">€</i>
+		  <i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>
 		</button>		
 		<!-- Pulsante Home -->
 		<button onclick="tornaAllaHome()" id="home-btn" style="
@@ -941,11 +941,11 @@ function toggleOrdinaPrezzo() {
       return prezzoA - prezzoB;
     });
 
-    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-sort-numeric-up-alt">&nbsp</i>';
+    document.getElementById("ordina-prezzo-btn").innerHTML = '&nbsp<i class="fas fa-sort">&nbsp</i>';
   } else {
     // Ripristina ordine originale
     window.articoliCorrenti = [...window.articoliOriginali];
-    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-long-arrow-alt-up">€</i>';
+    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>';
   }
 
   renderArticoli(window.articoliCorrenti);
