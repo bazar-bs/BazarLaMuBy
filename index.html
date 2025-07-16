@@ -11,9 +11,7 @@
   <meta charset="UTF-8">
   <meta name="description" content="Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.">
   <meta name="keywords" content="bazar online, articoli usati, oggetti usati, offerte usato, articoli vintage, occasioni, mercatino, LaMuBy, compra usato, oggetti da collezione">
-  <!-- <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0"> -->
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>il bAzAr LaMuBy</title>
   
@@ -28,8 +26,6 @@
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
-<!-- <div id="toast-preferiti">I tuoi preferiti</div> -->
-
 
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
@@ -49,7 +45,7 @@
 
 	<div id="popup-annullato" class="modal">
 		    <h2>❌ Ordine Annullato</h2>
-		    <p>Hai annullato il tuo ordine!! Torna al Carrello. <!--Se desideri riprovare, puoi tornare alla selezione degli articoli.</p>-->
+		    <p>Hai annullato il tuo ordine!! Torna al Carrello. 
 		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
 		        <i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
@@ -73,6 +69,22 @@
 </header>
 
 	<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">		
+		<!-- Pulsante Ordina per Prezzo -->
+		<button onclick="toggleOrdinaPrezzo()" id="ordina-prezzo-btn" aria-label="Ordina gli articoli per prezzo" style="
+			  padding: 0rem 1rem;
+			  height: 38px;
+			  margin-top: 12px;
+			  margin-left: 5px; 
+			  margin-right: -63px; 
+			  background-color: #6e3b6e;
+			  color: white;
+			  font-size: 0.9rem;
+			  border: none;
+			  border-radius: 8px;
+			  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+			  cursor: pointer;">
+		  <i class="fas fa-long-arrow-alt-up">€</i>
+		</button>		
 		<!-- Pulsante Home -->
 		<button onclick="tornaAllaHome()" id="home-btn" style="
 			  padding: 0rem 1rem;
@@ -100,7 +112,7 @@
 			  border-radius: 8px;
 			  cursor: pointer;">
 			  <i class="fas fa-shopping-cart"></i> Carrello (<span id="contatore-carrello">0</span>)
-		</button>
+		</button>		
 	</div>
 
   <div class="container">
@@ -307,6 +319,7 @@ function toggleModal() {
 		document.getElementById('clear-search').style.display = 'none'; // nascondi la x
 		document.getElementById("titolo-home").style.display = "none";
 		document.getElementById("home-btn").style.display = "inline-block";
+		document.getElementById("ordina-prezzo-btn").style.display = "none";
 		document.querySelector('.products').style.display = 'none';
 		
 		 let dettaglio = document.getElementById('dettaglio-articolo');
@@ -351,8 +364,8 @@ document.getElementById("share-btn").onclick = function () {
  function tornaAllaHome() {
     document.getElementById('search').style.display = 'block'; // mostra la barra
 	aggiornaClearBtn(); //  la X sarà visibile se c'è testo
-	<!-- document.getElementById('clear-search').style.display = 'block'; // mostra la x -->
 	document.getElementById("home-btn").style.display = "none";
+	document.getElementById("ordina-prezzo-btn").style.display = "inline-block";	
     let dettaglio = document.getElementById('dettaglio-articolo');
     
     // Rimuove gradualmente l'animazione prima di nascondere il dettaglio
@@ -535,9 +548,7 @@ function caricaCarrello() {
 }
 
 window.onload = function() {
-    <!-- localStorage.removeItem("carrello"); // Cancella il carrello salvato -->
-    <!-- carrello = []; // Azzeriamo la variabile -->
-	const salvato = localStorage.getItem("carrello");
+   	const salvato = localStorage.getItem("carrello");
   if (salvato) {
     try {
       carrello = JSON.parse(salvato);
@@ -689,6 +700,9 @@ function togglePolicyModal() {
 fetch('articoli.json')
   .then(response => response.json())
   .then(articoli => {
+  window.articoliOriginali = [...articoli];
+  window.articoliCorrenti = [...articoli];
+
     const container = document.querySelector('.products');
     const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
 	    // Leggi il carrello salvato
@@ -735,60 +749,8 @@ if (articoloRichiesto) {
 }
 
 
-    articoli.forEach(articolo => {
-      const div = document.createElement('div');
-      div.className = 'product';
-      div.style.position = 'relative';
-      div.setAttribute('ontouchstart', 'evidenzia(this)');
-      div.setAttribute('onclick', `mostraDettaglio('${articolo.titolo}', '${articolo.descrizione.replace(/'/g, "\\'")}', '${articolo.foto1}', '${articolo.foto2}', '${articolo.prezzo}', '${articolo.badge}')`);
-
-      // Crea il pulsante preferito
-      const isPreferito = preferiti.includes(articolo.titolo);
-      const cuore = isPreferito ? '❤️' : '🤍';
-
-      div.innerHTML = `
-        <div style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;">${articolo.badge}</div>
-        <button class="btn-preferito" style="position: absolute; top: 5px; right: 5px; background: none; border: none; font-size: 1.4rem; cursor: pointer; z-index: 10;">${cuore}</button>
-        <img src="${articolo.foto1}" alt="${articolo.titolo}" loading="lazy">
-        <h2>${articolo.titolo}</h2>
-        <p class="price"><strong>${articolo.prezzo}</strong></p>
-        <p>${articolo.descrizione}</p>
-      `;
-
-      const btn = div.querySelector('.btn-preferito');
-      btn.addEventListener('click', function (e) {
-  e.stopPropagation();
-
-  const index = preferiti.indexOf(articolo.titolo);
-  const toggleBtn = document.getElementById('toggle-sidebar');
-
-  if (index > -1) {
-    // Rimuovi dai preferiti
-    preferiti.splice(index, 1);
-    btn.textContent = '🤍';
-  } else {
-    // Aggiungi ai preferiti
-    preferiti.push(articolo.titolo);
-    btn.textContent = '❤️';
-
-    // ✨ Fai pulsare il cuore
-    if (toggleBtn) {
-      toggleBtn.classList.add('pulsante-pulsante');
-      setTimeout(() => {
-        toggleBtn.classList.remove('pulsante-pulsante');
-      }, 600); // durata dell'animazione
-    }
-  }
-
-  localStorage.setItem('preferiti', JSON.stringify(preferiti));
-  aggiornaStatoCuore();
-  aggiornaListaPreferiti(articoli);
-});
-
-      container.appendChild(div);
-    });
-
-    aggiornaListaPreferiti(articoli);
+renderArticoli(window.articoliCorrenti);
+    
   })
   .catch(error => console.error('Errore nel caricamento articoli:', error));
 
@@ -966,20 +928,86 @@ function aggiornaClearBtn() {
 }
 
 
-<!-- window.addEventListener("DOMContentLoaded", () => { -->
-  <!-- const title = document.querySelector('.animated-title'); -->
-  <!-- const toast = document.getElementById('toast-preferiti'); -->
+let ordinePrezzoAttivo = false;
 
-  <!-- // Mostra il toast dopo 3.2 secondi, in sincronia con fine animazione del titolo -->
-  <!-- setTimeout(() => { -->
-    <!-- toast.classList.add('show'); -->
+function toggleOrdinaPrezzo() {
+  ordinePrezzoAttivo = !ordinePrezzoAttivo;
 
-    <!-- // Nascondi dopo 3 secondi -->
-    <!-- setTimeout(() => { -->
-      <!-- toast.classList.remove('show'); -->
-    <!-- }, 3000); -->
-  <!-- }, 3200); // tempo leggermente superiore a typing 3s -->
-<!-- }); -->
+  if (ordinePrezzoAttivo) {
+    // Ordina per prezzo crescente
+    window.articoliCorrenti = [...window.articoliOriginali].sort((a, b) => {
+      const prezzoA = parseFloat(a.prezzo.replace(/[^\d,]/g, "").replace(",", "."));
+      const prezzoB = parseFloat(b.prezzo.replace(/[^\d,]/g, "").replace(",", "."));
+      return prezzoA - prezzoB;
+    });
+
+    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-sort-numeric-up-alt">&nbsp</i>';
+  } else {
+    // Ripristina ordine originale
+    window.articoliCorrenti = [...window.articoliOriginali];
+    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-long-arrow-alt-up">€</i>';
+  }
+
+  renderArticoli(window.articoliCorrenti);
+}
+
+function renderArticoli(articoli) {
+  const container = document.querySelector('.products');
+  const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
+
+  container.innerHTML = "";
+
+  articoli.forEach(articolo => {
+    const div = document.createElement('div');
+    div.className = 'product';
+    div.style.position = 'relative';
+    div.setAttribute('ontouchstart', 'evidenzia(this)');
+    div.setAttribute('onclick', `mostraDettaglio('${articolo.titolo}', '${articolo.descrizione.replace(/'/g, "\\'")}', '${articolo.foto1}', '${articolo.foto2}', '${articolo.prezzo}', '${articolo.badge}')`);
+
+    const isPreferito = preferiti.includes(articolo.titolo);
+    const cuore = isPreferito ? '❤️' : '🤍';
+
+    div.innerHTML = `
+      <div style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;">${articolo.badge}</div>
+      <button class="btn-preferito" style="position: absolute; top: 5px; right: 5px; background: none; border: none; font-size: 1.4rem; cursor: pointer; z-index: 10;">${cuore}</button>
+      <img src="${articolo.foto1}" alt="${articolo.titolo}" loading="lazy">
+      <h2>${articolo.titolo}</h2>
+      <p class="price"><strong>${articolo.prezzo}</strong></p>
+      <p>${articolo.descrizione}</p>
+    `;
+
+    const btn = div.querySelector('.btn-preferito');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+
+      const index = preferiti.indexOf(articolo.titolo);
+      const toggleBtn = document.getElementById('toggle-sidebar');
+
+      if (index > -1) {
+        preferiti.splice(index, 1);
+        btn.textContent = '🤍';
+      } else {
+        preferiti.push(articolo.titolo);
+        btn.textContent = '❤️';
+
+        if (toggleBtn) {
+          toggleBtn.classList.add('pulsante-pulsante');
+          setTimeout(() => toggleBtn.classList.remove('pulsante-pulsante'), 600);
+        }
+      }
+
+      localStorage.setItem('preferiti', JSON.stringify(preferiti));
+      aggiornaStatoCuore();
+      aggiornaListaPreferiti(articoli);
+    });
+
+    container.appendChild(div);
+  });
+
+  aggiornaListaPreferiti(articoli);
+  aggiornaStatoCuore();
+}
+
 
 
 </script>
