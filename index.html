@@ -890,22 +890,19 @@ function aggiornaStatoCuore() {
 const searchInput = document.getElementById('search');
 
 searchInput.addEventListener('keyup', function () {
-  const query = searchInput.value.toLowerCase();
-  
-  // Scrolla il campo in alto
-  const topOffset = searchInput.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top: topOffset - 20, behavior: 'smooth' }); // -20 è il margine
+  const query = searchInput.value.trim().toLowerCase();
 
-  document.querySelectorAll('.product').forEach(prod => {
-    const text = prod.textContent.toLowerCase();
-
-    if (text.includes(query)) {
-      prod.style.display = 'block';
-    } else {
-      prod.style.display = 'none';
-    }
+  const filtrati = window.articoliOriginali.filter(art => {
+    const testo = (art.titolo + " " + art.descrizione).toLowerCase();
+    return testo.includes(query);
   });
+
+  // aggiorna la lista attuale usata anche dal sort
+  window.articoliCorrenti = filtrati;
+
+  renderArticoli(filtrati);
 });
+
 
 const searchField = document.getElementById('search');
 const clearBtn = document.getElementById('clear-search');
@@ -935,20 +932,23 @@ function toggleOrdinaPrezzo() {
 
   if (ordinePrezzoAttivo) {
     // Ordina per prezzo crescente
-    window.articoliCorrenti = [...window.articoliOriginali].sort((a, b) => {
+    const ordinati = [...window.articoliCorrenti].sort((a, b) => {
       const prezzoA = parseFloat(a.prezzo.replace(/[^\d,]/g, "").replace(",", "."));
       const prezzoB = parseFloat(b.prezzo.replace(/[^\d,]/g, "").replace(",", "."));
       return prezzoA - prezzoB;
     });
 
-    document.getElementById("ordina-prezzo-btn").innerHTML = '&nbsp<i class="fas fa-sort">&nbsp</i>';
-  } else {
-    // Ripristina ordine originale
-    window.articoliCorrenti = [...window.articoliOriginali];
-    document.getElementById("ordina-prezzo-btn").innerHTML = '<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>';
-  }
+    document.getElementById("ordina-prezzo-btn").innerHTML =
+      '&nbsp<i class="fas fa-sort">&nbsp</i>';
 
-  renderArticoli(window.articoliCorrenti);
+    renderArticoli(ordinati);
+  } else {
+    // Ripristina l’ordine originale della ricerca (non ordinato per prezzo)
+    document.getElementById("ordina-prezzo-btn").innerHTML =
+      '<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>';
+
+    renderArticoli(window.articoliCorrenti);
+  }
 }
 
 function renderArticoli(articoli) {
