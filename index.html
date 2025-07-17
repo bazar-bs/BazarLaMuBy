@@ -118,7 +118,7 @@
   <div class="container">
 		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0rem;">
 		<div class="search-container" style="display: flex; flex-direction: row; align-items: flex-start; position: relative;">
-  <h2 id="titolo-home">I nostri articoli&nbsp;&nbsp;</h2>
+  <h2 id="titolo-home">Articoli <span id="contatore-articoli">(0)</span>&nbsp;&nbsp;</h2>
   <div class="search-wrapper">
     <input type="text" id="search" placeholder="🔍Cerca articoli..." />
     <span id="clear-search" title="Cancella" style="display:none;">&times;</span>
@@ -1006,8 +1006,15 @@ function renderArticoli(articoli) {
 
   aggiornaListaPreferiti(articoli);
   aggiornaStatoCuore();
+  aggiornaContatoreArticoli(articoli);
 }
 
+function aggiornaContatoreArticoli(lista) {
+  const contatore = document.getElementById("contatore-articoli");
+  if (contatore) {
+    contatore.textContent = `(${lista.length})`;
+  }
+}
 
 
 </script>

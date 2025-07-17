@@ -153,7 +153,7 @@
     
     .contact-button {
       display: block;
-      margin: 2rem auto 0;
+      margin:  2rem auto 0;
       padding: 0.5rem 1.5rem;
       background-color: #6e3b6e;
       color: white;
@@ -678,6 +678,23 @@
   transform: scale(1.1);
 }
 
+#titolo-home {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #4a255f; /* un viola coerente col tema */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#contatore-articoli {
+  background-color: #e6dbf4;
+  color: #6e3b6e;
+  font-size: 1rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: normal;
+}
 
 /* #toast-preferiti { */
   /* position: fixed; */
