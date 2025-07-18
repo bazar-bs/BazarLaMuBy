@@ -1017,7 +1017,7 @@ function aggiornaContatoreArticoli(lista) {
   const contatore = document.getElementById("contatore-articoli");
   if (contatore) {
     const isSearchAttiva = document.getElementById("search")?.value.trim() !== "";
-    const asterisco = isSearchAttiva ? "*" : "";
+    const asterisco = isSearchAttiva ? "✱" : "";
     contatore.textContent = `(${lista.length}${asterisco})`;
   }
 }
