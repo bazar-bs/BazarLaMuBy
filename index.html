@@ -1,32 +1,21 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-
 <link rel="icon" type="image/png" href="favicon.png">
-
 <link rel="manifest" href="./manifest.json">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=2">
-
   <meta charset="UTF-8">
   <meta name="description" content="Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.">
-  <meta name="keywords" content="bazar online, articoli usati, oggetti usati, offerte usato, articoli vintage, occasioni, mercatino, LaMuBy, compra usato, oggetti da collezione">
-  
+  <meta name="keywords" content="bazar online, articoli usati, oggetti usati, offerte usato, articoli vintage, occasioni, mercatino, LaMuBy, compra usato, oggetti da collezione">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>il bAzAr LaMuBy</title>
-  
+  <title>il bAzAr LaMuBy</title>  
 <link rel="stylesheet" href="style.css?v=1.0">
-
 </head>
-
 	<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
-
 <body>
-
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
-
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
   <button id="close-sidebar" class="close-btn">&times;</button>
@@ -44,17 +33,14 @@
     <ul id="lista-preferiti"></ul>
   </div>
 </div>
-
 <!-- Overlay per chiudere cliccando fuori -->
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
-
 	<div id="popup-annullato" class="modal">
 		    <h2>❌ Ordine Annullato</h2>
 		    <p>Hai annullato il tuo ordine!! Torna al Carrello. 
 		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
 		        <i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
-
 	<div id="easter-egg-modal" class="modal">
 		    <h2>Scoperto Easter Egg!</h2>
 		    <p class="evidenziato">
@@ -62,7 +48,6 @@
 		    </p>
 		    <button onclick="chiudiModal()"><i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
-
 <header>
 	  <div class="header-content">
 		    <img src="lamuby_logo_bigtext.avif" alt="Logo LaMuBy" class="logo">
@@ -72,7 +57,6 @@
 		    </div>
 	  </div>
 </header>
-
 	<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">		
 		<!-- Pulsante Ordina per Prezzo -->
 		<button onclick="toggleOrdinaPrezzo()" id="ordina-prezzo-btn" aria-label="Ordina gli articoli per prezzo" style="
@@ -106,7 +90,6 @@
 			  cursor: pointer;">
 			  <i class="fas fa-home"></i>
 		</button>
-
 		<!-- Pulsante Carrello -->
 		<button onclick="mostraCarrello()" id="carrello-btn" style="
 			  padding: 1rem 2rem;
@@ -119,7 +102,6 @@
 			  <i class="fas fa-shopping-cart"></i> Carrello (<span id="contatore-carrello">0</span>)
 		</button>		
 	</div>
-
   <div class="container">
 		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0rem;">
 		<div class="search-container" style="display: flex; flex-direction: row; align-items: flex-start; position: relative;">
@@ -128,12 +110,9 @@
     <input type="text" id="search" placeholder="🔍Cerca articoli..." />
     <span id="clear-search" title="Cancella" style="display:none;">&times;</span>
   </div>
-</div>
-
-	    
+</div>	    
 		<!-- Overlay oscurante -->
-		<div id="overlay-carrello" class="overlay"></div>
-	
+		<div id="overlay-carrello" class="overlay"></div>	
 		<!-- Finestra centrale del carrello -->
 		<div id="modal-carrello" class="modal">
 		<div class="contenitore-carrello-pagina">
@@ -156,7 +135,6 @@
 </button>
     <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;margin-top: 1.3rem;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
-
 <!-- Finestra Modulo Spedizione -->
 <div id="modal-spedizione" class="modal">
 <div class="contenitore-spedizione">
@@ -170,7 +148,6 @@
     <input type="text" id="indirizzo" placeholder="Indirizzo (via, civico, città, provincia, CAP)" required>
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
-
 <!-- Pulsante per inviare l'ordine via WhatsApp -->
     <button type="button" onclick="inviaOrdineWhatsApp()" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
@@ -178,7 +155,6 @@
     </form>
     <button onclick="chiudiModuloSpedizione()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
-
 <!-- Popup di conferma ordine -->
 <div id="popup-conferma" class="modal">
     <h2>✅ Ordine Confermato!</h2>
@@ -188,7 +164,6 @@
   </div>
     <div class="products">  
     </div>
-
     <!-- Dettaglio Articolo -->
     <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;position: relative;">   
       <div id="badge-articolo" style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;"></div>
@@ -203,29 +178,23 @@
       </p>
       <img id="foto1-articolo" src="" loading="lazy" alt="Foto principale dell'articolo">
       <img id="foto2-articolo" src="" loading="lazy" alt="Foto aggiuntiva dell'articolo">
-
 <!-- Nuovo bottone per aggiungere al carrello -->
   <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button">
     <i class="fas fa-shopping-cart"></i> Aggiungi al Carrello
 </button>
-
 <p id="conferma-aggiunta" style="display: none; color: #6e3b6e; font-weight: bold; text-align: center;"></p>
-
 <button onclick="tornaAllaHome()" class="contact-button">
     <i class="fas fa-home"></i> Torna alla home
 </button>
     </div>
-
 <button class="contact-button" onclick="toggleModal()">
     <i class="fas fa-envelope"></i> Contattaci
 </button>
-  </div>
-  
+  </div>  
 <!--nuovo pulsante per installare app-->  
 <button class="contact-button" onclick="toggleAppModal()">
   <i class="fas fa-mobile-alt"></i> App
 </button>
-
   <div class="modal" id="modal" onclick="toggleModal()">
   <h3>Chi siamo</h3>
   <!-- Inserimento QR Code sopra le informazioni di contatto -->
@@ -236,14 +205,11 @@
   <p>Contattaci per maggiori informazioni sui prodotti!</p>
   <p><b><i class="fab fa-whatsapp"></i> Telefono: <span id="telefonopersonale"></span></b></p>
   <p><b><i class="fas fa-envelope"></i> Email: <span id="emailpersonale"></span></b></p>
-
 <!-- Pulsante per aprire il modale privacy -->
 <button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
 </button>
-
 </div>
-
 <!-- Modale Privacy Policy -->
 <div id="modal-policy" class="modal">
   <h3>Privacy & Cookie Policy</h3>
@@ -259,10 +225,8 @@
   <button onclick="togglePolicyModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
     <i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
-
 <!-- Overlay per la policy -->
 <div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
-
 <!--tasto app -->
 <div id="app-modal" class="modal">
   <h3>Come installare l'app</h3>
@@ -280,9 +244,7 @@
   </p>
   <button onclick="toggleAppModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
-
 <div id="app-overlay" class="overlay" onclick="toggleAppModal()"></div>
-
 <button onclick="scrollToTop()" id="scroll-top-btn" style="
   position: fixed;
   bottom: 70px;
@@ -299,24 +261,18 @@
   animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
 ">
   <i class="fas fa-arrow-up"></i>
-</button>
-  
+</button>  
 <footer style="font-weight: bold; background-color: #f4f0ff; font-size: 16px;">
   &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
-  <div class="piva">P.IVA 04692000989</div>
-		
-</footer>
-  
-<script>
- 
+  <div class="piva">P.IVA 04692000989</div>		
+</footer>  
+<script> 
 let ultimaPosizioneScroll = 0; 
-document.getElementById("home-btn").style.display = "none";
-  
+document.getElementById("home-btn").style.display = "none";  
 function toggleModal() {
   document.getElementById('modal').classList.toggle('active');
   document.getElementById('overlay').classList.toggle('active');
 }
-
     function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
 		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
 		window.scrollTo(0, 0); // Porta subito la pagina all'inizio
@@ -325,16 +281,13 @@ function toggleModal() {
 		document.getElementById("titolo-home").style.display = "none";
 		document.getElementById("home-btn").style.display = "inline-block";
 		document.getElementById("ordina-prezzo-btn").style.display = "none";
-		document.querySelector('.products').style.display = 'none';
-		
+		document.querySelector('.products').style.display = 'none';		
 		 let dettaglio = document.getElementById('dettaglio-articolo');
     dettaglio.style.display = 'block';
-
     // Aggiunge l'animazione
     setTimeout(() => {
         dettaglio.classList.add('active');
-    }, 50);
-			
+    }, 50);			
 		document.getElementById('dettaglio-articolo').style.display = 'block';
 		document.getElementById('titolo-articolo').textContent = titolo;
 		document.getElementById('badge-articolo').textContent = badge;
@@ -342,20 +295,15 @@ function toggleModal() {
 		document.getElementById('foto1-articolo').src = img1;
 		document.getElementById('foto2-articolo').src = img2;
 		document.getElementById('prezzo-articolo').textContent = prezzo;		
-	}
-	
+	}	
 document.getElementById("share-btn").onclick = function () {
   const sito = 'Il bAzAr LaMuBy'
   const titolo = document.getElementById("titolo-articolo").textContent.trim();
   const descrizione = document.getElementById("descrizione-articolo").textContent.trim();
   const prezzo = document.getElementById("prezzo-articolo").textContent.trim();
-  
-
   // Link al dettaglio dell'articolo con parametro ?item=
   const url = `${window.location.origin}${window.location.pathname}?item=${encodeURIComponent(titolo)}`;
-
   const messaggio = `*${sito}*\n\n🛍️ *${titolo}*\n\n💬 ${descrizione}\n💶 Prezzo: ${prezzo}\n🔗 ${url}`;
-
   if (navigator.share) {
     navigator.share({
       title: `Articolo: ${titolo}`,
@@ -365,45 +313,36 @@ document.getElementById("share-btn").onclick = function () {
     prompt("Copia e condividi questo messaggio:", messaggio);
   }
 };
-
  function tornaAllaHome() {
     document.getElementById('search').style.display = 'block'; // mostra la barra
 	aggiornaClearBtn(); //  la X sarà visibile se c'è testo
 	document.getElementById("home-btn").style.display = "none";
 	document.getElementById("ordina-prezzo-btn").style.display = "inline-block";	
-    let dettaglio = document.getElementById('dettaglio-articolo');
-    
+    let dettaglio = document.getElementById('dettaglio-articolo');    
     // Rimuove gradualmente l'animazione prima di nascondere il dettaglio
     dettaglio.classList.remove('active');
-
     setTimeout(() => {
         dettaglio.style.display = 'none';
         document.querySelector('.products').style.display = 'grid'; 
 		window.scrollTo({ top: ultimaPosizioneScroll, behavior: 'auto' }); // Torna dove eri
   }, 500);
-
     document.getElementById("titolo-home").style.display = "block";
-    window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina
-	
+    window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina	
 	// ✅ Rimuove ?item=... dall'URL senza ricaricare la pagina
   if (window.history.replaceState) {
     const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '');
     window.history.replaceState({}, document.title, baseUrl);
   }
 	}
-
     function evidenzia(el) {
       el.classList.add("highlight");
       setTimeout(() => {
         el.classList.remove("highlight");
       }, 300);
     }
-
 let carrello = [];
-
 function aggiungiAlCarrello(nome, prezzo) {
     let prezzoNumerico = parseFloat(prezzo.replace(/[^\d.]/g, "")); // Rimuove simboli e converte in numero
-
     let articolo = carrello.find(item => item.nome === nome);
     if (articolo) {
         articolo.quantita++;
@@ -417,12 +356,10 @@ function aggiungiAlCarrello(nome, prezzo) {
     toast.innerHTML = `<i class="fas fa-check-circle"></i> ${nome} aggiunto al carrello!`;
     toast.style.display = "block";
     toast.innerHTML += '<div id="toast-progress-bar"></div>';
-
     // Nasconde il toast dopo 3 secondi
     setTimeout(() => {
         toast.style.display = "none";
     }, 3000);
-
     // Effetto animazione su icona carrello
     let carrelloBtn = document.getElementById("carrello-btn");
     carrelloBtn.style.animation = "bounce 1s ease-in-out 2";
@@ -430,24 +367,19 @@ function aggiungiAlCarrello(nome, prezzo) {
         carrelloBtn.style.animation = "";
     }, 2000);
 }
-
 function salvaCarrelloLocalmente() {
     if (carrello.length > 0) {
         localStorage.setItem("carrello", JSON.stringify(carrello));
     }
 }
-
 function aggiornaCarrello() {
     let carrelloContainer = document.getElementById("lista-carrello");
     carrelloContainer.innerHTML = "";
-
     let totalePrezzo = 0;
-
     carrello.forEach(item => {
         if (!isNaN(item.prezzo)) { // Controlla che il prezzo sia valido
             totalePrezzo += item.prezzo * item.quantita;
         }
-
         let li = document.createElement("li");
         li.innerHTML = `${item.nome} - €${item.prezzo.toFixed(2)} (x${item.quantita}) 
                         <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 10px;">
@@ -455,18 +387,12 @@ function aggiornaCarrello() {
 </button>`;
         carrelloContainer.appendChild(li);
     });
-
-    document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
-    
-    document.getElementById("contatore-carrello-modal").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
-    
-
-    document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;
-    
+    document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);    
+    document.getElementById("contatore-carrello-modal").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);   
+    document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;    
     // Mostra o nasconde i pulsanti in base al contenuto del carrello
     let btnSvuota = document.getElementById("btn-svuota");
-    let btnProcedi = document.getElementById("btn-procedi");
-    
+    let btnProcedi = document.getElementById("btn-procedi");    
     if (carrello.length === 0) {
         btnSvuota.style.display = "none";
         btnProcedi.style.display = "none";
@@ -475,64 +401,49 @@ function aggiornaCarrello() {
         btnProcedi.style.display = "block";
     }
 }
-
 function inviaOrdineWhatsApp() {
     let nome = document.getElementById("nome").value.trim();
     let indirizzo = document.getElementById("indirizzo").value.trim();
     let telefono = document.getElementById("telefono").value.trim();
     let email = document.getElementById("email").value.trim();
-
     if (!nome || !indirizzo || !telefono || !email) {
         alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
         return;
     }
-
     let carrelloSalvato = localStorage.getItem("carrello");
     if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
         alert("Il carrello è vuoto, impossibile inviare l'ordine!");
         return;
     }
-
     let ordine = JSON.parse(carrelloSalvato);
     let totalePrezzo = ordine.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
-
     let messaggio = `*Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
-
     ordine.forEach(item => {
         messaggio += `- ${item.nome} | €${item.prezzo.toFixed(2)} x ${item.quantita}\n`;
     });
-
     messaggio += `\n *Totale Ordine:* €${totalePrezzo.toFixed(2)}\n\n Grazie per l'acquisto! `;
-
     let numeroWhatsApp = "3516100235"; // Sostituisci con il numero destinatario
     let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
-
     // Apri automaticamente WhatsApp
     window.open(urlWhatsApp, "_blank");
-
     // Mostra il popup di conferma ordine
     mostraPopupConferma();
-
     // Svuota il carrello dopo l'invio
     svuotaCarrello();
 }
-
 function mostraCarrello() {
     document.getElementById("modal-carrello").classList.add("active");
     document.getElementById("overlay-carrello").classList.add("active");
 }
-
 function chiudiCarrello() {
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
 }
-
 function svuotaCarrello() {
     carrello = [];
     localStorage.removeItem("carrello"); // Cancella i dati salvati
     aggiornaCarrello();
 }
-
 function rimuoviDalCarrello(nome) {
     let articolo = carrello.find(item => item.nome === nome);
     if (articolo) {
@@ -545,13 +456,11 @@ function rimuoviDalCarrello(nome) {
     salvaCarrelloLocalmente();
     aggiornaCarrello();
 }
-
 function caricaCarrello() {
     localStorage.removeItem("carrello"); // Cancella i dati salvati all'avvio
     carrello = []; // Resetta la variabile
     aggiornaCarrello(); // Assicura che i pulsanti siano gestiti correttamente
 }
-
 window.onload = function() {
    	const salvato = localStorage.getItem("carrello");
   if (salvato) {
@@ -566,16 +475,13 @@ window.onload = function() {
   }
     aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
 };
-
 function mostraModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "block";
 }
-
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
     document.getElementById("popup-annullato").style.display = "block";
 }
-
 function mostraPopupConferma() {
     // Chiudi il carrello
     document.getElementById("modal-carrello").classList.remove("active");
@@ -588,7 +494,6 @@ function mostraPopupConferma() {
     document.getElementById("popup-conferma").style.display = "block";
     document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
 }
-
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
 }
@@ -598,15 +503,11 @@ function chiudiPopupConferma() {
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
     location.reload(); // Ricarica la pagina manualmente
 }
-
-
 let clickCounter = 0;
 const logo = document.querySelector(".logo");
 const modal = document.getElementById("easter-egg-modal");
-
 logo.addEventListener("click", function() {
-    clickCounter++;
-    
+    clickCounter++;    
     if (clickCounter === 5) {
     modal.style.display = "block";
     document.getElementById("overlay-easteregg").classList.add("active");
@@ -614,17 +515,14 @@ logo.addEventListener("click", function() {
     clickCounter = 0;
 }
 });
-
 function chiudiModal() {
     modal.style.display = "none";
     document.getElementById("overlay-easteregg").classList.remove("active");
 }
-
 function toggleAppModal() {
   document.getElementById("app-modal").classList.toggle("active");
   document.getElementById("app-overlay").classList.toggle("active");
 }
-
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js')
@@ -632,14 +530,11 @@ function toggleAppModal() {
           .catch(err => console.error('Errore Service Worker', err));
       });
     }
-
 const canvas = document.getElementById("fireworks-canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 let fireworks = [];
-
 function createFirework() {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height / 2;
@@ -656,7 +551,6 @@ function createFirework() {
         });
     }
 }
-
 function updateFireworks() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     fireworks.forEach((f, i) => {
@@ -675,7 +569,6 @@ function updateFireworks() {
     ctx.globalAlpha = 1;
     requestAnimationFrame(updateFireworks);
 }
-
 function startFireworks() {
     canvas.style.display = "block";
     const interval = setInterval(createFirework, 400);
@@ -685,46 +578,35 @@ function startFireworks() {
         setTimeout(() => canvas.style.display = "none", 2000);
     }, 3000);
 }
-
 // Mostra il tasto solo quando si scrolla verso il basso
 window.addEventListener("scroll", function() {
   const btn = document.getElementById("scroll-top-btn");
   btn.style.display = (window.scrollY > 300) ? "block" : "none";
 });
-
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-
 function togglePolicyModal() {
   document.getElementById("modal-policy").classList.toggle("active");
   document.getElementById("policy-overlay").classList.toggle("active");
 }
-
 fetch('articoli.json')
   .then(response => response.json())
   .then(articoli => {
   window.articoliOriginali = [...articoli];
   window.articoliCorrenti = [...articoli];
-
     const container = document.querySelector('.products');
     const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
 	    // Leggi il carrello salvato
     let carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
-
     // Crea una lista dei titoli validi
     const titoliDisponibili = articoli.map(a => a.titolo);
-
     // Filtra il carrello mantenendo solo gli articoli ancora presenti
     carrelloSalvato = carrelloSalvato.filter(item => titoliDisponibili.includes(item.nome));
-
     // Salva di nuovo il carrello filtrato
     localStorage.setItem("carrello", JSON.stringify(carrelloSalvato));
-
     // Aggiorna la variabile globale carrello (se serve)
     carrello = carrelloSalvato;
-
     // Aggiorna la UI
     aggiornaCarrello();
 let preferitiPuliti = preferiti.filter(titolo => titoliDisponibili.includes(titolo));
@@ -734,11 +616,9 @@ preferiti.push(...preferitiPuliti);
 // Aggiorna l’icona cuore (🤍/❤️) in alto a destra
 aggiornaStatoCuore();
 aggiornaListaPreferiti(articoli);
-
 // 🔗 Mostra dettaglio articolo se URL contiene ?item=
 const urlParams = new URLSearchParams(window.location.search);
 const articoloRichiesto = urlParams.get("item");
-
 if (articoloRichiesto) {
   const articolo = articoli.find(a => a.titolo === articoloRichiesto);
   if (articolo) {
@@ -752,21 +632,14 @@ if (articoloRichiesto) {
     );
   }
 }
-
-
-renderArticoli(window.articoliCorrenti);
-    
+renderArticoli(window.articoliCorrenti);    
   })
   .catch(error => console.error('Errore nel caricamento articoli:', error));
-
-
 function aggiornaListaPreferiti(articoli) {
   const lista = document.getElementById('lista-preferiti');
   if (!lista) return;
-
   const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
   lista.innerHTML = '';
-
   preferiti.forEach(titolo => {
     const articolo = articoli.find(a => a.titolo === titolo);
     if (articolo) {
@@ -774,7 +647,6 @@ function aggiornaListaPreferiti(articoli) {
       li.textContent = articolo.titolo;
       li.style.cursor = 'pointer';
       li.style.color = '#fff';
-
       li.addEventListener('click', () => {
         mostraDettaglio(
           articolo.titolo,
@@ -787,55 +659,41 @@ function aggiornaListaPreferiti(articoli) {
 		// Chiudi sidebar e overlay
 		document.getElementById('sidebar').classList.remove('active');
 		document.getElementById('sidebar-overlay').classList.remove('active');
-
 		});
-
       lista.appendChild(li);
     }
   });
 }
-
-
  window.addEventListener("DOMContentLoaded", () => {
     const emailBase64 = "bGF1cmEucGlvdmFuZWxsaTE5ODRAZ21haWwuY29t";
     const telefonoBase64 = "MzUxNjEwMDIzNQ==";
-
     const email = atob(emailBase64);
     const telefono = atob(telefonoBase64);
-
     const emailEl = document.getElementById("emailpersonale");
     const telefonoEl = document.getElementById("telefonopersonale");
     const telCarrello = document.getElementById("telefonocarrello");
-
-
     if (emailEl && telefonoEl) {
       emailEl.textContent = email;
       telefonoEl.textContent = telefono;
     } else {
       console.warn("Elementi contatto non trovati nel DOM.");
     }
-    
     if (telCarrello) {
 		telCarrello.textContent = telefono;
-	}
-	
+	}	
   const nomeEl = document.getElementById("nome-utente");
   const nomeSalvato = localStorage.getItem("nomeUtente");
-
   if (nomeSalvato) {
     nomeEl.textContent = `Bentornatə ${nomeSalvato}`;
   }
-
   nomeEl.addEventListener("click", () => {
     const nuovoNome = prompt("Inserisci il tuo nome:");
     if (nuovoNome) {
       localStorage.setItem("nomeUtente", nuovoNome);
       nomeEl.textContent = `Bentornatə ${nuovoNome}`;
     }
+  });    
   });
-    
-  });
-
   const toggleSidebar = document.getElementById('toggle-sidebar');
   const sidebar = document.getElementById('sidebar');
   const closeSidebar = document.getElementById('close-sidebar');
@@ -845,22 +703,18 @@ function aggiornaListaPreferiti(articoli) {
     sidebar.classList.add('active');
     overlay.classList.add('active');
   });
-
   closeSidebar.addEventListener('click', () => {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
   });
-
   overlay.addEventListener('click', () => {
     sidebar.classList.remove('active');
     overlay.classList.remove('active');
   });
-
 document.addEventListener("DOMContentLoaded", function () {
     aggiornaStatoCuore();
 	const dettaglio = document.getElementById("dettaglio-articolo");
     const toggleBtn = document.getElementById("toggle-sidebar");
-
     if (dettaglio && toggleBtn) {
       const observer = new MutationObserver(() => {
         if (dettaglio.classList.contains("active")) {
@@ -869,15 +723,12 @@ document.addEventListener("DOMContentLoaded", function () {
           toggleBtn.style.display = "block";
         }
       });
-
       observer.observe(dettaglio, { attributes: true });
     }
   });
-
 function aggiornaStatoCuore() {
   const toggleBtn = document.getElementById('toggle-sidebar');
   const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
-
   if (toggleBtn) {
     if (preferiti.length > 0) {
       toggleBtn.classList.remove('vuoto');
@@ -890,50 +741,35 @@ function aggiornaStatoCuore() {
     }
   }
 }
-
 const searchInput = document.getElementById('search');
-
 searchInput.addEventListener('keyup', function () {
   const query = searchInput.value.trim().toLowerCase();
-
   const filtrati = window.articoliOriginali.filter(art => {
     const testo = (art.titolo + " " + art.descrizione).toLowerCase();
     return testo.includes(query);
   });
-
   // aggiorna la lista attuale usata anche dal sort
   window.articoliCorrenti = filtrati;
-
   renderArticoli(filtrati);
 });
-
-
 const searchField = document.getElementById('search');
 const clearBtn = document.getElementById('clear-search');
-
 searchField.addEventListener('input', () => {
   clearBtn.style.display = searchField.value ? 'block' : 'none';
 });
-
 clearBtn.addEventListener('click', () => {
   searchField.value = '';
   clearBtn.style.display = 'none';
-
   // Trigger manualmente l’evento keyup per riattivare il filtro prodotti
   const event = new Event('keyup');
   searchField.dispatchEvent(event);
 });
-
 function aggiornaClearBtn() {
   clearBtn.style.display = searchField.value ? 'block' : 'none';
 }
-
-
 let ordinePrezzoAttivo = false;
-
 function toggleOrdinaPrezzo() {
   ordinePrezzoAttivo = !ordinePrezzoAttivo;
-
   if (ordinePrezzoAttivo) {
     // Ordina per prezzo crescente
     const ordinati = [...window.articoliCorrenti].sort((a, b) => {
@@ -941,36 +777,28 @@ function toggleOrdinaPrezzo() {
       const prezzoB = parseFloat(b.prezzo.replace(/[^\d,]/g, "").replace(",", "."));
       return prezzoA - prezzoB;
     });
-
     document.getElementById("ordina-prezzo-btn").innerHTML =
       '&nbsp<i class="fas fa-sort">&nbsp</i>';
-
     renderArticoli(ordinati);
   } else {
     // Ripristina l’ordine originale della ricerca (non ordinato per prezzo)
     document.getElementById("ordina-prezzo-btn").innerHTML =
       '<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>';
-
     renderArticoli(window.articoliCorrenti);
   }
 }
-
 function renderArticoli(articoli) {
   const container = document.querySelector('.products');
   const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
-
   container.innerHTML = "";
-
   articoli.forEach(articolo => {
     const div = document.createElement('div');
     div.className = 'product';
     div.style.position = 'relative';
     div.setAttribute('ontouchstart', 'evidenzia(this)');
     div.setAttribute('onclick', `mostraDettaglio('${articolo.titolo}', '${articolo.descrizione.replace(/'/g, "\\'")}', '${articolo.foto1}', '${articolo.foto2}', '${articolo.prezzo}', '${articolo.badge}')`);
-
     const isPreferito = preferiti.includes(articolo.titolo);
     const cuore = isPreferito ? '❤️' : '🤍';
-
     div.innerHTML = `
       <div style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;">${articolo.badge}</div>
       <button class="btn-preferito" style="position: absolute; top: 5px; right: 5px; background: none; border: none; font-size: 1.4rem; cursor: pointer; z-index: 10;">${cuore}</button>
@@ -979,40 +807,32 @@ function renderArticoli(articoli) {
       <p class="price"><strong>${articolo.prezzo}</strong></p>
       <p>${articolo.descrizione}</p>
     `;
-
     const btn = div.querySelector('.btn-preferito');
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
-
       const index = preferiti.indexOf(articolo.titolo);
       const toggleBtn = document.getElementById('toggle-sidebar');
-
       if (index > -1) {
         preferiti.splice(index, 1);
         btn.textContent = '🤍';
       } else {
         preferiti.push(articolo.titolo);
         btn.textContent = '❤️';
-
         if (toggleBtn) {
           toggleBtn.classList.add('pulsante-pulsante');
           setTimeout(() => toggleBtn.classList.remove('pulsante-pulsante'), 600);
         }
       }
-
       localStorage.setItem('preferiti', JSON.stringify(preferiti));
       aggiornaStatoCuore();
       aggiornaListaPreferiti(articoli);
     });
-
     container.appendChild(div);
   });
-
   aggiornaListaPreferiti(articoli);
   aggiornaStatoCuore();
   aggiornaContatoreArticoli(articoli);
 }
-
 function aggiornaContatoreArticoli(lista) {
   const contatore = document.getElementById("contatore-articoli");
   if (contatore) {
@@ -1021,14 +841,11 @@ function aggiornaContatoreArticoli(lista) {
     contatore.textContent = `(${lista.length}${asterisco})`;
   }
 }
-
-</script>
- 
+</script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
 <div id="toast-confirm"></div>
-<div id="toast-progress-bar"></div>
- 
+<div id="toast-progress-bar"></div> 
 </body>
 </html>
