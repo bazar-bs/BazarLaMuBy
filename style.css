@@ -721,4 +721,31 @@
   text-decoration: underline;
   color: #a77ff0;
 }
+
+.price,
+#prezzo-articolo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #6e3b6e;
+  background-color: #f6edf6;
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  display: inline-block;
+  box-shadow: 0 2px 6px rgba(110, 59, 110, 0.2);
+  transition: transform 0.2s ease;
+
+  /* ✅ Posizionamento e spaziatura */
+  margin-top: 0.5rem;         /* distanza dall'elemento sopra */
+  margin-bottom: 1rem;        /* distanza dall'elemento sotto */
+  position: relative;
+  top: 2px;                   /* leggero spostamento verso il basso */
+}
+.price:hover,
+#prezzo-articolo:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 10px rgba(110, 59, 110, 0.3);
+}
+
+
+
 </style>
