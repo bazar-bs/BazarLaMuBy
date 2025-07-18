@@ -696,65 +696,6 @@
   font-weight: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-  }
-
-  header, footer {
-    background-color: #222;
-    color: #ccc;
-  }
-
-  .product {
-    background-color: #2a2a2a;
-    border: 1px solid #444;
-  }
-
-  .product h2, .product p {
-    color: #eaeaea;
-  }
-
-  .price {
-    color: #a4ffaf;
-  }
-
-  #titolo-home {
-    color: #e0e0ff;
-  }
-
-  #contatore-articoli {
-    background-color: #333;
-    color: #a77ff0;
-  }
-
-  .search-wrapper input {
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-  }
-
-  .modal {
-    background-color: #2c2c2c;
-    color: #f2f2f2;
-  }
-
-  button {
-    background-color: #444;
-    color: #f0f0f0;
-  }
-
-  .btn-preferito {
-    color: #ff7bdc;
-  }
-
-  .contact-button {
-    background-color: #6e3b6e;
-    color: #fff;
-  }
-}
-
 /* #toast-preferiti { */
   /* position: fixed; */
   /* top: 81px; */
