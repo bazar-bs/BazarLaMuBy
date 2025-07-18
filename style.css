@@ -717,5 +717,8 @@
   /* opacity: 1; */
 /* } */
 
-
+#nome-utente:hover {
+  text-decoration: underline;
+  color: #a77ff0;
+}
 </style>
