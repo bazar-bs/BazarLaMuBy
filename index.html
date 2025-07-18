@@ -819,7 +819,6 @@ function aggiornaListaPreferiti(articoli) {
 		telCarrello.textContent = telefono;
 	}
 	
-	 // 🔽 Il tuo codice qui sotto
   const nomeEl = document.getElementById("nome-utente");
   const nomeSalvato = localStorage.getItem("nomeUtente");
 
@@ -1017,10 +1016,11 @@ function renderArticoli(articoli) {
 function aggiornaContatoreArticoli(lista) {
   const contatore = document.getElementById("contatore-articoli");
   if (contatore) {
-    contatore.textContent = `(${lista.length})`;
+    const isSearchAttiva = document.getElementById("search")?.value.trim() !== "";
+    const asterisco = isSearchAttiva ? "*" : "";
+    contatore.textContent = `(${lista.length}${asterisco})`;
   }
 }
-
 
 </script>
  
