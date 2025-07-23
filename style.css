@@ -251,6 +251,7 @@
 	}
 	#lista-carrello {
 	    	font-weight: bold;
+			
 	}
 	.evidenziato {
 	    	font-size: 32px; /* Aumenta la grandezza */
@@ -635,5 +636,9 @@
 #prezzo-articolo:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 10px rgba(110, 59, 110, 0.3);
+}
+#lista-carrello li:last-child {
+  border-bottom: 1px solid black;
+  padding: 0.8rem 0;
 }
 </style>

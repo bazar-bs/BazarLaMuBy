@@ -382,7 +382,7 @@ function aggiornaCarrello() {
         }
         let li = document.createElement("li");
         li.innerHTML = `${item.nome} - €${item.prezzo.toFixed(2)} (x${item.quantita}) 
-                        <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.5rem; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+                        <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.3rem; border-radius: 5px; cursor: pointer; margin-left: 5px;">
     <i class="fas fa-trash-alt"></i>
 </button>`;
         carrelloContainer.appendChild(li);
