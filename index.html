@@ -493,10 +493,14 @@ window.onload = function() {
     aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
 };
 function mostraModuloSpedizione() {
+	chiudiCarrello(); // Chiude il carrello
     document.getElementById("modal-spedizione").style.display = "block";
+	document.getElementById("overlay-carrello").classList.add("active"); // Applica overlay oscurante
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
+    document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
+    mostraCarrello(); // Ri-apre il carrello
     document.getElementById("popup-annullato").style.display = "block";
 }
 function mostraPopupConferma() {
