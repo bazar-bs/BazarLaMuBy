@@ -45,6 +45,75 @@
     	border: none;
     	cursor: pointer;
 	}
+	.bottoni-carrello {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem auto;
+  max-width: 500px;
+}
+
+.bottoni-carrello button {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+#btn-svuota {
+  background: #d9534f;
+}
+
+#btn-procedi {
+  background: #28a745;
+}
+.articolo-carrello-semplice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #fff8fc;
+  border: 1px solid #e6dbf4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(110, 59, 110, 0.1);
+  font-size: 1rem;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+.articolo-carrello-semplice:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 8px rgba(110, 59, 110, 0.15);
+}
+.nome-articolo {
+  font-weight: bold;
+  color: #6e3b6e;
+  flex: 1;
+}
+.prezzo-articolo {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #f6edf6;
+  color: black;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(110, 59, 110, 0.1);
+  margin-right: 0.8rem;
+}
+.icona-rimuovi {
+  background: none;
+  border: none;
+  color: #d9534f;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.icona-rimuovi:hover {
+  color: #c9302c;
+}
 	#modal-spedizione input {
 		width: 100%;
 		padding: 0.6rem;

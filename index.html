@@ -114,26 +114,37 @@
 		<!-- Overlay oscurante -->
 		<div id="overlay-carrello" class="overlay"></div>	
 		<!-- Finestra centrale del carrello -->
-		<div id="modal-carrello" class="modal">
-		<div class="contenitore-carrello-pagina">
-  <div class="contenitore-carrello">
-    <i class="fas fa-shopping-basket icona-animata-carrello"></i>
-    <span id="contatore-carrello-modal">0</span>
+<div id="modal-carrello" class="modal">
+  <div class="contenitore-carrello-pagina">
+    <div class="contenitore-carrello">
+      <i class="fas fa-shopping-basket icona-animata-carrello"></i>
+      <span id="contatore-carrello-modal">0</span>
+    </div>
   </div>
-</div>
-<p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
-  Salvare <strong style="background-color: yellow; padding: 2px;"><span id="telefonocarrello"></span></strong> nella tua rubrica per completare l'ordine
-</p>
-    <h2 style="text-align: center;">Il tuo carrello</h2>
-    <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
-    <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.2rem; margin-top: 10px;">Totale: €0.00</p>
-  <button id="btn-svuota" onclick="svuotaCarrello()" style="background: #d9534f; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 1rem auto;">
-    <i class="fas fa-trash"></i> Svuota
-</button>
-    <button id="btn-procedi" onclick="mostraModuloSpedizione()" style="background: #28a745; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;">
-    <i class="fas fa-arrow-right"></i> Procedi
-</button>
-    <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;margin-top: 1.3rem;"><i class="fas fa-times-circle"></i> Chiudi</button>
+
+  <p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
+    Salvare <strong style="background-color: yellow; padding: 2px;"><span id="telefonocarrello"></span></strong> nella tua rubrica per completare l'ordine
+  </p>
+
+  <h2 style="text-align: center;">Il tuo carrello</h2>
+
+  <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
+
+  <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Totale: €0.00</p>
+
+  <!-- 🔁 Bottoni aggiornati -->
+  <div class="bottoni-carrello">
+    <button id="btn-svuota" onclick="svuotaCarrello()">
+      <i class="fas fa-trash"></i> Svuota
+    </button>
+    <button id="btn-procedi" onclick="mostraModuloSpedizione()">
+      <i class="fas fa-arrow-right"></i> Procedi
+    </button>
+  </div>
+
+  <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 1.3rem;">
+    <i class="fas fa-times-circle"></i> Chiudi
+  </button>
 </div>
 <!-- Finestra Modulo Spedizione -->
 <div id="modal-spedizione" class="modal">
@@ -381,10 +392,16 @@ function aggiornaCarrello() {
             totalePrezzo += item.prezzo * item.quantita;
         }
         let li = document.createElement("li");
-        li.innerHTML = `${item.nome} - €${item.prezzo.toFixed(2)} (x${item.quantita}) 
-                        <button onclick="rimuoviDalCarrello('${item.nome}')" style="background: #d9534f; color: white; border: none; padding: 0.3rem; border-radius: 5px; cursor: pointer; margin-left: 5px;">
-    <i class="fas fa-trash-alt"></i>
-</button>`;
+        li.innerHTML = `
+  <div class="articolo-carrello-semplice">
+    <span class="nome-articolo">${item.nome}</span>
+    <span class="quantita-articolo">x${item.quantita}</span>
+    <span class="prezzo-articolo">€${item.prezzo.toFixed(2)}</span>
+    <button onclick="rimuoviDalCarrello('${item.nome}')" class="icona-rimuovi">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
+`;
         carrelloContainer.appendChild(li);
     });
     document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);    
