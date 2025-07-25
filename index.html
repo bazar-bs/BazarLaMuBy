@@ -31,6 +31,8 @@
 </h2>
 	<h3>I tuoi preferiti ❤️</h3>
     <ul id="lista-preferiti"></ul>
+	<h3 style="cursor:pointer;" onclick="toggleOrdini()">I tuoi ordini 📦</h3>
+    <ul id="lista-ordini" style="display: none;"></ul>	
   </div>
 </div>
 <!-- Overlay per chiudere cliccando fuori -->
@@ -121,17 +123,12 @@
       <span id="contatore-carrello-modal">0</span>
     </div>
   </div>
-
   <p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
     Salvare <strong style="background-color: yellow; padding: 2px;"><span id="telefonocarrello"></span></strong> nella tua rubrica per completare l'ordine
   </p>
-
   <h2 style="text-align: center;">Il tuo carrello</h2>
-
   <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
-
   <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Totale: €0.00</p>
-
   <!-- 🔁 Bottoni aggiornati -->
   <div class="bottoni-carrello">
     <button id="btn-svuota" onclick="svuotaCarrello()">
@@ -141,7 +138,6 @@
       <i class="fas fa-arrow-right"></i> Procedi
     </button>
   </div>
-
   <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 1.3rem;">
     <i class="fas fa-times-circle"></i> Chiudi
   </button>
@@ -445,6 +441,19 @@ function inviaOrdineWhatsApp() {
     window.open(urlWhatsApp, "_blank");
     // Mostra il popup di conferma ordine
     mostraPopupConferma();
+	// Salva l'ordine in localStorage
+let ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
+let nuovoOrdine = {
+  data: new Date().toLocaleString(),
+  nome,
+  indirizzo,
+  telefono,
+  email,
+  prodotti: ordine,
+  totale: totalePrezzo.toFixed(2)
+};
+ordiniSalvati.push(nuovoOrdine);
+localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
     // Svuota il carrello dopo l'invio
     svuotaCarrello();
 }
@@ -518,7 +527,6 @@ function mostraPopupConferma() {
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
 }
-
 function chiudiPopupConferma() {
     svuotaCarrello(); // Svuota il carrello quando si chiude il popup
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
@@ -719,7 +727,6 @@ function aggiornaListaPreferiti(articoli) {
   const sidebar = document.getElementById('sidebar');
   const closeSidebar = document.getElementById('close-sidebar');
   const overlay = document.getElementById('sidebar-overlay');
-
   toggleSidebar.addEventListener('click', () => {
     sidebar.classList.add('active');
     overlay.classList.add('active');
@@ -860,6 +867,39 @@ function aggiornaContatoreArticoli(lista) {
     const isSearchAttiva = document.getElementById("search")?.value.trim() !== "";
     const asterisco = isSearchAttiva ? "✱" : "";
     contatore.textContent = `(${lista.length}${asterisco})`;
+  }
+}
+function mostraOrdini() {
+  const lista = document.getElementById("lista-ordini");
+  lista.innerHTML = ""; // pulisce la lista
+  const ordini = JSON.parse(localStorage.getItem("ordini")) || [];
+  if (ordini.length === 0) {
+    lista.innerHTML = "<li>Nessun ordine salvato.</li>";
+    return;
+  }
+
+  ordini.reverse().forEach((ordine, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <div style="margin-bottom: 10px; padding: 5px; background: #6e3b6e; border-radius: 6px;">
+        <strong>Ordine #${ordini.length - index}</strong><br>
+        📅 ${ordine.data}<br>
+        💶 Totale: €${ordine.totale}<br>
+        📦 Prodotti:
+        <ul style="padding-left: 1rem;">${ordine.prodotti.map(p => `<li>${p.nome} x${p.quantita}</li>`).join("")}</ul>
+      </div>
+    `;
+    lista.appendChild(li);
+  });
+}
+
+function toggleOrdini() {
+  const lista = document.getElementById("lista-ordini");
+  if (lista.style.display === "none") {
+    mostraOrdini(); // Popola la lista
+    lista.style.display = "block";
+  } else {
+    lista.style.display = "none";
   }
 }
 </script> 

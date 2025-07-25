@@ -566,6 +566,10 @@
 .sidebar-overlay.active {
   display: block;
 }
+.sidebar {
+  overflow-y: auto;
+  max-height: 100vh;
+}
 /* Pulsante chiudi */
 .close-btn {
   align-self: flex-end;
