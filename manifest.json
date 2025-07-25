@@ -3,7 +3,7 @@
   "short_name": "LaMuBy",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f4f4f4",
+  "background_color": "#fffde9",
   "theme_color": "#6e3b6e",
   "orientation": "portrait-primary landscape-primary",
   "icons": [
