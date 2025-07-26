@@ -713,13 +713,13 @@ function aggiornaListaPreferiti(articoli) {
   const nomeEl = document.getElementById("nome-utente");
   const nomeSalvato = localStorage.getItem("nomeUtente");
   if (nomeSalvato) {
-    nomeEl.textContent = `Bentornatə ${nomeSalvato}`;
+    nomeEl.textContent = `Bentornato/a ${nomeSalvato}`;
   }
   nomeEl.addEventListener("click", () => {
     const nuovoNome = prompt("Inserisci il tuo nome:");
     if (nuovoNome) {
       localStorage.setItem("nomeUtente", nuovoNome);
-      nomeEl.textContent = `Bentornatə ${nuovoNome}`;
+      nomeEl.textContent = `Bentornato/a ${nuovoNome}`;
     }
   });    
   });
