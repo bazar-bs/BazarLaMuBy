@@ -768,12 +768,13 @@
   transform: scale(1.03);
 }
 .descrizione-scarabocchio {
+  /* background-image: url('sfondo-scarabocchio.svg'); */
   font-weight: bold;
   padding: 1rem;
   border-radius: 8px;
   background-repeat: repeat;
   background-size: 300px;
   color: #4a255f;
-  box-shadow: 0 2px 6px rgba(110, 59, 110, 0.1);
+  /* box-shadow: 0 2px 6px rgba(110, 59, 110, 0.1); */
 }
 </style>
