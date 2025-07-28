@@ -301,6 +301,7 @@ function toggleModal() {
 		document.getElementById('titolo-articolo').textContent = titolo;
 		document.getElementById('badge-articolo').textContent = badge;
 		document.getElementById('descrizione-articolo').innerHTML = descrizione;
+		document.getElementById('descrizione-articolo').classList.add('descrizione-scarabocchio');
 		document.getElementById('foto1-articolo').src = img1;
 		document.getElementById('foto2-articolo').src = img2;
 		document.getElementById('prezzo-articolo').textContent = prezzo;		
@@ -835,7 +836,7 @@ function renderArticoli(articoli) {
       <img src="${articolo.foto1}" alt="${articolo.titolo}" loading="lazy">
       <h2>${articolo.titolo}</h2>
       <p class="price"><strong>${articolo.prezzo}</strong></p>
-      <p>${articolo.descrizione}</p>
+      <p class="descrizione-scarabocchio">${articolo.descrizione}</p>
 	  <p class="visualizza-articolo">Visualizza articolo</p>
     `;
     const btn = div.querySelector('.btn-preferito');
