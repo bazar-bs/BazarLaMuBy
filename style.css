@@ -271,6 +271,14 @@
 		border: 2px solid white;
 		background-color: #fff;
 	}
+	.logosidebar {
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid white;
+		background-color: transparent;
+	}
 	.animated-title {
 		overflow: hidden;
 		border-right: .15em solid white;
