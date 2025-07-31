@@ -580,11 +580,11 @@
 }
 /* Pulsante chiudi */
 .close-btn {
-  align-self: flex-end;
-  font-size: 1.5rem;
+  align-self: flex-start;
+  font-size: 1.1rem;
   background: none;
   border: none;
-  color: #6e3b6e;
+  color: white;
   cursor: pointer;
 }
 /* Menu link */
