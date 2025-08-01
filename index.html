@@ -28,8 +28,8 @@
   <img src="lamuby_logo_bigtext_trasp_bianco.png" alt="Logo LaMuBy" class="logosidebar">
     <h2 id="messaggio-bentornato">
       <span id="nome-utente" style="cursor:pointer;">
-        Benvenuto <span id="username-dinamico">Utente</span>
-        <span title="Clicca per cambiare nome" style="font-size: 1rem; margin-left: 6px;">✏️</span>
+       <span id="saluto-label">Benvenuto</span> <span id="username-dinamico">Utente</span>
+       <span <span id="icona-modifica" title="Clicca per cambiare nome" style="font-size: 1rem; margin-left: 6px;">✏️</span>
       </span>
     </h2>
 	<h3>I tuoi preferiti ❤️</h3>
@@ -722,19 +722,42 @@ function aggiornaListaPreferiti(articoli) {
     if (telCarrello) {
 		telCarrello.textContent = telefono;
 	}	
-  const nomeEl = document.getElementById("nome-utente");
+ const nomeEl = document.getElementById("nome-utente");
+  const salutoLabel = document.getElementById("saluto-label");
+  const usernameSpan = document.getElementById("username-dinamico");
   const nomeSalvato = localStorage.getItem("nomeUtente");
+  const nomeAppenaInserito = localStorage.getItem("nomeAppenaInserito");
+  const nomeModificato = localStorage.getItem("nomeModificato"); /*serve per non modificare piu il nome */
   if (nomeSalvato) {
-    nomeEl.textContent = `Bentornato/a ${nomeSalvato}`;
+    usernameSpan.textContent = nomeSalvato;
+    if (nomeAppenaInserito === "true") {
+      salutoLabel.textContent = "Benvenuto/a";
+    } else {
+      salutoLabel.textContent = "Bentornato/a";
+	  document.getElementById("icona-modifica").style.display = "none";
+	  localStorage.setItem("nomeModificato", "true"); /*serve per non modificare piu il nome */
+    }
   }
-  nomeEl.addEventListener("click", () => {
-    const nuovoNome = prompt("Inserisci il tuo nome:");
+  // 🔁 Disattiva subito il flag dopo l'uso
+  if (nomeAppenaInserito === "true") {
+    localStorage.setItem("nomeAppenaInserito", "false");
+  }
+    nomeEl.addEventListener("click", () => {
+     /*if (localStorage.getItem("nomeModificato") === "true") {
+     alert("Hai già cambiato il nome una volta.");
+     return; 
+	 } */
+	const nuovoNome = prompt("Inserisci il tuo nome:");
     if (nuovoNome) {
       localStorage.setItem("nomeUtente", nuovoNome);
-      nomeEl.textContent = `Bentornato/a ${nuovoNome}`;
+      localStorage.setItem("nomeAppenaInserito", "false");
+      usernameSpan.textContent = nuovoNome;
+      salutoLabel.textContent = "Benvenuto/a";
+	  document.getElementById("icona-modifica").style.display = "none";
+	  localStorage.setItem("nomeModificato", "true"); /*serve per non modificare piu il nome */
     }
-  });    
   });
+});
   const toggleSidebar = document.getElementById('toggle-sidebar');
   const sidebar = document.getElementById('sidebar');
   const closeSidebar = document.getElementById('close-sidebar');
