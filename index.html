@@ -506,8 +506,6 @@ window.onload = function() {
     carrello = [];
   }
     aggiornaCarrello(); // Assicura che i pulsanti vengano gestiti correttamente
-	history.replaceState(null, null, window.location.pathname);
-    history.pushState(null, null, window.location.pathname);
 };
 function mostraModuloSpedizione() {
 	chiudiCarrello(); // Chiude il carrello
@@ -889,7 +887,7 @@ function mostraOrdini() {
   lista.innerHTML = ""; // pulisce la lista
   const ordini = JSON.parse(localStorage.getItem("ordini")) || [];
   if (ordini.length === 0) {
-    lista.innerHTML = "<li>Nessun ordine 😔</li>"; 
+    lista.innerHTML = "<li>Nessun ordine 😔</li>";
     return;
   }
   ordini.reverse().forEach((ordine, index) => {
@@ -919,33 +917,6 @@ function toggleOrdini() {
     freccia.textContent = "⬇️";
   }
 }
-// 🔄 Gestione avanzata del tasto Indietro
-window.addEventListener("popstate", function (event) {
-  const dettaglioVisibile = document.getElementById("dettaglio-articolo")?.style.display !== "none";
-  const carrelloAperto = document.getElementById("modal-carrello")?.classList.contains("active");
-  const spedizioneVisibile = document.getElementById("modal-spedizione")?.style.display === "block";
-  const sidebarAperta = document.getElementById("sidebar")?.classList.contains("active");
-  const modaleAttiva = document.querySelector(".modal.active") !== null;
-
-  const NON_SEI_IN_HOME = dettaglioVisibile || carrelloAperto || spedizioneVisibile || sidebarAperta || modaleAttiva;
-
-  if (NON_SEI_IN_HOME) {
-    // Sei fuori dalla home: blocca il tasto indietro e rimani qui
-    history.pushState(null, null, window.location.href);
-    
-    // Se vuoi anche chiudere qualcosa:
-    if (dettaglioVisibile) tornaAllaHome();
-    if (carrelloAperto) chiudiCarrello();
-    if (spedizioneVisibile) chiudiModuloSpedizione();
-    if (sidebarAperta) {
-     document.getElementById('sidebar').classList.remove('active');
-     document.getElementById('sidebar-overlay').classList.remove('active');
-   }
-    // Blocca davvero il ritorno indietro
-    return;
-  }
-  // Sei in home → lascia funzionare il tasto indietro
-});
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
