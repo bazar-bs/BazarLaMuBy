@@ -934,14 +934,13 @@ window.addEventListener("popstate", function (event) {
     history.pushState(null, null, window.location.href);
     
     // Se vuoi anche chiudere qualcosa:
-    // if (dettaglioVisibile) tornaAllaHome();
-    // if (carrelloAperto) chiudiCarrello();
-    // if (spedizioneVisibile) chiudiModuloSpedizione();
-    //if (sidebarAperta) {
-    //  document.getElementById('sidebar').classList.remove('active');
-    //  document.getElementById('sidebar-overlay').classList.remove('active');
-    //} 
-
+    if (dettaglioVisibile) tornaAllaHome();
+    if (carrelloAperto) chiudiCarrello();
+    if (spedizioneVisibile) chiudiModuloSpedizione();
+    if (sidebarAperta) {
+     document.getElementById('sidebar').classList.remove('active');
+     document.getElementById('sidebar-overlay').classList.remove('active');
+   }
     // Blocca davvero il ritorno indietro
     return;
   }
