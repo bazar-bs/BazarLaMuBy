@@ -722,7 +722,7 @@ function aggiornaListaPreferiti(articoli) {
     if (telCarrello) {
 		telCarrello.textContent = telefono;
 	}	
- const nomeEl = document.getElementById("nome-utente");
+  const nomeEl = document.getElementById("nome-utente");
   const salutoLabel = document.getElementById("saluto-label");
   const usernameSpan = document.getElementById("username-dinamico");
   const nomeSalvato = localStorage.getItem("nomeUtente");
@@ -735,27 +735,40 @@ function aggiornaListaPreferiti(articoli) {
     } else {
       salutoLabel.textContent = "Bentornato/a";
 	  document.getElementById("icona-modifica").style.display = "none";
-	  localStorage.setItem("nomeModificato", "true"); /*serve per non modificare piu il nome */
+	  localStorage.setItem("nomeModificato", "true"); /*serve per reset preferiti e ordini */
     }
   }
   // 🔁 Disattiva subito il flag dopo l'uso
   if (nomeAppenaInserito === "true") {
     localStorage.setItem("nomeAppenaInserito", "false");
-  }
+  }  
     nomeEl.addEventListener("click", () => {
-     /*if (localStorage.getItem("nomeModificato") === "true") {
-     alert("Hai già cambiato il nome una volta.");
-     return; 
-	 } */
-	const nuovoNome = prompt("Inserisci il tuo nome:");
+	let nuovoNome;
+if (localStorage.getItem("nomeModificato") === "true") {
+  nuovoNome = prompt("Nuovo nome? (⚠️ reset preferiti/ordini)");
+} else {
+  nuovoNome = prompt("Prima volta, Inserisci il tuo nome(Nickname):");
+}
     if (nuovoNome) {
-      localStorage.setItem("nomeUtente", nuovoNome);
+      localStorage.removeItem("preferiti");
+      localStorage.removeItem("ordini");	  
+	  localStorage.setItem("nomeUtente", nuovoNome);
       localStorage.setItem("nomeAppenaInserito", "false");
       usernameSpan.textContent = nuovoNome;
       salutoLabel.textContent = "Benvenuto/a";
 	  document.getElementById("icona-modifica").style.display = "none";
 	  localStorage.setItem("nomeModificato", "true"); /*serve per non modificare piu il nome */
-    }
+       // ✅ Aggiorna subito preferiti e ordini nella UI
+    aggiornaListaPreferiti(window.articoliOriginali); // aggiorna lista preferiti
+    aggiornaStatoCuore(); // aggiorna icona cuore
+
+    const listaOrdini = document.getElementById("lista-ordini");
+    if (listaOrdini && listaOrdini.style.display !== "none") {
+      mostraOrdini(); // aggiorna lista visiva se è aperta
+    }	
+	// ✅ Aggiorna pulsanti ❤️/🤍 negli articoli della home
+    renderArticoli(window.articoliCorrenti);
+	}
   });
 });
   const toggleSidebar = document.getElementById('toggle-sidebar');
