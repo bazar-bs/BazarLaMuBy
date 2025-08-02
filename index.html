@@ -835,6 +835,9 @@ searchInput.addEventListener('keyup', function () {
   // aggiorna la lista attuale usata anche dal sort
   window.articoliCorrenti = filtrati;
   renderArticoli(filtrati);
+  document.getElementById("ordina-prezzo-btn").innerHTML =
+  '<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>';
+ordinePrezzoAttivo = false;
 });
 const searchField = document.getElementById('search');
 const clearBtn = document.getElementById('clear-search');
