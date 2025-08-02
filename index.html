@@ -727,7 +727,7 @@ function aggiornaListaPreferiti(articoli) {
   const usernameSpan = document.getElementById("username-dinamico");
   const nomeSalvato = localStorage.getItem("nomeUtente");
   const nomeAppenaInserito = localStorage.getItem("nomeAppenaInserito");
-  const nomeModificato = localStorage.getItem("nomeModificato"); /*serve per non modificare piu il nome */
+  const nomeModificato = localStorage.getItem("nomeModificato"); /*serve per reset preferiti e ordini */
   if (nomeSalvato) {
     usernameSpan.textContent = nomeSalvato;
     if (nomeAppenaInserito === "true") {
@@ -745,9 +745,9 @@ function aggiornaListaPreferiti(articoli) {
     nomeEl.addEventListener("click", () => {
 	let nuovoNome;
 if (localStorage.getItem("nomeModificato") === "true") {
-  nuovoNome = prompt("Nuovo nome? (⚠️ reset preferiti/ordini)");
+  nuovoNome = prompt("✨Nuovo nome? (⚠️ reset preferiti/ordini)");
 } else {
-  nuovoNome = prompt("Prima volta, Scegli il tuo nickname ✨");
+  nuovoNome = prompt("Prima volta? Scegli il tuo nickname ✨");
 }
     if (nuovoNome) {
       localStorage.removeItem("preferiti");
