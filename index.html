@@ -389,6 +389,14 @@ function aggiornaCarrello() {
     let carrelloContainer = document.getElementById("lista-carrello");
     carrelloContainer.innerHTML = "";
     let totalePrezzo = 0;
+	if (carrello.length === 0) {
+			const vuotoMsg = document.createElement("li");
+			vuotoMsg.innerHTML = '(vuoto)';
+			vuotoMsg.style.color = "gray";
+			vuotoMsg.style.textAlign = "center";
+			vuotoMsg.style.padding = "6px 0";
+			carrelloContainer.appendChild(vuotoMsg);
+		}
     carrello.forEach(item => {
         if (!isNaN(item.prezzo)) { // Controlla che il prezzo sia valido
             totalePrezzo += item.prezzo * item.quantita;
@@ -404,7 +412,7 @@ function aggiornaCarrello() {
     </button>
   </div>
 `;
-        carrelloContainer.appendChild(li);
+        carrelloContainer.appendChild(li);		
     });
     document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);    
     document.getElementById("contatore-carrello-modal").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);   
@@ -727,7 +735,7 @@ function aggiornaListaPreferiti(articoli) {
   const usernameSpan = document.getElementById("username-dinamico");
   const nomeSalvato = localStorage.getItem("nomeUtente");
   const nomeAppenaInserito = localStorage.getItem("nomeAppenaInserito");
-  const nomeModificato = localStorage.getItem("nomeModificato"); /*serve per reset preferiti e ordini */
+  const nomeModificato = localStorage.getItem("nomeModificato");  /*serve per reset preferiti e ordini */
   if (nomeSalvato) {
     usernameSpan.textContent = nomeSalvato;
     if (nomeAppenaInserito === "true") {
