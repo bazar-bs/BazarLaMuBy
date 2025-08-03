@@ -795,7 +795,7 @@
 
 @keyframes flyToCart {
   0% {
-    transform: translate(0, 0) scale(3);
+    transform: translate(0, 0) scale(2);
     opacity: 1;
   }
   100% {
