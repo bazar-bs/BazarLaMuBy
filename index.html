@@ -502,8 +502,7 @@ function caricaCarrello() {
     aggiornaCarrello(); // Assicura che i pulsanti siano gestiti correttamente
 }
 window.onload = function() {
-   	history.pushState(null, null, location.href); // Impedisce back diretto
-	const salvato = localStorage.getItem("carrello");
+   	const salvato = localStorage.getItem("carrello");
   if (salvato) {
     try {
       carrello = JSON.parse(salvato);
@@ -770,6 +769,7 @@ if (localStorage.getItem("nomeModificato") === "true") {
        // ✅ Aggiorna subito preferiti e ordini nella UI
     aggiornaListaPreferiti(window.articoliOriginali); // aggiorna lista preferiti
     aggiornaStatoCuore(); // aggiorna icona cuore
+
     const listaOrdini = document.getElementById("lista-ordini");
     if (listaOrdini && listaOrdini.style.display !== "none") {
       mostraOrdini(); // aggiorna lista visiva se è aperta
@@ -964,73 +964,6 @@ function toggleOrdini() {
     freccia.textContent = "⬇️";
   }
 }
-window.addEventListener("popstate", function (event) {
-  // Chiude sidebar se aperta
-  if (document.getElementById("sidebar").classList.contains("active")) {
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("sidebar-overlay").classList.remove("active");
-    history.pushState(null, null, location.href); // annulla indietro
-    return;
-  }
-
-  // Chiude carrello se visibile
-  if (document.getElementById("modal-carrello").classList.contains("active")) {
-    chiudiCarrello();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude modulo spedizione se aperto
-  if (document.getElementById("modal-spedizione").style.display === "block") {
-    chiudiModuloSpedizione();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude popup conferma ordine
-  if (document.getElementById("popup-conferma").style.display === "block") {
-    chiudiPopupConferma();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude popup ordine annullato
-  if (document.getElementById("popup-annullato").style.display === "block") {
-    chiudiPopupAnnullato();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude contattaci (chi siamo)
-  if (document.getElementById("modal").classList.contains("active")) {
-    toggleModal();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude policy
-  if (document.getElementById("modal-policy").classList.contains("active")) {
-    togglePolicyModal();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude app
-  if (document.getElementById("app-modal").classList.contains("active")) {
-    toggleAppModal();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Chiude dettaglio articolo → torna alla home
-  if (document.getElementById("dettaglio-articolo").style.display === "block") {
-    tornaAllaHome();
-    history.pushState(null, null, location.href);
-    return;
-  }
-
-  // Se sei in home, lascia davvero uscire (non annulla popstate)
-});
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
