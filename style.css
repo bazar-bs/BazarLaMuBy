@@ -811,4 +811,42 @@
     opacity: 0;
   }
 }
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7); /* più piccolo all'inizio */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.zoom-in {
+  animation: zoomIn 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
 </style>

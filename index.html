@@ -284,6 +284,7 @@ document.getElementById("home-btn").style.display = "none";
 function toggleModal() {
   document.getElementById('modal').classList.toggle('active');
   document.getElementById('overlay').classList.toggle('active');
+  apriModaleAnimato("modal" , "fade");
 }
     function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
 		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
@@ -484,7 +485,7 @@ function inviaOrdineWhatsApp() {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
-	}, 2000);
+	}, 1500);
 	// Nasconde il toast dopo 1.5 secondi
 	setTimeout(() => {
 		toast.style.display = "none";
@@ -508,6 +509,7 @@ localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
 function mostraCarrello() {
     document.getElementById("modal-carrello").classList.add("active");
     document.getElementById("overlay-carrello").classList.add("active");
+	apriModaleAnimato("modal-carrello" , "fade");
 }
 function chiudiCarrello() {
     document.getElementById("modal-carrello").classList.remove("active");
@@ -553,12 +555,14 @@ function mostraModuloSpedizione() {
 	chiudiCarrello(); // Chiude il carrello
     document.getElementById("modal-spedizione").style.display = "block";
 	document.getElementById("overlay-carrello").classList.add("active"); // Applica overlay oscurante
+	apriModaleAnimato("modal-spedizione" , "fade");
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
     document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
     mostraCarrello(); // Ri-apre il carrello
     document.getElementById("popup-annullato").style.display = "block";
+	apriModaleAnimato("popup-annullato" , "fade");
 }
 function mostraPopupConferma() {
     // Chiudi il carrello
@@ -599,6 +603,7 @@ function chiudiModal() {
 function toggleAppModal() {
   document.getElementById("app-modal").classList.toggle("active");
   document.getElementById("app-overlay").classList.toggle("active");
+  apriModaleAnimato("app-modal" , "fade");
 }
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -666,6 +671,7 @@ function scrollToTop() {
 function togglePolicyModal() {
   document.getElementById("modal-policy").classList.toggle("active");
   document.getElementById("policy-overlay").classList.toggle("active");
+  apriModaleAnimato("modal-policy" , "fade");	
 }
 fetch('articoli.json')
   .then(response => response.json())
@@ -1043,6 +1049,28 @@ function mostraToast(messaggio) {
   setTimeout(() => {
     toast.style.display = "none";
   }, 3000);
+}
+function apriModaleAnimato(id, tipo = "slide") {
+  const modale = document.getElementById(id);
+  if (!modale) return;
+
+  // Rimuove tutte le classi di animazione
+  modale.classList.remove("slide-up", "fade-in", "zoom-in");
+
+  // Forza il repaint per riavviare l’animazione
+  void modale.offsetWidth;
+
+  // Applica la giusta animazione
+  switch (tipo) {
+    case "fade":
+      modale.classList.add("fade-in");
+      break;
+    case "zoom":
+      modale.classList.add("zoom-in");
+      break;
+    default:
+      modale.classList.add("slide-up");
+  }
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
