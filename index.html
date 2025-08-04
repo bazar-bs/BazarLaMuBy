@@ -397,7 +397,7 @@ function aggiungiAlCarrello(nome, prezzo) {
     toast.innerHTML += '<div id="toast-progress-bar"></div>';
     setTimeout(() => {
         toast.style.display = "none";
-    }, 3000);
+    }, 2500);
 
     // bounce carrello
     carrelloBtn.style.animation = "bounce 1s ease-in-out 2";
@@ -486,11 +486,11 @@ function inviaOrdineWhatsApp() {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
-	}, 2000);
-	// Nasconde il toast dopo 3 secondi
+	}, 1500);
+	// Nasconde il toast dopo 1.5 secondi
 	setTimeout(() => {
 		toast.style.display = "none";
-	}, 2000);    
+	}, 1500);    
 	// Salva l'ordine in localStorage
 let ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
 let nuovoOrdine = {
