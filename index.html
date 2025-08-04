@@ -364,48 +364,43 @@ function aggiungiAlCarrello(nome, prezzo) {
     }
     salvaCarrelloLocalmente();
     aggiornaCarrello();
-
     // ✨ ANIMAZIONE ICONA FLY TO CART
     const event = window.event;
     const clickX = event.clientX;
     const clickY = event.clientY;
-
     const icona = document.createElement("div");
     icona.classList.add("fly-to-cart");
-    icona.innerHTML = "📦"; // puoi usare 👻, 📦, 🎁...
+    icona.innerHTML = "📦"; // puoi usare 👻, 📦, 🎁, ✨, 💎, 🛍️, 🧺
     icona.style.left = `${clickX}px`;
     icona.style.top = `${clickY}px`;
-
     // Calcolo destinazione (posizione del carrello)
     const carrelloBtn = document.getElementById("carrello-btn");
     const rect = carrelloBtn.getBoundingClientRect();
     const dx = rect.left - clickX + 10;
     const dy = rect.top - clickY + 10;
-
     icona.style.setProperty("--dx", `${dx}px`);
     icona.style.setProperty("--dy", `${dy}px`);
     document.body.appendChild(icona);
-
     setTimeout(() => {
         icona.remove();
     }, 1000);
-
     // 🔔 TOAST NOTIFICATION
     let toast = document.getElementById("toast-confirm");
     toast.innerHTML = `<i class="fas fa-check-circle"></i> ${nome} aggiunto al carrello!`;
-    toast.style.display = "block";
+    toast.style.animationDuration = `2500ms`;
+	toast.style.display = "block";
     toast.innerHTML += '<div id="toast-progress-bar"></div>';
+	const barra = document.querySelector("#toast-progress-bar");
+    barra.style.animationDuration = `2500ms`;
     setTimeout(() => {
         toast.style.display = "none";
     }, 2500);
-
     // bounce carrello
     carrelloBtn.style.animation = "bounce 1s ease-in-out 2";
     setTimeout(() => {
         carrelloBtn.style.animation = "";
     }, 2000);
 }
-
 function salvaCarrelloLocalmente() {
     if (carrello.length > 0) {
         localStorage.setItem("carrello", JSON.stringify(carrello));
@@ -479,14 +474,17 @@ function inviaOrdineWhatsApp() {
     let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
     let toast = document.getElementById("toast-confirm");
 	toast.innerHTML = `<i class="fab fa-whatsapp"></i> Apro WhatsApp...`;
+	toast.style.animationDuration = `1500ms`;
 	toast.style.display = "block";
 	toast.innerHTML += '<div id="toast-progress-bar"></div>';
+	const barra = document.querySelector("#toast-progress-bar");
+    barra.style.animationDuration = `1500ms`;
 	// ✅ Attendi un attimo prima di aprire WhatsApp
 	setTimeout(() => {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
-	}, 1500);
+	}, 1800);
 	// Nasconde il toast dopo 1.5 secondi
 	setTimeout(() => {
 		toast.style.display = "none";
@@ -990,7 +988,6 @@ function mostraOrdini() {
 function toggleOrdini() {
   const lista = document.getElementById("lista-ordini");
   const freccia = document.getElementById("freccia");
-
   if (lista.style.display === "none" || lista.style.display === "") {
     mostraOrdini(); 
     lista.style.display = "block";
@@ -999,6 +996,53 @@ function toggleOrdini() {
     lista.style.display = "none";
     freccia.textContent = "⬇️";
   }
+}
+// ⏳ INATTIVITÀ
+let inattivitaTimer;
+// Reset timer su ogni attività
+function resetInattivitaTimer() {
+  clearTimeout(inattivitaTimer);
+  inattivitaTimer = setTimeout(() => {
+    mostraToast("Tutto ok? Ti aspettiamo 👋");
+  }, 2 * 60 * 1000); // 2 minuti
+}
+// 👁️ VISIBILITY: torna da background
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    // Quando torna visibile
+    mostraToast("Bentornato! 👋");
+    resetInattivitaTimer();
+  } else {
+    clearTimeout(inattivitaTimer); // ferma il timer mentre è via
+  }
+});
+// Eventi che contano come "attività"
+["mousemove", "keydown", "touchstart", "scroll"].forEach(evento => {
+  window.addEventListener(evento, resetInattivitaTimer);
+});
+// Avvio iniziale
+resetInattivitaTimer();
+// 📢 Funzione toast riutilizzabile
+function mostraToast(messaggio) {
+  const toast = document.getElementById("toast-confirm");
+  if (!toast) return;
+  // 🚫 NON mostrare il toast se il popup conferma è visibile
+  const confermaVisibile = document.getElementById("popup-conferma")?.style.display === "block";
+  if (confermaVisibile) return;
+  // Posizione: sempre in basso a destra per ora
+  toast.style.top = "";
+  toast.style.bottom = "20px";
+  toast.style.right = "20px";
+  toast.style.left = "";
+  toast.innerHTML = `<i class="fas fa-smile-beam"></i> ${messaggio}`;
+  toast.style.animationDuration = `3000ms`;  
+  toast.style.display = "block";  
+  toast.innerHTML += '<div id="toast-progress-bar"></div>';
+  const barra = document.querySelector("#toast-progress-bar");
+  barra.style.animationDuration = `3000ms`;
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 

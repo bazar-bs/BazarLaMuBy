@@ -349,7 +349,11 @@
 		    font-size: 16px;
 		    display: none;
 		    z-index: 1000;
-		    animation: fadeInOut 3s ease-in-out;
+		    /* animation: fadeInOut 3s ease-in-out; */
+			/* ✅ SOLO definizione del nome, non durata */
+			animation-name: fadeInOut;
+			animation-timing-function: ease-in-out;
+			animation-fill-mode: both;
 	}
 /* Fade-in e fade-out del toast */
 	@keyframes fadeInOut {
@@ -403,9 +407,14 @@
   height: 4px;
   background-color: #fff;
   width: 100%;
-  animation: shrinkBar 3s linear forwards;
+  /* animation: shrinkBar 3s linear forwards; */
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  /* RIMUOVI durata fissa! */
+  animation-name: shrinkBar;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* durata gestita da JS → NON mettere animation-duration qui */
 }
 @keyframes shrinkBar {
   from { width: 100%; }
@@ -792,7 +801,6 @@
   animation: flyToCart 1s ease-in-out forwards;
   pointer-events: none;
 }
-
 @keyframes flyToCart {
   0% {
     transform: translate(0, 0) scale(2);
@@ -803,5 +811,4 @@
     opacity: 0;
   }
 }
-
 </style>
