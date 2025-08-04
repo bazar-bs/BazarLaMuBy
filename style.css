@@ -51,7 +51,6 @@
   margin: 1rem auto;
   max-width: 500px;
 }
-
 .bottoni-carrello button {
   flex: 1;
   padding: 0.8rem;
@@ -61,11 +60,9 @@
   cursor: pointer;
   color: white;
 }
-
 #btn-svuota {
   background: #d9534f;
 }
-
 #btn-procedi {
   background: #28a745;
 }
