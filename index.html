@@ -159,7 +159,7 @@
 <h4 style="margin-top: 2px;">(se invio ordine non va a buon fine usare Contattaci)</h4>
     <form id="form-spedizione">
     <input type="text" id="nome" placeholder="Nome e Cognome" required>
-    <input type="text" id="indirizzo" placeholder="Indirizzo (via, civico, città, provincia, CAP)" required>
+    <input type="text" id="indirizzo" placeholder="Indirizzo (es. Via Rossi 10 Milano MI 20100)" required>
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
 <!-- Pulsante per inviare l'ordine via WhatsApp -->
@@ -462,10 +462,30 @@ function inviaOrdineWhatsApp() {
     let indirizzo = document.getElementById("indirizzo").value.trim();
     let telefono = document.getElementById("telefono").value.trim();
     let email = document.getElementById("email").value.trim();
-    if (!nome || !indirizzo || !telefono || !email) {
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}\s+[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}(?:\s+.*)?$/;
+	const indirizzoRegex = /^.*[a-zA-Z]+\s+\d+\s+.*\s+\d{5}$/;
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const telefonoRegex = /^[0-9+\s]{9,15}$/;	
+	if (!nome || !indirizzo || !telefono || !email) {
         alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
         return;
     }
+	if (!nomeRegex.test(nome)) {
+		alert("Inserisci nome e cognome validi (almeno 3 lettere ciascuno).");
+		return;
+	}
+	if (!indirizzoRegex.test(indirizzo)) {
+		alert("Inserisci un indirizzo completo (es. Via Rossi 10 Milano MI 20100)");
+		return;
+	}
+	if (!telefonoRegex.test(telefono)) {
+		alert("Inserisci un numero di telefono valido.");
+		return;
+	}
+	if (!emailRegex.test(email)) {
+		alert("Inserisci un'email valida.");
+		return;
+	}
     let carrelloSalvato = localStorage.getItem("carrello");
     if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
         alert("Il carrello è vuoto, impossibile inviare l'ordine!");
