@@ -596,6 +596,7 @@ logo.addEventListener("click", function() {
     clickCounter++;    
     if (clickCounter === 5) {
     modal.style.display = "block";
+	apriModaleAnimato("easter-egg-modal" , "fade");
     document.getElementById("overlay-easteregg").classList.add("active");
     startFireworks(); //  AVVIO
     clickCounter = 0;
@@ -803,18 +804,19 @@ if (localStorage.getItem("nomeModificato") === "true") {
   nuovoNome = prompt("Prima volta?! Scegli il tuo nickname ✨");
 }
     if (nuovoNome) {
-      localStorage.removeItem("preferiti");
-      localStorage.removeItem("ordini");	  
+		if (localStorage.getItem("nomeModificato") === "true") {
+			localStorage.removeItem("preferiti");
+			localStorage.removeItem("ordini");	  
+		}      
 	  localStorage.setItem("nomeUtente", nuovoNome);
       localStorage.setItem("nomeAppenaInserito", "false");
       usernameSpan.textContent = nuovoNome;
       salutoLabel.textContent = "Benvenuto/a";
 	  document.getElementById("icona-modifica").style.display = "none";
-	  localStorage.setItem("nomeModificato", "true"); /*serve per non modificare piu il nome */
+	  localStorage.setItem("nomeModificato", "true");  /*serve per reset preferiti e ordini */
        // ✅ Aggiorna subito preferiti e ordini nella UI
     aggiornaListaPreferiti(window.articoliOriginali); // aggiorna lista preferiti
     aggiornaStatoCuore(); // aggiorna icona cuore
-
     const listaOrdini = document.getElementById("lista-ordini");
     if (listaOrdini && listaOrdini.style.display !== "none") {
       mostraOrdini(); // aggiorna lista visiva se è aperta
@@ -1021,7 +1023,7 @@ function resetInattivitaTimer() {
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     // Quando torna visibile
-    mostraToast("Bentornato! 👋");
+    mostraToast("Bentornato/a! 👋");
     resetInattivitaTimer();
   } else {
     clearTimeout(inattivitaTimer); // ferma il timer mentre è via
@@ -1058,13 +1060,10 @@ function mostraToast(messaggio) {
 function apriModaleAnimato(id, tipo = "slide") {
   const modale = document.getElementById(id);
   if (!modale) return;
-
   // Rimuove tutte le classi di animazione
   modale.classList.remove("slide-up", "fade-in", "zoom-in");
-
   // Forza il repaint per riavviare l’animazione
   void modale.offsetWidth;
-
   // Applica la giusta animazione
   switch (tipo) {
     case "fade":
