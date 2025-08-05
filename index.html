@@ -13,6 +13,7 @@
 </head>
 	<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 <body>
+<audio id="suono-aggiunta" src="add-to-cart-soft-pop.mp3" preload="auto"></audio>
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
@@ -361,7 +362,8 @@ document.getElementById("share-btn").onclick = function () {
     }
 let carrello = [];
 function aggiungiAlCarrello(nome, prezzo) {
-    let prezzoNumerico = parseFloat(prezzo.replace(/[^\d.]/g, ""));
+    document.getElementById("suono-aggiunta").play().catch(e => console.warn("Audio non riproducibile:", e));
+	let prezzoNumerico = parseFloat(prezzo.replace(/[^\d.]/g, ""));
     let articolo = carrello.find(item => item.nome === nome);
     if (articolo) {
         articolo.quantita++;
