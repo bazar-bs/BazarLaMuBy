@@ -35,7 +35,7 @@
     </h2>
 	<h3>I tuoi preferiti ❤️</h3>
      <ul id="lista-preferiti"></ul>
-	<h3 class="bottone-ordini" onclick="toggleOrdini()">
+	<h3 class="bottone-ordini" onclick="toggleOrdini()" aria-label="Visualizza ordini salvati" title="Visualizza ordini salvati">
     I tuoi ordini 📦 <span class="clicca-qui">(clicca qui)</span> <span id="freccia" class="freccia">⬇️</span>
     </h3>
     <ul id="lista-ordini" style="display: none;"></ul>	
@@ -84,7 +84,7 @@
 		  <i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>
 		</button>		
 		<!-- Pulsante Home -->
-		<button onclick="tornaAllaHome()" id="home-btn" style="
+		<button onclick="tornaAllaHome()" id="home-btn" aria-label="Torna alla Home" title="Torna alla Home" style="
 			  padding: 0rem 1rem;
 			  height: 38px;
 			  margin-top: 12px;
@@ -100,7 +100,7 @@
 			  <i class="fas fa-home"></i>
 		</button>
 		<!-- Pulsante Carrello -->
-		<button onclick="mostraCarrello()" id="carrello-btn" style="
+		<button onclick="mostraCarrello()" id="carrello-btn" aria-label="Visualizza Carrello" title="Visualizza Carrello" style="
 			  padding: 1rem 2rem;
 			  background-color: #6e3b6e;
 			  color: white;
@@ -138,10 +138,10 @@
   <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Totale: €0.00</p>
   <!-- 🔁 Bottoni aggiornati -->
   <div class="bottoni-carrello">
-    <button id="btn-svuota" onclick="svuotaCarrello()">
+    <button id="btn-svuota" onclick="svuotaCarrello()" aria-label="Svuota il carrello" title="Svuota il carrello">
       <i class="fas fa-trash"></i> Svuota
     </button>
-    <button id="btn-procedi" onclick="mostraModuloSpedizione()">
+    <button id="btn-procedi" onclick="mostraModuloSpedizione()" aria-label="Procedi" title="Procedi">
       <i class="fas fa-arrow-right"></i> Procedi
     </button>
   </div>
@@ -163,11 +163,11 @@
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
 <!-- Pulsante per inviare l'ordine via WhatsApp -->
-    <button type="button" onclick="inviaOrdineWhatsApp()" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
+    <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
 </button>    
     </form>
-    <button onclick="chiudiModuloSpedizione()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
+    <button onclick="chiudiModuloSpedizione()" aria-label="Annulla Ordine" title="Annulla Ordine" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
 <!-- Popup di conferma ordine -->
 <div id="popup-conferma" class="modal">
@@ -193,20 +193,20 @@
       <img id="foto1-articolo" src="" loading="lazy" alt="Foto principale dell'articolo">
       <img id="foto2-articolo" src="" loading="lazy" alt="Foto aggiuntiva dell'articolo">
 <!-- Nuovo bottone per aggiungere al carrello -->
-  <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button">
+  <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button" aria-label="Aggiungi al carrello" title="Aggiungi al carrello">
     <i class="fas fa-shopping-cart"></i> Aggiungi al Carrello
 </button>
 <p id="conferma-aggiunta" style="display: none; color: #6e3b6e; font-weight: bold; text-align: center;"></p>
-<button onclick="tornaAllaHome()" class="contact-button">
+<button onclick="tornaAllaHome()" class="contact-button" aria-label="Torna alla Home" title="Torna alla Home">
     <i class="fas fa-home"></i> Torna alla home
 </button>
     </div>
-<button class="contact-button" onclick="toggleModal()">
+<button class="contact-button" onclick="toggleModal()" aria-label="Contattaci" title="Contattaci">
     <i class="fas fa-envelope"></i> Contattaci
 </button>
   </div>  
 <!--nuovo pulsante per installare app-->  
-<button class="contact-button" onclick="toggleAppModal()">
+<button class="contact-button" onclick="toggleAppModal()" aria-label="Info APP" title="Info APP">
   <i class="fas fa-mobile-alt"></i> App
 </button>
   <div class="modal" id="modal" onclick="toggleModal()">
@@ -224,7 +224,7 @@
   <p><b><i class="fab fa-whatsapp"></i> Telefono: <span id="telefonopersonale"></span></b></p>
   <p><b><i class="fas fa-envelope"></i> Email: <span id="emailpersonale"></span></b></p>
 <!-- Pulsante per aprire il modale privacy -->
-<button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
+<button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
 </button>
 </div>
@@ -263,7 +263,7 @@
   <button onclick="toggleAppModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
 <div id="app-overlay" class="overlay" onclick="toggleAppModal()"></div>
-<button onclick="scrollToTop()" id="scroll-top-btn" style="
+<button onclick="scrollToTop()" id="scroll-top-btn" aria-label="Vai Su" title="Vai Su" style="
   position: fixed;
   bottom: 70px;
   left: 10px;
@@ -436,7 +436,7 @@ function aggiornaCarrello() {
     <span class="nome-articolo">${item.nome}</span>
     <span class="quantita-articolo">x${item.quantita}</span>
     <span class="prezzo-articolo">€${item.prezzo.toFixed(2)}</span>
-    <button onclick="rimuoviDalCarrello('${item.nome}')" class="icona-rimuovi">
+    <button onclick="rimuoviDalCarrello('${item.nome}')" aria-label="Rimuovi articolo" title="Rimuovi articolo" class="icona-rimuovi">
       <i class="fas fa-trash-alt"></i>
     </button>
   </div>
@@ -467,23 +467,23 @@ function inviaOrdineWhatsApp() {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telefonoRegex = /^[0-9+\s]{9,15}$/;	
 	if (!nome || !indirizzo || !telefono || !email) {
-        alert("Compila tutti i campi della spedizione prima di confermare l'ordine!");
+        alert("⚠️Compila tutti i campi della spedizione prima di confermare l'ordine!");
         return;
     }
 	if (!nomeRegex.test(nome)) {
-		alert("Inserisci nome e cognome validi (almeno 3 lettere ciascuno).");
+		alert("⚠️Inserisci nome e cognome validi (almeno 3 lettere ciascuno).");
 		return;
 	}
 	if (!indirizzoRegex.test(indirizzo)) {
-		alert("Inserisci un indirizzo completo (es. Via Rossi 10 Milano MI 20100)");
+		alert("⚠️Inserisci un indirizzo completo (es. Via Rossi 10 Milano MI 20100)");
 		return;
 	}
 	if (!telefonoRegex.test(telefono)) {
-		alert("Inserisci un numero di telefono valido.");
+		alert("⚠️Inserisci un numero di telefono valido.");
 		return;
 	}
 	if (!emailRegex.test(email)) {
-		alert("Inserisci un'email valida.");
+		alert("⚠️Inserisci un'email valida.");
 		return;
 	}
     let carrelloSalvato = localStorage.getItem("carrello");
