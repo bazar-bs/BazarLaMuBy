@@ -47,10 +47,10 @@
 		    <h2>❌ Ordine Annullato</h2>
 		    <p>Hai annullato il tuo ordine! Stai per tornare al carrello. 
 		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
-		        <i class="fas fa-times-circle"></i> Chiudi</button>
+		    <i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
 	<div id="easter-egg-modal" class="modal">
-    <h2>🎉Scoperto Easter Egg!</h2>
+    <h2>🎉Easter Egg!🎉</h2>
     <p class="evidenziato">
         Hai trovato il segreto nascosto...👀  
         <span class="nome-antimo">Antimo</span> è la mente geniale dietro tutto questo: creatore e sviluppatore del sito!💻
@@ -156,18 +156,45 @@
   <div class="nuvoletta"></div>
 </div>
     <h2 style="margin-bottom: 2px;">Inserisci i dati di spedizione</h2>
-<h4 style="margin-top: 2px;">(se invio ordine non va a buon fine usare Contattaci)</h4>
+<h4 style="margin-top: 2px;"> </h4>
     <form id="form-spedizione">
     <input type="text" id="nome" placeholder="Nome e Cognome" required>
     <input type="text" id="indirizzo" placeholder="Indirizzo (es. Via Rossi 10 Milano MI 20100)" required>
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
-<!-- Pulsante per inviare l'ordine via WhatsApp -->
-    <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
-    <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
-</button>    
-    </form>
+    <!-- Bottone Continua -->
+<button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" style="background: #28a745; font-size: 1rem; color: white; padding: 1rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto 0;">
+  <i class="fas fa-arrow-right"></i> Continua
+</button>
+	</form>
     <button onclick="chiudiModuloSpedizione()" aria-label="Annulla Ordine" title="Annulla Ordine" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
+<!-- Modale Riepilogo Ordine -->
+<div id="modal-riepilogo" class="modal" style="display: none;">
+  <h2 style="margin-bottom: 2px;">Riepilogo dell'Ordine</h2>
+  <h4 style="margin-top: 2px;">Controlla i dati prima di inviare(se non va a buon fine Contattaci)</h4>
+  <!-- Carrello -->
+  <div id="riepilogo-carrello" style="margin-bottom: 15px;">
+    <h3>🛒 Carrello</h3>
+    <ul id="riepilogo-lista-carrello" style="list-style: none; padding: 0;"></ul>
+    <p id="riepilogo-totale" style="font-weight: bold; font-size: 1.2rem;"></p>
+  </div>
+  <!-- Spedizione -->
+  <div id="riepilogo-spedizione" style="margin-bottom: 15px;">
+    <h3>🚚 Dati Spedizione</h3>
+    <p><strong>Nome:</strong> <span id="riepilogo-nome"></span></p>
+    <p><strong>Indirizzo:</strong> <span id="riepilogo-indirizzo"></span></p>
+    <p><strong>Telefono:</strong> <span id="riepilogo-telefono"></span></p>
+    <p><strong>Email:</strong> <span id="riepilogo-email"></span></p>
+  </div>
+  <!-- Bottone WhatsApp -->
+  <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
+    <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
+  </button>
+  <!-- Bottone Annulla -->
+  <button onclick="chiudiModuloRiepilogo()" aria-label="Annulla Ordine" title="Annulla Ordine" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 10px auto 0;">
+    <i class="fas fa-times-circle"></i> Annulla
+  </button>
 </div>
 <!-- Popup di conferma ordine -->
 <div id="popup-conferma" class="modal">
@@ -458,34 +485,10 @@ function aggiornaCarrello() {
     }
 }
 function inviaOrdineWhatsApp() {
-    let nome = document.getElementById("nome").value.trim();
+	let nome = document.getElementById("nome").value.trim();
     let indirizzo = document.getElementById("indirizzo").value.trim();
     let telefono = document.getElementById("telefono").value.trim();
     let email = document.getElementById("email").value.trim();
-    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}\s+[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}(?:\s+.*)?$/;
-	const indirizzoRegex = /^.*[a-zA-Z]+\s+\d+\s+.*\s+\d{5}$/;
-	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const telefonoRegex = /^[0-9+\s]{9,15}$/;	
-	if (!nome || !indirizzo || !telefono || !email) {
-        alert("⚠️Compila tutti i campi della spedizione prima di confermare l'ordine!");
-        return;
-    }
-	if (!nomeRegex.test(nome)) {
-		alert("⚠️Inserisci nome e cognome validi (almeno 3 lettere ciascuno).");
-		return;
-	}
-	if (!indirizzoRegex.test(indirizzo)) {
-		alert("⚠️Inserisci un indirizzo completo (es. Via Rossi 10 Milano MI 20100)");
-		return;
-	}
-	if (!telefonoRegex.test(telefono)) {
-		alert("⚠️Inserisci un numero di telefono valido.");
-		return;
-	}
-	if (!emailRegex.test(email)) {
-		alert("⚠️Inserisci un'email valida.");
-		return;
-	}
     let carrelloSalvato = localStorage.getItem("carrello");
     if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
         alert("Il carrello è vuoto, impossibile inviare l'ordine!");
@@ -592,19 +595,16 @@ function mostraModuloSpedizione() {
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
-    document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
-    mostraCarrello(); // Ri-apre il carrello
-    document.getElementById("popup-annullato").style.display = "block";
-	apriModaleAnimato("popup-annullato" , "fade");
+    document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante -->
 }
 function mostraPopupConferma() {
     // Chiudi il carrello
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
-
     // Chiudi la finestra di spedizione
-    document.getElementById("modal-spedizione").style.display = "none";
-
+    document.getElementById("modal-spedizione").style.display = "none";	
+	// Chiudi la finestra di riepilogo
+	document.getElementById("modal-riepilogo").style.display = "none";
     // Mostra la conferma dell'ordine
     document.getElementById("popup-conferma").style.display = "block";
     document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
@@ -1103,6 +1103,61 @@ function apriModaleAnimato(id, tipo = "slide") {
     default:
       modale.classList.add("slide-up");
   }
+}
+function apriRiepilogo() {
+	let nome = document.getElementById("nome").value.trim();
+    let indirizzo = document.getElementById("indirizzo").value.trim();
+    let telefono = document.getElementById("telefono").value.trim();
+    let email = document.getElementById("email").value.trim();
+    const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}\s+[A-Za-zÀ-ÖØ-öø-ÿ'’-]{3,}(?:\s+.*)?$/;
+	const indirizzoRegex = /^.*[a-zA-Z]+\s+\d+\s+.*\s+\d{5}$/;
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const telefonoRegex = /^[0-9+\s]{9,15}$/;	
+	if (!nome || !indirizzo || !telefono || !email) {
+        alert("⚠️Compila tutti i campi della spedizione prima di confermare l'ordine!");
+        return;
+    }
+	if (!nomeRegex.test(nome)) {
+		alert("⚠️Inserisci nome e cognome validi (almeno 3 lettere ciascuno).");
+		return;
+	}
+	if (!indirizzoRegex.test(indirizzo)) {
+		alert("⚠️Inserisci un indirizzo completo (es. Via Rossi 10 Milano MI 20100)");
+		return;
+	}
+	if (!telefonoRegex.test(telefono)) {
+		alert("⚠️Inserisci un numero di telefono valido.");
+		return;
+	}
+	if (!emailRegex.test(email)) {
+		alert("⚠️Inserisci un'email valida.");
+		return;
+	}
+  document.getElementById("riepilogo-nome").textContent = nome;
+  document.getElementById("riepilogo-indirizzo").textContent = indirizzo;
+  document.getElementById("riepilogo-telefono").textContent = telefono;
+  document.getElementById("riepilogo-email").textContent = email;
+  const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
+  const lista = document.getElementById("riepilogo-lista-carrello");
+  lista.innerHTML = "";
+  let totale = 0;
+  carrelloSalvato.forEach(item => {
+    const li = document.createElement("li");
+    li.innerHTML = `${item.nome} x${item.quantita} - €${item.prezzo.toFixed(2)}`;
+    lista.appendChild(li);
+    totale += item.prezzo * item.quantita;
+  });
+  document.getElementById("riepilogo-totale").textContent = `Totale: €${totale.toFixed(2)}`;
+  document.getElementById("modal-spedizione").style.display = "none";
+  document.getElementById("modal-riepilogo").style.display = "block";
+  apriModaleAnimato("modal-riepilogo" , "fade");
+}
+function chiudiModuloRiepilogo() {
+  document.getElementById("modal-riepilogo").style.display = "none";
+  document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
+  mostraCarrello(); // Ri-apre il carrello
+  document.getElementById("popup-annullato").style.display = "block";
+  apriModaleAnimato("popup-annullato" , "fade");	
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
