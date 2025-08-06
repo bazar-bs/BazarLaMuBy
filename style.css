@@ -846,4 +846,9 @@
 .fade-in {
   animation: fadeIn 0.4s ease-out;
 }
+#riepilogo-spedizione p {
+  margin: -0.2rem 0; 
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
 </style>
