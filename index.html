@@ -171,7 +171,7 @@
 </div>
 <!-- Modale Riepilogo Ordine -->
 <div id="modal-riepilogo" class="modal" style="display: none;">
-  <h2 style="margin-bottom: 2px;">Riepilogo dell'Ordine</h2>
+  <h2 style="margin-bottom: 2px;">📋Riepilogo dell'Ordine</h2>
   <h4 style="margin-top: 2px;">Controlla i dati prima di inviare(se non va a buon fine Contattaci)</h4>
   <!-- Carrello -->
   <div id="riepilogo-carrello" style="margin-bottom: 15px;">
@@ -611,6 +611,7 @@ function mostraPopupConferma() {
 }
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
+	mostraCarrello();
 }
 function chiudiPopupConferma() {
     svuotaCarrello(); // Svuota il carrello quando si chiude il popup
@@ -1154,10 +1155,8 @@ function apriRiepilogo() {
 }
 function chiudiModuloRiepilogo() {
   document.getElementById("modal-riepilogo").style.display = "none";
-  document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
-  mostraCarrello(); // Ri-apre il carrello
   document.getElementById("popup-annullato").style.display = "block";
-  apriModaleAnimato("popup-annullato" , "fade");	
+  apriModaleAnimato("popup-annullato" , "fade");
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
