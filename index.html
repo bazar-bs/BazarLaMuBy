@@ -181,7 +181,7 @@
     <!-- Dettaglio Articolo -->
     <div id="dettaglio-articolo" style="display:none; background: white; padding: 1rem; border-radius: 8px;position: relative;">   
       <div id="badge-articolo" style="position: absolute; top: 0; left: 0; background-color: #6e3b6e; color: white; font-size: 0.7rem; padding: 4px 10px; font-weight: bold; border-bottom-right-radius: 8px;"></div>
-      <button id="share-btn" title="Condividi" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 1.3rem; color: #6e3b6e; padding: 10px; cursor: pointer;">
+      <button id="share-btn" aria-label="Condividi" title="Condividi" style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 1.3rem; color: #6e3b6e; padding: 10px; cursor: pointer;">
       <i class="fas fa-share-alt"></i>
       </button>
 	  <h2 id="titolo-articolo"></h2>
@@ -493,11 +493,17 @@ function inviaOrdineWhatsApp() {
     }
     let ordine = JSON.parse(carrelloSalvato);
     let totalePrezzo = ordine.reduce((sum, item) => sum + item.prezzo * item.quantita, 0);
-    let messaggio = `*Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
-    ordine.forEach(item => {
-        messaggio += `- ${item.nome} | €${item.prezzo.toFixed(2)} x ${item.quantita}\n`;
-    });
-    messaggio += `\n *Totale Ordine:* €${totalePrezzo.toFixed(2)}\n\n Grazie per l'acquisto! `;
+    let nomeUtente = localStorage.getItem("nomeUtente");
+	let messaggio;
+	if (nomeUtente && nomeUtente.trim() !== "") {
+		messaggio = `*Nuovo Ordine da ${nomeUtente}* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
+	} else {
+		messaggio = `*Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
+	}
+	ordine.forEach(item => {
+		messaggio += `- ${item.nome} | €${item.prezzo.toFixed(2)} x ${item.quantita}\n`;
+	});
+	messaggio += `\n *Totale Ordine:* €${totalePrezzo.toFixed(2)}\n\n Grazie per l'acquisto! `;
     let numeroWhatsApp = "3516100235"; // Sostituisci con il numero destinatario
     let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
     let toast = document.getElementById("toast-confirm");
