@@ -506,7 +506,7 @@ function inviaOrdineWhatsApp() {
     let nomeUtente = localStorage.getItem("nomeUtente");
 	let messaggio;
 	if (nomeUtente && nomeUtente.trim() !== "") {
-		messaggio = `*Nuovo Ordine da ${nomeUtente}* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
+		messaggio = `*Nuovo Ordine* da *${nomeUtente}* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
 	} else {
 		messaggio = `*Nuovo Ordine* \n\n Nome: ${nome}\n Indirizzo: ${indirizzo}\n Telefono: ${telefono}\n Email: ${email}\n\n *Prodotti Ordinati:* \n`;
 	}
