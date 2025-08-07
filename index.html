@@ -40,6 +40,12 @@
     </h3>
     <ul id="lista-ordini" style="display: none;"></ul>	
   </div>
+  <!-- ✅ Footer versione, fissato in fondo -->
+  <div class="sidebar-footer">
+	<h4 style="text-align: center; opacity: 0.6;">
+		<i class="fas fa-tag"></i> Ver. 1.03
+	</h4>
+  </div>
 </div>
 <!-- Overlay per chiudere cliccando fuori -->
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -255,8 +261,16 @@
   </div>
   <p>Siamo un piccolo bazar online dedicato alla vendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
   <p>Contattaci per maggiori informazioni sui prodotti!</p>
-  <p><b><i class="fab fa-whatsapp"></i> Telefono: <span id="telefonopersonale"></span></b></p>
-  <p><b><i class="fas fa-envelope"></i> Email: <span id="emailpersonale"></span></b></p>
+  <p>
+  <b><i class="fab fa-whatsapp"></i> Telefono: 
+    <span id="telefonopersonale" onclick="copiaContatto('telefonopersonale')" style="cursor: pointer;" title="Clicca per copiare"></span>
+  </b>
+</p>
+<p>
+  <b><i class="fas fa-envelope"></i> Email: 
+    <span id="emailpersonale" onclick="copiaContatto('emailpersonale')" style="cursor: pointer;" title="Clicca per copiare"></span>
+  </b>
+</p>
 <!-- Pulsante per aprire il modale privacy -->
 <button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
@@ -1195,6 +1209,25 @@ if (salvati) {
     console.warn("Dati spedizione corrotti o non validi");
   }
 }
+}
+function copiaContatto(idElemento) {
+  const testo = document.getElementById(idElemento)?.textContent?.trim();
+  if (!testo) return;
+
+  // Determina il tipo di contatto copiato
+  let tipo = "";
+  if (idElemento === "telefonopersonale") {
+    tipo = "Telefono";
+  } else if (idElemento === "emailpersonale") {
+    tipo = "Email";
+  }
+
+  // Copia negli appunti
+  navigator.clipboard.writeText(testo).then(() => {
+    mostraToast(`✅ Copiato ${tipo}`);
+  }).catch(() => {
+    mostraToast("❌ Errore nella copia");
+  });
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
