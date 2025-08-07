@@ -162,7 +162,7 @@
     <input type="text" id="indirizzo" placeholder="Indirizzo (es. Via Rossi 10 Milano MI 20100)" required>
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
-    <!-- Bottone Continua -->
+<!-- Bottone Continua -->
 <button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" style="background: #28a745; font-size: 1rem; color: white; padding: 1rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto 0;">
   <i class="fas fa-arrow-right"></i> Continua
 </button>
@@ -842,7 +842,13 @@ if (localStorage.getItem("nomeModificato") === "true") {
     if (nuovoNome) {
 		if (localStorage.getItem("nomeModificato") === "true") {
 			localStorage.removeItem("preferiti");
-			localStorage.removeItem("ordini");	  
+			localStorage.removeItem("ordini");
+			localStorage.removeItem("datiSpedizione");
+			// opzionale: svuota i campi
+			document.getElementById("nome").value = "";
+			document.getElementById("indirizzo").value = "";
+			document.getElementById("telefono").value = "";
+			document.getElementById("email").value = "";			
 		}      
 	  localStorage.setItem("nomeUtente", nuovoNome);
       localStorage.setItem("nomeAppenaInserito", "false");
@@ -892,6 +898,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       observer.observe(dettaglio, { attributes: true });
     }
+	inizializzaSpedizione();
   });
 function aggiornaStatoCuore() {
   const toggleBtn = document.getElementById('toggle-sidebar');
@@ -1145,6 +1152,11 @@ function apriRiepilogo() {
   document.getElementById("riepilogo-indirizzo").textContent = indirizzo;
   document.getElementById("riepilogo-telefono").textContent = telefono;
   document.getElementById("riepilogo-email").textContent = email;
+  
+   // Salvataggio dati spedizione
+  const dati = { nome, indirizzo, telefono, email };
+  localStorage.setItem("datiSpedizione", JSON.stringify(dati));
+  
   const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
   const lista = document.getElementById("riepilogo-lista-carrello");
   lista.innerHTML = "";
@@ -1168,6 +1180,21 @@ function chiudiModuloRiepilogo() {
 function tornaAllaSpedizione() {
   document.getElementById("modal-riepilogo").style.display = "none";
   document.getElementById("modal-spedizione").style.display = "block";
+}
+function inizializzaSpedizione() {
+// Precompila i dati salvati
+const salvati = localStorage.getItem("datiSpedizione");
+if (salvati) {
+  try {
+    const dati = JSON.parse(salvati);
+    document.getElementById("nome").value = dati.nome || "";
+    document.getElementById("indirizzo").value = dati.indirizzo || "";
+    document.getElementById("telefono").value = dati.telefono || "";
+    document.getElementById("email").value = dati.email || "";
+  } catch (e) {
+    console.warn("Dati spedizione corrotti o non validi");
+  }
+}
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
