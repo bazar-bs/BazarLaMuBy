@@ -74,48 +74,25 @@
 </header>
 	<div style="display: flex; justify-content: center; gap: 10px; margin: 1rem auto;">		
 		<!-- Pulsante Ordina per Prezzo -->
-		<button onclick="toggleOrdinaPrezzo()" id="ordina-prezzo-btn" aria-label="Ordina gli articoli per prezzo" title="Ordina per prezzo" style="
-			  padding: 0rem 1rem;
-			  height: 38px;
-			  margin-top: 12px;
-			  margin-left: 5px; 
-			  margin-right: -63px; 
-			  background-color: #6e3b6e;
-			  color: white;
-			  font-size: 0.9rem;
-			  border: none;
-			  border-radius: 8px;
-			  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
-			  cursor: pointer;">
-		  <i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>
-		</button>		
+		<button onclick="toggleOrdinaPrezzo()" id="ordina-prezzo-btn"
+			class="btn-ordina-prezzo"
+			aria-label="Ordina gli articoli per prezzo"
+			title="Ordina per prezzo">
+			<i class="fas fa-long-arrow-alt-up"><sup>€</sup></i>
+		</button>	
 		<!-- Pulsante Home -->
-		<button onclick="tornaAllaHome()" id="home-btn" aria-label="Torna alla Home" title="Torna alla Home" style="
-			  padding: 0rem 1rem;
-			  height: 38px;
-			  margin-top: 12px;
-			  margin-left: 5px; 
-			  margin-right: -63px; 
-			  background-color: #6e3b6e;
-			  color: white;
-			  font-size: 0.9rem;
-			  border: none;
-			  border-radius: 8px;
-			  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
-			  cursor: pointer;">
-			  <i class="fas fa-home"></i>
-		</button>
+		<button onclick="tornaAllaHome()" id="home-btn"
+			class="btn-home"
+			aria-label="Torna alla Home"
+			title="Torna alla Home">
+			<i class="fas fa-home"></i>
+		</button>	
 		<!-- Pulsante Carrello -->
-		<button onclick="mostraCarrello()" id="carrello-btn" aria-label="Visualizza Carrello" title="Visualizza Carrello" style="
-			  padding: 1rem 2rem;
-			  background-color: #6e3b6e;
-			  color: white;
-			  font-size: 1.2rem;
-			  border: none;
-			  border-radius: 8px;
-			  cursor: pointer;">
-			  <i class="fas fa-shopping-cart"></i> Carrello (<span id="contatore-carrello">0</span>)
-		</button>		
+		<button onclick="mostraCarrello()" id="carrello-btn"
+			aria-label="Visualizza Carrello"
+			title="Visualizza Carrello">
+			<i class="fas fa-shopping-cart"></i> Carrello (<span id="contatore-carrello">0</span>)
+		</button>
 	</div>
   <div class="container">
 		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0rem;">
@@ -137,7 +114,7 @@
     </div>
   </div>
   <p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
-    Salvare <strong style="background-color: yellow; padding: 2px;"><span id="telefonocarrello"></span></strong> nella tua rubrica per completare l'ordine
+    Gli ordini vengono gestiti direttamente su <strong style="background-color: yellow; padding: 2px;">WhatsApp</strong>.
   </p>
   <h2 style="text-align: center;">Il tuo carrello</h2>
   <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
@@ -151,8 +128,8 @@
       <i class="fas fa-arrow-right"></i> Procedi
     </button>
   </div>
-  <button onclick="chiudiCarrello()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 1.3rem;">
-    <i class="fas fa-times-circle"></i> Chiudi
+  <button onclick="chiudiCarrello()" class="btn-chiudi-carrello" aria-label="Chiudi il carrello" title="Chiudi il carrello">
+	<i class="fas fa-times-circle"></i> Chiudi
   </button>
 </div>
 <!-- Finestra Modulo Spedizione -->
@@ -311,23 +288,9 @@
   <button onclick="toggleAppModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
 <div id="app-overlay" class="overlay" onclick="toggleAppModal()"></div>
-<button onclick="scrollToTop()" id="scroll-top-btn" aria-label="Vai Su" title="Vai Su" style="
-  position: fixed;
-  bottom: 70px;
-  left: 10px;
-  padding: 1rem;
-  background-color: #6e3b6e;
-  color: white;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  z-index: 9999;
-  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
-">
+<button onclick="scrollToTop()" id="scroll-top-btn" class="btn-scroll-top" aria-label="Vai Su" title="Vai Su">
   <i class="fas fa-arrow-up"></i>
-</button>  
+</button>
 <footer style="font-weight: bold; background-color: #f4f0ff; font-size: 16px;">
   &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
   <div class="piva">P.IVA 04692000989</div>		
@@ -336,9 +299,16 @@
 let ultimaPosizioneScroll = 0; 
 document.getElementById("home-btn").style.display = "none";  
 function toggleModal() {
-  document.getElementById('modal').classList.toggle('active');
-  document.getElementById('overlay').classList.toggle('active');
-  apriModaleAnimato("modal" , "fade");
+  const modal = document.getElementById('modal');
+  const overlay = document.getElementById('overlay');
+  modal.classList.toggle('active');
+  overlay.classList.toggle('active');
+  if (modal.classList.contains('active')) {
+    bloccaScroll()
+  } else {
+    sbloccaScroll()
+  }
+  apriModaleAnimato("modal", "fade");
 }
     function mostraDettaglio(titolo, descrizione, img1, img2, prezzo,badge) {
 		ultimaPosizioneScroll = window.scrollY; // Salva la posizione corrente
@@ -566,11 +536,13 @@ localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
 function mostraCarrello() {
     document.getElementById("modal-carrello").classList.add("active");
     document.getElementById("overlay-carrello").classList.add("active");
+	bloccaScroll()
 	apriModaleAnimato("modal-carrello" , "fade");
 }
 function chiudiCarrello() {
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
+	sbloccaScroll()
 }
 function svuotaCarrello() {
     carrello = [];
@@ -612,11 +584,13 @@ function mostraModuloSpedizione() {
 	chiudiCarrello(); // Chiude il carrello
     document.getElementById("modal-spedizione").style.display = "block";
 	document.getElementById("overlay-carrello").classList.add("active"); // Applica overlay oscurante
+	bloccaScroll()
 	apriModaleAnimato("modal-spedizione" , "fade");
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
     document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante -->
+    sbloccaScroll()
 }
 function mostraPopupConferma() {
     // Chiudi il carrello
@@ -629,15 +603,18 @@ function mostraPopupConferma() {
     // Mostra la conferma dell'ordine
     document.getElementById("popup-conferma").style.display = "block";
     document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
+    bloccaScroll()
 }
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
+	sbloccaScroll()
 	mostraCarrello();
 }
 function chiudiPopupConferma() {
     svuotaCarrello(); // Svuota il carrello quando si chiude il popup
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
-    location.reload(); // Ricarica la pagina manualmente
+    sbloccaScroll()
+	location.reload(); // Ricarica la pagina manualmente
 }
 let clickCounter = 0;
 const logo = document.querySelector(".logo");
@@ -646,6 +623,7 @@ logo.addEventListener("click", function() {
     clickCounter++;    
     if (clickCounter === 5) {
     modal.style.display = "block";
+	bloccaScroll()
 	apriModaleAnimato("easter-egg-modal" , "fade");
     document.getElementById("overlay-easteregg").classList.add("active");
     startFireworks(); //  AVVIO
@@ -655,11 +633,19 @@ logo.addEventListener("click", function() {
 function chiudiModal() {
     modal.style.display = "none";
     document.getElementById("overlay-easteregg").classList.remove("active");
+    sbloccaScroll()
 }
 function toggleAppModal() {
-  document.getElementById("app-modal").classList.toggle("active");
-  document.getElementById("app-overlay").classList.toggle("active");
-  apriModaleAnimato("app-modal" , "fade");
+  const modal = document.getElementById("app-modal");
+  const overlay = document.getElementById("app-overlay");  
+  modal.classList.toggle("active");
+  overlay.classList.toggle("active");
+  if (modal.classList.contains("active")) {
+    bloccaScroll()
+  } else {
+    sbloccaScroll()
+  }
+  apriModaleAnimato("app-modal", "fade");
 }
   if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -725,9 +711,21 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function togglePolicyModal() {
-  document.getElementById("modal-policy").classList.toggle("active");
-  document.getElementById("policy-overlay").classList.toggle("active");
-  apriModaleAnimato("modal-policy" , "fade");	
+  const modal = document.getElementById("modal-policy");
+  const overlay = document.getElementById("policy-overlay");
+
+  modal.classList.toggle("active");
+  overlay.classList.toggle("active");
+
+  if (modal.classList.contains("active")) {
+	document.body.classList.add("noscroll");  // Blocca lo scroll della pagina
+  } else {
+  document.getElementById("modal").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+    document.body.classList.remove("noscroll");  // Sblocca lo scroll
+  }
+
+  apriModaleAnimato("modal-policy", "fade");
 }
 fetch('articoli.json')
   .then(response => response.json())
@@ -1182,16 +1180,19 @@ function apriRiepilogo() {
   document.getElementById("riepilogo-totale").textContent = `Totale: €${totale.toFixed(2)}`;
   document.getElementById("modal-spedizione").style.display = "none";
   document.getElementById("modal-riepilogo").style.display = "block";
+  bloccaScroll()
   apriModaleAnimato("modal-riepilogo" , "fade");
 }
 function chiudiModuloRiepilogo() {
   document.getElementById("modal-riepilogo").style.display = "none";
   document.getElementById("popup-annullato").style.display = "block";
+  sbloccaScroll()
   apriModaleAnimato("popup-annullato" , "fade");
 }
 function tornaAllaSpedizione() {
   document.getElementById("modal-riepilogo").style.display = "none";
   document.getElementById("modal-spedizione").style.display = "block";
+  bloccaScroll()		
 }
 function inizializzaSpedizione() {
   const salvati = localStorage.getItem("datiSpedizione");
@@ -1217,7 +1218,6 @@ function inizializzaSpedizione() {
     h4Spedizione.textContent = "";
   }
 }
-
 function copiaContatto(idElemento) {
   const testo = document.getElementById(idElemento)?.textContent?.trim();
   if (!testo) return;
@@ -1234,6 +1234,13 @@ function copiaContatto(idElemento) {
   }).catch(() => {
     mostraToast("❌ Errore nella copia");
   });
+}
+function bloccaScroll() {
+  document.body.classList.add("noscroll");
+}
+
+function sbloccaScroll() {
+  document.body.classList.remove("noscroll");
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 

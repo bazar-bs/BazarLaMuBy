@@ -10,6 +10,10 @@
         background-color: #fffde9;
         color: #333;
 	}	
+	body.noscroll {
+		overflow: hidden;
+		height: 100vh;
+	}
 	input {
     	width: 100%;
     	padding: 0.5rem;
@@ -855,5 +859,66 @@
   color: white;
   padding: 10px;
   margin-top: auto;
+}
+.btn-ordina-prezzo {
+  padding: 0rem 1rem;
+  height: 38px;
+  margin-top: 12px;
+  margin-left: 5px;
+  margin-right: -63px;
+  background-color: #6e3b6e;
+  color: white;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  animation: bounce 1s ease-in-out 2;
+  cursor: pointer;
+}
+.btn-home {
+  padding: 0rem 1rem;
+  height: 38px;
+  margin-top: 12px;
+  margin-left: 5px;
+  margin-right: -63px;
+  background-color: #6e3b6e;
+  color: white;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+  cursor: pointer;
+}
+.btn-chiudi-carrello {
+  background: #6e3b6e;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  margin-top: 1.3rem;
+}
+
+.btn-chiudi-carrello:hover {
+  background: #843d84; /* leggermente più chiaro in hover */
+}
+.btn-scroll-top {
+  position: fixed;
+  bottom: 70px;
+  left: 10px;
+  padding: 1rem;
+  background-color: #6e3b6e;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none; /* mostra solo quando serve */
+  z-index: 9999;
+  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
+}
+.btn-scroll-top:hover {
+  background-color: #843d84; /* viola più chiaro in hover */
 }
 </style>
