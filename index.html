@@ -162,7 +162,7 @@
   <div class="nuvoletta"></div>
 </div>
     <h2 style="margin-bottom: 2px;">Inserisci i dati di spedizione</h2>
-<h4 style="margin-top: 2px;"> </h4>
+	<h4 style="margin-top: 2px; opacity: 0.5;">recupero dati</h4>
     <form id="form-spedizione">
     <input type="text" id="nome" placeholder="Nome e Cognome" required>
     <input type="text" id="indirizzo" placeholder="Indirizzo (es. Via Rossi 10 Milano MI 20100)" required>
@@ -1165,12 +1165,10 @@ function apriRiepilogo() {
   document.getElementById("riepilogo-nome").textContent = nome;
   document.getElementById("riepilogo-indirizzo").textContent = indirizzo;
   document.getElementById("riepilogo-telefono").textContent = telefono;
-  document.getElementById("riepilogo-email").textContent = email;
-  
+  document.getElementById("riepilogo-email").textContent = email;  
    // Salvataggio dati spedizione
   const dati = { nome, indirizzo, telefono, email };
-  localStorage.setItem("datiSpedizione", JSON.stringify(dati));
-  
+  localStorage.setItem("datiSpedizione", JSON.stringify(dati));  
   const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
   const lista = document.getElementById("riepilogo-lista-carrello");
   lista.innerHTML = "";
@@ -1196,24 +1194,33 @@ function tornaAllaSpedizione() {
   document.getElementById("modal-spedizione").style.display = "block";
 }
 function inizializzaSpedizione() {
-// Precompila i dati salvati
-const salvati = localStorage.getItem("datiSpedizione");
-if (salvati) {
-  try {
-    const dati = JSON.parse(salvati);
-    document.getElementById("nome").value = dati.nome || "";
-    document.getElementById("indirizzo").value = dati.indirizzo || "";
-    document.getElementById("telefono").value = dati.telefono || "";
-    document.getElementById("email").value = dati.email || "";
-  } catch (e) {
-    console.warn("Dati spedizione corrotti o non validi");
+  const salvati = localStorage.getItem("datiSpedizione");
+  const h4Spedizione = document.querySelector('#modal-spedizione h4');
+
+  if (salvati) {
+    try {
+      const dati = JSON.parse(salvati);
+      document.getElementById("nome").value = dati.nome || "";
+      document.getElementById("indirizzo").value = dati.indirizzo || "";
+      document.getElementById("telefono").value = dati.telefono || "";
+      document.getElementById("email").value = dati.email || "";
+      // ✅ Mostra messaggio se i dati sono validi
+      if (dati.nome || dati.indirizzo || dati.telefono || dati.email) {
+        h4Spedizione.textContent = "(Dati spedizione recuperati)";
+      }
+    } catch (e) {
+      console.warn("Dati spedizione corrotti o non validi");
+      h4Spedizione.textContent = ""; // rimuove il testo se errore
+    }
+  } else {
+    // Nessun dato salvato → svuota il testo
+    h4Spedizione.textContent = "";
   }
 }
-}
+
 function copiaContatto(idElemento) {
   const testo = document.getElementById(idElemento)?.textContent?.trim();
   if (!testo) return;
-
   // Determina il tipo di contatto copiato
   let tipo = "";
   if (idElemento === "telefonopersonale") {
@@ -1221,10 +1228,9 @@ function copiaContatto(idElemento) {
   } else if (idElemento === "emailpersonale") {
     tipo = "Email";
   }
-
   // Copia negli appunti
   navigator.clipboard.writeText(testo).then(() => {
-    mostraToast(`✅ Copiato ${tipo}`);
+    mostraToast(`✅${tipo} Copiato`);
   }).catch(() => {
     mostraToast("❌ Errore nella copia");
   });
