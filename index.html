@@ -1257,11 +1257,9 @@ function mostraLinkPagamento() {
   }
   const usernamePayPal = "AntimoN"; // <-- cambia con il tuo PayPal.me
   const link = `https://paypal.me/${usernamePayPal}/${totale.toFixed(2)}`; 
-  <!-- if (confirm(`Aprire il link di pagamento?\n${link}`)) {	 -->
-    <!-- window.open(link, "_blank"); -->
-	alert("Per il momento link non disponibile, attendere Whatsapp. Chiudi il popup di conferma");
-    return;
-  <!-- } -->
+  if (confirm(`Aprire il link di pagamento?\n${link}`)) {	
+    window.open(link, "_blank");
+  }
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
