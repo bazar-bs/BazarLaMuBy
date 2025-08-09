@@ -146,7 +146,7 @@
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
 <!-- Bottone Continua -->
-<button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" style="background: #28a745; font-size: 1rem; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: -5px auto 0;">
+<button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" style="background: #28a745; font-size: 1rem; color: white; padding: 1rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 10px auto 0;">
   <i class="fas fa-arrow-right"></i> Continua
 </button>
 	</form>
@@ -190,14 +190,7 @@
 <div id="popup-conferma" class="modal">
     <h2>✅ Ordine Confermato!</h2>
     <p>Grazie per il tuo acquisto! Ti contatteremo a breve per il pagamento e la spedizione.</p>
-    <!-- Bottone Mostra Link Pagamento PayPal -->
-    <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal" style="background: #0070ba;">
-      <i class="fab fa-paypal"></i> Mostra link PayPal
-    </button>
-    <!-- Bottone Chiudi -->
-    <button onclick="chiudiPopupConferma()" class="btn-chiudi-popup">
-      <i class="fas fa-times-circle"></i> Chiudi
-    </button>
+    <button onclick="chiudiPopupConferma()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;"><i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
   </div>
     <div class="products">  
@@ -1245,21 +1238,9 @@ function copiaContatto(idElemento) {
 function bloccaScroll() {
   document.body.classList.add("noscroll");
 }
+
 function sbloccaScroll() {
   document.body.classList.remove("noscroll");
-}
-function mostraLinkPagamento() {
-  const totaleTesto = document.getElementById("riepilogo-totale")?.textContent || "";
-  const totale = parseFloat(totaleTesto.replace(/[^\d.]/g, "")); // estrai solo numero
-  if (isNaN(totale) || totale <= 0) {
-    alert("Importo non valido per il pagamento.");
-    return;
-  }
-  const usernamePayPal = "AntimoN"; // <-- cambia con il tuo PayPal.me
-  const link = `https://paypal.me/${usernamePayPal}/${totale.toFixed(2)}`; 
-  if (confirm(`Aprire il link di pagamento?\n${link}`)) {	
-    window.open(link, "_blank");
-  }
 }
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 

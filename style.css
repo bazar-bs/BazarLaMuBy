@@ -921,31 +921,4 @@
 .btn-scroll-top:hover {
   background-color: #843d84; /* viola più chiaro in hover */
 }
-.btn-paypal {
-  background: #0070ba; /* Blu PayPal */
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  display: block;
-  margin: 10px auto;
-  font-size: 1.1rem;
-}
-.btn-paypal:hover {
-  background: #005c9d;
-}
-.btn-chiudi-popup {
-  background: #6e3b6e;
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  display: block;
-  margin: auto;
-}
-.btn-chiudi-popup:hover {
-  background: #843d84;
-}
 </style>
