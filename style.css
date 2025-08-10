@@ -1,5 +1,9 @@
 	.animated-subtitle {
-	  font-family: sans-serif;
+		  font-family: sans-serif;
+		  font-size: 1.2rem;
+		  opacity: 0;
+		  transform: translateY(20px);
+		  animation: fadeUp 1.2s ease-out forwards;
 	} 
 	body {
 		background-size: cover;
@@ -47,12 +51,12 @@
     	border: none;
     	cursor: pointer;
 	}
-	.bottoni-carrello {
+.bottoni-carrello {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin: 1rem auto;
-  max-width: 500px;
+  max-width: 500px;  
 }
 .bottoni-carrello button {
   flex: 1;
@@ -202,7 +206,7 @@
     }    
     .contact-button {
       display: block;
-      margin:  2rem auto 0;
+      margin:  1.5rem auto 0;
       padding: 0.5rem 1.5rem;
       background-color: #6e3b6e;
       color: white;
@@ -388,12 +392,6 @@
         opacity: 0.8;
       }
     }    
-	.animated-subtitle {
-		  font-size: 1.2rem;
-		  opacity: 0;
-		  transform: translateY(20px);
-		  animation: fadeUp 1.2s ease-out forwards;
-	}
 	@keyframes fadeUp {
 		  to {
 		    opacity: 1;
@@ -506,7 +504,7 @@
 }
 /* Icona animata */
 .icona-animata-carrello {
-  position: flex;
+  position: absolute;
   top: 5.8rem;
   left: 2.8rem;
   font-size: 2rem;
@@ -651,8 +649,8 @@
 .search-container {
   display: flex;
   flex-direction: column;
-  align-items: left; 
-  gap: -1rem; /* Spazio tra input e h2 */
+  align-items: flex-start; 
+  gap: 0rem; /* Spazio tra input e h2 */
   margin-top: -1rem; /* Distanza dalla parte alta della pagina */
 }
 #search {
@@ -920,3 +918,197 @@
 .btn-scroll-top:hover {
   background-color: #843d84; /* viola più chiaro in hover */
 }
+.btn-paypal {
+  background: #0070ba !important; /* Blu PayPal */
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto;
+  font-size: 1.1rem;
+}
+.btn-paypal:hover {
+  background: #005c9d;
+}
+.btn-chiudi-popup {
+  background: #6e3b6e;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+.btn-chiudi-popup:hover {
+  background: #843d84;
+}
+.btn-continua {
+  background: #28a745 !important;
+  font-size: 1rem;
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: -5px auto 0;
+}
+.chiudi-modulo-spedizione {
+  background: #6e3b6e;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto 0;
+}
+.invia-whatsapp-container {
+  text-align: center;
+  margin-top: 15px;
+}
+.btn-invia-whatsapp {
+  background: #25d366 !important;
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto 0;
+  font-size: 1.1rem;
+}
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+.btn-indietro {
+  color: white;
+  padding: 0.8rem 1.4rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  min-width: 120px; /* 👈 Allungamento */
+  background: #f0ad4e !important;
+}
+.btn-annulla {
+  color: white;
+  padding: 0.8rem 1.4rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.05rem;
+  min-width: 120px; /* 👈 Allungamento */
+  background: #d9534f!important;
+}
+.btn-privacy {
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  background: #6e3b6e;
+  margin-top: 0.2rem;
+  /* Se vuoi sovrascrivere margine negativo */
+  /* margin-top: -2px; */
+  min-width: 190px;
+}
+.btn-pagamento {
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  background: #6e3b6e;
+  margin-top: 0.5rem;
+  min-width: 180px;
+}
+/* Lightbox (full-screen) */
+.img-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 20000;
+  align-items: center;
+  justify-content: center;
+  touch-action: none; /* cattura gesture quando aperto */
+}
+.img-lightbox.active { display: flex; }
+
+/* slider/slide */
+.lb-slider {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  transition: transform 200ms ease;
+  will-change: transform;
+}
+.lb-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lb-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 80ms linear;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* close / indicator */
+.lb-close {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 20010;
+  background: rgba(0,0,0,0.3);
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.lb-indicator {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-weight: 600;
+  z-index: 20010;
+  background: rgba(0,0,0,0.35);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+}
+
+/* evita che il contenuto sottostante scrolli quando lightbox è aperto */
+body.noscroll { overflow: hidden; height: 100vh; }
+
+/* piccola ottimizzazione per fluidità */
+.img-lightbox *, .img-lightbox { -webkit-tap-highlight-color: transparent; }

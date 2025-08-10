@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
-	<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
+<canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 <audio id="suono-aggiunta" src="add-to-cart-soft-pop.mp3" preload="auto"></audio>
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
@@ -20,8 +20,8 @@
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
   <button id="close-sidebar" class="close-btn" title="Chiudi">
-  <i class="fas fa-times" ></i>
- </button>
+	<i class="fas fa-times" ></i>
+  </button>
   <nav class="sidebar-menu">    
   </nav>
   <!-- ✅ Qui va la lista dei preferiti -->
@@ -34,16 +34,16 @@
       </span>
     </h2>
 	<h3>I tuoi preferiti ❤️</h3>
-     <ul id="lista-preferiti"></ul>
+		<ul id="lista-preferiti"></ul>
 	<h3 class="bottone-ordini" onclick="toggleOrdini()" aria-label="Visualizza ordini salvati" title="Visualizza ordini salvati">
-    I tuoi ordini 📦 <span class="clicca-qui">(clicca qui)</span> <span id="freccia" class="freccia">⬇️</span>
+		I tuoi ordini 📦 <span class="clicca-qui">(clicca qui)</span> <span id="freccia" class="freccia">⬇️</span>
     </h3>
     <ul id="lista-ordini" style="display: none;"></ul>	
   </div>
   <!-- ✅ Footer versione, fissato in fondo -->
   <div class="sidebar-footer">
 	<h4 style="text-align: center; opacity: 0.6;">
-		<i class="fas fa-tag"></i> Ver. 1.05
+		<i class="fas fa-tag"></i> Ver. 1.06
 	</h4>
   </div>
 </div>
@@ -51,7 +51,7 @@
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
 	<div id="popup-annullato" class="modal">
 		    <h2>❌ Ordine Annullato</h2>
-		    <p>Hai annullato il tuo ordine! Stai per tornare al carrello. 
+		    <p>😅Hai annullato il tuo ordine! Stai per tornare al carrello. 
 		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
 		    <i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
@@ -146,20 +146,26 @@
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
 <!-- Bottone Continua -->
-<button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" style="background: #28a745; font-size: 1rem; color: white; padding: 1rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 10px auto 0;">
+<button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" class="btn-continua"> 
   <i class="fas fa-arrow-right"></i> Continua
 </button>
 	</form>
-    <button onclick="chiudiModuloSpedizione()" aria-label="Chiudi" title="Chiudi" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block;  margin: 10px auto 0;"><i class="fas fa-times-circle"></i> Chiudi</button>
+    <button onclick="chiudiModuloSpedizione()" aria-label="Chiudi" title="Chiudi" class="chiudi-modulo-spedizione">
+		<i class="fas fa-times-circle"></i> Chiudi
+    </button>
 </div>
 <!-- Modale Riepilogo Ordine -->
 <div id="modal-riepilogo" class="modal" style="display: none;">
   <h2 style="margin-bottom: 2px;">📋Riepilogo dell'Ordine</h2>
-  <h4 style="margin-top: 2px;">Verifica i dati, dopo l’invio riceverai le istruzioni per il pagamento</h4>
+  <h4 style="margin-top: 2px;">
+	Verifica i dati, dopo l’invio riceverai Info per il pagamento 
+	<i class="fab fa-paypal" style="margin-right: 4px;"></i>
+	PayPal
+  </h4>
   <!-- Carrello -->
   <div id="riepilogo-carrello" style="margin-bottom: 15px;">
     <h3>🛒 Carrello</h3>
-    <ul id="riepilogo-lista-carrello" style="list-style: none; padding: 0;"></ul>
+    <ul id="riepilogo-lista-carrello" style="list-style: disc; padding: 0;"></ul>
     <p id="riepilogo-totale" style="font-weight: bold; font-size: 1.2rem;"></p>
   </div>
   <!-- Spedizione -->
@@ -171,17 +177,17 @@
     <p><strong>Email:</strong> <span id="riepilogo-email"></span></p>
   </div>
 <!-- Pulsante WhatsApp centrato in alto -->
-<div style="text-align: center; margin-top: 15px;">
-  <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" style="background: #25d366; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto; margin-top: 10px; font-size: 1.1rem;">
+<div class="invia-whatsapp-container">
+  <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" class="btn-invia-whatsapp">
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
   </button>
 </div>
 <!-- Pulsanti Indietro e Annulla affiancati sotto -->
-<div style="display: flex; justify-content: center; gap: 12px; margin-top: 15px; flex-wrap: wrap;">
-  <button onclick="tornaAllaSpedizione()" aria-label="Torna alla Spedizione" title="Torna alla Spedizione" style="background: #f0ad4e; color: white; padding: 0.8rem 1.4rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1.05rem;">
+<div class="btn-group">
+  <button onclick="tornaAllaSpedizione()" aria-label="Torna alla Spedizione" title="Torna alla Spedizione" class="btn btn-indietro">
     <i class="fas fa-arrow-left"></i> Indietro
   </button>
-  <button onclick="chiudiModuloRiepilogo()" aria-label="Annulla Ordine" title="Annulla Ordine" style="background: #d9534f; color: white; padding: 0.8rem 1.4rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1.05rem;">
+  <button onclick="chiudiModuloRiepilogo()" aria-label="Annulla Ordine" title="Annulla Ordine" class="btn btn-annulla">
     <i class="fas fa-times-circle"></i> Annulla
   </button>
 </div>
@@ -189,8 +195,15 @@
 <!-- Popup di conferma ordine -->
 <div id="popup-conferma" class="modal">
     <h2>✅ Ordine Confermato!</h2>
-    <p>Grazie per il tuo acquisto! Ti contatteremo a breve per il pagamento e la spedizione.</p>
-    <button onclick="chiudiPopupConferma()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: auto;"><i class="fas fa-times-circle"></i> Chiudi</button>
+    <p>😄Grazie per il tuo acquisto! Ti contatteremo a breve...</p>
+    <!-- Bottone Mostra Link Pagamento PayPal -->
+    <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal">
+      <i class="fab fa-paypal"></i> Paga ora con PayPal
+    </button>
+    <!-- Bottone Chiudi -->
+    <button onclick="chiudiPopupConferma()" class="btn-chiudi-popup">
+      <i class="fas fa-times-circle"></i> Chiudi
+    </button>
 </div>
   </div>
     <div class="products">  
@@ -219,7 +232,8 @@
 </button>
     </div>
 <button class="contact-button" onclick="toggleModal()" aria-label="Contattaci" title="Contattaci">
-    <i class="fas fa-envelope"></i> Contattaci
+    <i class="fas fa-envelope"></i> Contattaci<br>
+	<i class="fas fa-question-circle"></i> FAQ
 </button>
   </div>  
 <!--nuovo pulsante per installare app-->  
@@ -233,7 +247,7 @@
 </button>
   <h3>Chi siamo</h3>
   <!-- Inserimento QR Code sopra le informazioni di contatto -->
-  <div style="text-align: center; margin-top: 1rem;">
+  <div style="text-align: center; margin-top: -1rem; margin-bottom: -1rem">
       <img src="qr-lamuby.png" alt="QR Code LaMuBy" style="width: 120px; height: 120px;">
   </div>
   <p>Siamo un piccolo bazar online dedicato alla vendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
@@ -249,8 +263,11 @@
   </b>
 </p>
 <!-- Pulsante per aprire il modale privacy -->
-<button onclick="togglePolicyModal()" style="margin-top: 1.5rem; background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
+<button onclick="togglePolicyModal()" class="btn btn-privacy" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
+</button>
+<button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione">
+  <i class="fas fa-info-circle"></i> Pagamento & Spedizione
 </button>
 </div>
 <!-- Modale Privacy Policy -->
@@ -270,6 +287,18 @@
 </div>
 <!-- Overlay per la policy -->
 <div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
+<!-- Modal Info Pagamento e Spedizione -->
+<div class="modal" id="modal-pagamento-spedizione">
+  <h3>Info Pagamento e Spedizione</h3>
+  <p><strong>Pagamento PayPal.me:</strong> Puoi effettuare il pagamento in modo sicuro tramite il nostro link personalizzato PayPal.me. Ti forniremo il link dopo la conferma dell’ordine.</p>
+  <p>⚠️ "Se non hai il link per il pagamento tramite PayPal.me, puoi richiederlo direttamente in chat su WhatsApp."</p>
+  <hr>
+  <p><strong>Spedizione:</strong> Gli ordini vengono elaborati entro 1-2 giorni lavorativi. Le spedizioni sono gestite tramite corriere tracciabile e riceverai un codice di tracking via email.</p>
+  <button onclick="togglePagamentoSpedizioneModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
+    <i class="fas fa-times-circle"></i> Chiudi</button>
+</div>
+<!-- Overlay per info spedizione e pagamento -->
+<div id="modal-pagamento-spedizione-overlay" class="overlay" onclick="togglePagamentoSpedizioneModal()"></div>
 <!--tasto app -->
 <div id="app-modal" class="modal">
   <h3>Come installare l'app</h3>
@@ -291,6 +320,16 @@
 <button onclick="scrollToTop()" id="scroll-top-btn" class="btn-scroll-top" aria-label="Vai Su" title="Vai Su">
   <i class="fas fa-arrow-up"></i>
 </button>
+<!-- LIGHTBOX IMMAGINI (in fondo al body) -->
+<div id="img-lightbox" class="img-lightbox" aria-hidden="true" role="dialog" aria-label="Galleria immagini">
+  <button id="lb-close" class="lb-close" aria-label="Chiudi galleria">✕</button>
+  <div id="lb-slider" class="lb-slider" aria-live="polite">
+    <div class="lb-slide"><img id="lb-img-0" src="" alt=""></div>
+    <div class="lb-slide"><img id="lb-img-1" src="" alt=""></div>
+  </div>
+  <div id="lb-indicator" class="lb-indicator" aria-hidden="true">1 / 2</div>
+</div>
+
 <footer style="font-weight: bold; background-color: #f4f0ff; font-size: 16px;">
   &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
   <div class="piva">P.IVA 04692000989</div>		
@@ -501,22 +540,22 @@ function inviaOrdineWhatsApp() {
     let numeroWhatsApp = "3516100235"; // Sostituisci con il numero destinatario
     let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
     let toast = document.getElementById("toast-confirm");
-	toast.innerHTML = `<i class="fab fa-whatsapp"></i> Apro WhatsApp...`;
-	toast.style.animationDuration = `1500ms`;
+	toast.innerHTML = `<i class="fab fa-whatsapp"></i> Apro WhatsApp:ricordati di premere“Invia”!😉`;
+	toast.style.animationDuration = `1800ms`;
 	toast.style.display = "block";
 	toast.innerHTML += '<div id="toast-progress-bar"></div>';
 	const barra = document.querySelector("#toast-progress-bar");
-    barra.style.animationDuration = `1500ms`;
+    barra.style.animationDuration = `1800ms`;
 	// ✅ Attendi un attimo prima di aprire WhatsApp
 	setTimeout(() => {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
-	}, 1500);
-	// Nasconde il toast dopo 1.5 secondi
+	}, 1800);
+	// Nasconde il toast dopo 1.8 secondi
 	setTimeout(() => {
 		toast.style.display = "none";
-	}, 1500);    
+	}, 1800);    
 	// Salva l'ordine in localStorage
 let ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
 let nuovoOrdine = {
@@ -713,10 +752,8 @@ function scrollToTop() {
 function togglePolicyModal() {
   const modal = document.getElementById("modal-policy");
   const overlay = document.getElementById("policy-overlay");
-
   modal.classList.toggle("active");
   overlay.classList.toggle("active");
-
   if (modal.classList.contains("active")) {
 	document.body.classList.add("noscroll");  // Blocca lo scroll della pagina
   } else {
@@ -724,7 +761,6 @@ function togglePolicyModal() {
   document.getElementById("overlay").classList.remove("active");
     document.body.classList.remove("noscroll");  // Sblocca lo scroll
   }
-
   apriModaleAnimato("modal-policy", "fade");
 }
 fetch('articoli.json')
@@ -814,7 +850,7 @@ function aggiornaListaPreferiti(articoli) {
     const telefono = atob(telefonoBase64);
     const emailEl = document.getElementById("emailpersonale");
     const telefonoEl = document.getElementById("telefonopersonale");
-    const telCarrello = document.getElementById("telefonocarrello"); /* non piu usato era salvare numero in rubrica */
+    const telCarrello = document.getElementById("telefonocarrello"); /* non piu usato era per salvare numero in rubrica */
     if (emailEl && telefonoEl) {
       emailEl.textContent = email;
       telefonoEl.textContent = telefono;
@@ -1197,7 +1233,6 @@ function tornaAllaSpedizione() {
 function inizializzaSpedizione() {
   const salvati = localStorage.getItem("datiSpedizione");
   const h4Spedizione = document.querySelector('#modal-spedizione h4');
-
   if (salvati) {
     try {
       const dati = JSON.parse(salvati);
@@ -1238,10 +1273,209 @@ function copiaContatto(idElemento) {
 function bloccaScroll() {
   document.body.classList.add("noscroll");
 }
-
 function sbloccaScroll() {
   document.body.classList.remove("noscroll");
 }
+function mostraLinkPagamento() {
+  const totaleTesto = document.getElementById("riepilogo-totale")?.textContent || "";
+  const totale = parseFloat(totaleTesto.replace(/[^\d.]/g, "")); // estrai solo numero
+  if (isNaN(totale) || totale <= 0) {
+    alert("Importo non valido per il pagamento.");
+    return;
+  }
+  const usernamePayPal = "AntimoN"; // <-- cambia con il tuo PayPal.me
+  const link = `https://paypal.me/${usernamePayPal}/${totale.toFixed(2)}`;   
+    // Copia negli appunti
+  navigator.clipboard.writeText(link)
+    .then(() => {
+      console.log("Link copiato negli appunti:", link);
+    })
+    .catch(err => {
+      console.warn("Impossibile copiare il link:", err);
+    });
+  // Conferma e apertura
+  if (confirm(`🅿️ Paga ora con PayPal\n${link}`)) {
+    window.open(link, "_blank");
+  }
+}
+function togglePagamentoSpedizioneModal() {
+  const modal = document.getElementById("modal-pagamento-spedizione");
+  const overlay = document.getElementById("modal-pagamento-spedizione-overlay");  
+  modal.classList.toggle("active");
+  overlay.classList.toggle("active");
+  if (modal.classList.contains("active")) {
+    bloccaScroll()
+  } else {
+    sbloccaScroll()
+  }
+  apriModaleAnimato("modal-pagamento-spedizione", "fade");
+}
+// LIGHTBOX VANILLA (2 immagini) - pinch, pan, swipe, double-tap
+(function(){
+  const thumb1 = document.getElementById('foto1-articolo');
+  const thumb2 = document.getElementById('foto2-articolo');
+  const lb = document.getElementById('img-lightbox');
+  const lbSlider = document.getElementById('lb-slider');
+  const slidesImg = [ document.getElementById('lb-img-0'), document.getElementById('lb-img-1') ];
+  const indicator = document.getElementById('lb-indicator');
+  const closeBtn = document.getElementById('lb-close');
+
+  if (!lb || !slidesImg[0] || !slidesImg[1]) return; // niente da fare
+
+  let idx = 0;
+  let scale = 1, lastScale = 1;
+  let translate = {x:0, y:0}, lastTranslate = {x:0,y:0};
+  let isPanning = false, panStart = null;
+  let pinchStartDist = null;
+  let swipeStartX = null;
+  let lastTap = 0;
+
+  function setSlidesSrc() {
+    // prendi le src correnti (utile quando mostraDettaglio aggiorna le immagini)
+    if (thumb1 && thumb1.src) slidesImg[0].src = thumb1.src;
+    if (thumb2 && thumb2.src) slidesImg[1].src = thumb2.src;
+    slidesImg.forEach((img,i)=>{ img.alt = `${document.getElementById('titolo-articolo')?.textContent || 'Immagine'} — foto ${i+1}`; });
+  }
+
+  function openLightbox(i){
+    idx = i || 0;
+    setSlidesSrc();
+    resetTransforms();
+    lb.classList.add('active');
+    lb.setAttribute('aria-hidden','false');
+    document.body.classList.add('noscroll');
+    updateIndicator();
+    // posiziona lo slider
+    lbSlider.style.transform = `translateX(${ -idx * 100 }%)`;
+  }
+
+  function closeLightbox(){
+    lb.classList.remove('active');
+    lb.setAttribute('aria-hidden','true');
+    document.body.classList.remove('noscroll');
+    resetTransforms();
+  }
+
+  function updateIndicator(){
+    indicator.textContent = `${idx+1} / ${slidesImg.length}`;
+  }
+
+  function resetTransforms(){
+    scale = 1; lastScale = 1;
+    translate = {x:0,y:0}; lastTranslate = {x:0,y:0};
+    slidesImg.forEach(img => img.style.transform = `translate3d(0px,0px,0px) scale(1)`);
+  }
+
+  function applyTransform(){
+    const img = slidesImg[idx];
+    if(!img) return;
+    const rect = img.getBoundingClientRect();
+    const maxX = Math.max(0, (scale * rect.width - rect.width) / 2);
+    const maxY = Math.max(0, (scale * rect.height - rect.height) / 2);
+    // clamp
+    translate.x = Math.max(-maxX, Math.min(maxX, translate.x));
+    translate.y = Math.max(-maxY, Math.min(maxY, translate.y));
+    img.style.transform = `translate3d(${translate.x}px, ${translate.y}px, 0px) scale(${scale})`;
+  }
+
+  // double-tap toggle
+  function handleDoubleTap() {
+    const now = Date.now();
+    if (now - lastTap < 300) {
+      if (scale > 1.05) { resetTransforms(); } 
+      else { scale = 2.5; lastScale = scale; applyTransform(); }
+    }
+    lastTap = now;
+  }
+
+  // ========== TOUCH & MOUSE HANDLERS ==========
+  lb.addEventListener('touchstart', function(e){
+    if (!lb.classList.contains('active')) return;
+    if (e.touches.length === 2) {
+      pinchStartDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      lastScale = scale;
+    } else if (e.touches.length === 1) {
+      const t = e.touches[0];
+      if (scale > 1.05) {
+        isPanning = true;
+        panStart = { x: t.clientX, y: t.clientY };
+        lastTranslate = { ...translate };
+      } else {
+        // possibile swipe
+        swipeStartX = t.clientX;
+      }
+    }
+  }, {passive:true});
+
+  lb.addEventListener('touchmove', function(e){
+    if (!lb.classList.contains('active')) return;
+    if (e.touches.length === 2 && pinchStartDist) {
+      const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      const ratio = d / pinchStartDist;
+      scale = Math.min(3, Math.max(1, lastScale * ratio));
+      applyTransform();
+      e.preventDefault();
+    } else if (e.touches.length === 1 && isPanning && panStart) {
+      const t = e.touches[0];
+      translate.x = lastTranslate.x + (t.clientX - panStart.x);
+      translate.y = lastTranslate.y + (t.clientY - panStart.y);
+      applyTransform();
+      e.preventDefault();
+    }
+  }, {passive:false});
+
+  lb.addEventListener('touchend', function(e){
+    // reset pinch/pan states
+    if (e.touches.length === 0) {
+      pinchStartDist = null;
+      isPanning = false;
+      panStart = null;
+      // handle swipe (solo se non era zoomed)
+      if (swipeStartX !== null && scale <= 1.05) {
+        const changed = e.changedTouches && e.changedTouches[0];
+        if (changed) {
+          const dx = changed.clientX - swipeStartX;
+          if (dx > 60 && idx > 0) { idx--; lbSlider.style.transform = `translateX(${ -idx * 100 }%)`; updateIndicator(); resetTransforms(); }
+          if (dx < -60 && idx < slidesImg.length - 1) { idx++; lbSlider.style.transform = `translateX(${ -idx * 100 }%)`; updateIndicator(); resetTransforms(); }
+        }
+      }
+      swipeStartX = null;
+    }
+    handleDoubleTap();
+  }, {passive:true});
+
+  // mouse pan support when zoomed
+  let isMouseDown = false, mouseStart = null;
+  lb.addEventListener('mousedown', (e) => {
+    if (scale > 1.05) { isMouseDown = true; mouseStart = {x:e.clientX, y:e.clientY}; lastTranslate = {...translate}; }
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!isMouseDown) return;
+    translate.x = lastTranslate.x + (e.clientX - mouseStart.x);
+    translate.y = lastTranslate.y + (e.clientY - mouseStart.y);
+    applyTransform();
+  });
+  window.addEventListener('mouseup', ()=>{ isMouseDown = false; mouseStart = null; });
+
+  // open via thumbnails (usiamo le img già presenti)
+  if (thumb1) thumb1.addEventListener('click', (e)=>{ e.stopPropagation(); openLightbox(0); });
+  if (thumb2) thumb2.addEventListener('click', (e)=>{ e.stopPropagation(); openLightbox(1); });
+
+  // chiusura e click sullo sfondo
+  closeBtn.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLightbox(); });
+
+  // keyboard navigation
+  window.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && idx > 0) { idx--; lbSlider.style.transform = `translateX(${ -idx * 100 }%)`; updateIndicator(); resetTransforms(); }
+    if (e.key === 'ArrowRight' && idx < slidesImg.length - 1) { idx++; lbSlider.style.transform = `translateX(${ -idx * 100 }%)`; updateIndicator(); resetTransforms(); }
+  });
+
+  // se mostraDettaglio aggiorna le immagini, quando riapri il lightbox le prendiamo al volo (setSlidesSrc fa questo)
+})();
+
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
