@@ -1138,4 +1138,4 @@ body.noscroll { overflow: hidden; height: 100vh; }
 }
 .detail-image:hover .img-zoom-icon,
 .detail-image:focus-within .img-zoom-icon { opacity: 1; transform: translateY(-2px); }
-@media (max-width:420px) { .img-zoom-icon { font-size:0.95rem; top:6px; right:6px; opacity:0.55 } }
+@media (max-width:420px) { .img-zoom-icon { font-size:1.6rem; top:6px; right:6px; opacity:0.55 } }
