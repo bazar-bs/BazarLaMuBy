@@ -8,12 +8,12 @@
   "orientation": "portrait-primary landscape-primary",
   "icons": [
     {
-      "src": "lamuby_logo_bigtext(192).png",
+      "src": "lamuby_logo_round(192).png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "lamuby_logo_bigtext(512).png",
+      "src": "lamuby_logo_round(512).png",
       "sizes": "512x512",
       "type": "image/png"
     }
