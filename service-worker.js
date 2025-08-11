@@ -3,6 +3,9 @@ const ASSETS = [
   'index.html',
   'offline.html',
   'style.css',
+  'lamuby_logo_bigtext_trasp_bianco.png',
+  'lamuby_logo_bigtext.avif',
+  'qr-lamuby.png',
   // aggiungi eventuali immagini o font qui
 ];
 
