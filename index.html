@@ -148,6 +148,24 @@
     <input type="text" id="indirizzo" placeholder="Indirizzo (es. Via Rossi 10 Milano MI 20100)" required>
     <input type="tel" id="telefono" placeholder="Telefono" required>
     <input type="email" id="email" placeholder="Email" required>
+<!-- Salva i dati della spedizione nel browser -->
+<label 
+  style="display: inline-flex; align-items: center; font-size: 14px;" 
+  title="Seleziona per salvare i dati della spedizione nel browser">  
+  <i class="fas fa-save" 
+     style="margin-right: 2px; font-size: 14px;" 
+     aria-label="Icona Salva dati" 
+     title="Salva i dati" 
+     aria-hidden="true"></i>
+  <input type="checkbox" 
+         style="margin: 0 2px; width: 14px; height: 14px;" 
+         id="consenso-salvataggio" 
+         aria-label="Checkbox per salvare i dati della spedizione" />
+  <span style="margin: 0; padding: 0;" 
+        aria-label="Testo: Salva i dati della spedizione">
+    Salva i dati
+  </span>
+</label>
 <!-- Bottone Continua -->
 <button type="button" onclick="apriRiepilogo()" aria-label="Continua" title="Continua" class="btn-continua"> 
   <i class="fas fa-arrow-right"></i> Continua
@@ -286,7 +304,7 @@
 <div id="modal-policy" class="modal">
   <h3>Privacy & Cookie Policy</h3>
   <p><strong>Raccolta dati:</strong><br>
-    Non raccogliamo dati personali in modo automatico. Gli ordini inviati tramite WhatsApp sono gestiti manualmente e non vengono archiviati online. Tutti i dati vengono salvati localmente sul dispositivo dell’utente.
+    Non raccogliamo dati personali in modo automatico. Gli ordini inviati tramite WhatsApp sono gestiti manualmente e non vengono archiviati online. I dati vengono salvati localmente sul dispositivo, previo consenso per il salvataggio delle informazioni di spedizione.
   </p>
   <p><strong>Ordini via WhatsApp:</strong><br>
     Se invii un ordine tramite WhatsApp, i tuoi dati saranno visibili solo a noi (la titolare del bAzAr LaMuBy) per finalità legate alla spedizione. Non saranno condivisi o archiviati digitalmente.
@@ -1211,9 +1229,16 @@ function apriRiepilogo() {
   document.getElementById("riepilogo-indirizzo").textContent = indirizzo;
   document.getElementById("riepilogo-telefono").textContent = telefono;
   document.getElementById("riepilogo-email").textContent = email;  
-   // Salvataggio dati spedizione
+  // Aggiungi questa riga in alto per recuperare lo stato del checkbox
+const salvaDati = document.getElementById("consenso-salvataggio")?.checked;
+
+// Salvataggio dati spedizione SOLO se il consenso è attivo
+if (salvaDati) {
   const dati = { nome, indirizzo, telefono, email };
   localStorage.setItem("datiSpedizione", JSON.stringify(dati));  
+} else {
+  localStorage.removeItem("datiSpedizione");
+}  
   const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
   const lista = document.getElementById("riepilogo-lista-carrello");
   lista.innerHTML = "";
