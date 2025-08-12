@@ -922,6 +922,9 @@ if (localStorage.getItem("nomeModificato") === "true") {
 			localStorage.removeItem("ordini");
 			localStorage.removeItem("datiSpedizione");
 			// opzionale: svuota i campi
+			 // Recupero dell'elemento h4 prima di modificarlo
+			const h4Spedizione = document.querySelector('#modal-spedizione h4');
+			if (h4Spedizione) h4Spedizione.textContent = "";
 			document.getElementById("nome").value = "";
 			document.getElementById("indirizzo").value = "";
 			document.getElementById("telefono").value = "";
