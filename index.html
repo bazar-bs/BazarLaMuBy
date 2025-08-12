@@ -1188,7 +1188,7 @@ function apriRiepilogo() {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const telefonoRegex = /^[0-9+\s]{9,15}$/;	
 	if (!nome || !indirizzo || !telefono || !email) {
-        alert("⚠️Per continuare, è necessario inserire tutte le informazioni di spedizione.");
+        alert("⚠️Per continuare, è necessario inserire tutte le informazioni.");
         return;
     }
 	if (!nomeRegex.test(nome)) {
