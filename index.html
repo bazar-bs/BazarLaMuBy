@@ -15,6 +15,11 @@
 <body>
 <canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 <audio id="suono-aggiunta" src="add-to-cart-soft-pop.mp3" preload="auto"></audio>
+	<!-- Loader -->
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Caricamento articoli...</p>
+</div>
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
@@ -1498,6 +1503,13 @@ function togglePagamentoSpedizioneModal() {
   });
   // se mostraDettaglio aggiorna le immagini, quando riapri il lightbox le prendiamo al volo (setSlidesSrc fa questo)
 })();
+	// Mostra loader all'avvio
+document.getElementById("loader").style.display = "flex";
+// Simulazione caricamento prodotti
+window.addEventListener("load", function () {
+  // Nasconde loader quando la pagina e le immagini sono pronte
+  document.getElementById("loader").style.display = "none";
+});
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
