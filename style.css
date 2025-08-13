@@ -119,8 +119,9 @@
 }
 	#modal-spedizione input {
 		width: 100%;
-		padding: 0.6rem;
+		padding: 0.5rem;
 		margin: 0.5rem 0;
+		margin-left: -0.7rem;
 		border: 2px solid #6e3b6e;
 		border-radius: 6px;
 		background-color: #fff8fc;
@@ -128,6 +129,12 @@
 		font-weight: bold;
 		color: #333;
 		transition: all 0.3s ease;
+		/* 👇 Fix iOS */
+		font-size: 16px;           /* blocca zoom Safari */
+	}
+/* Stile placeholder per tutti gli input */
+	input::placeholder {
+		font-size: 14px;        /* dimensione del testo */
 	}
 	#modal-spedizione input:focus {
 		outline: none;
