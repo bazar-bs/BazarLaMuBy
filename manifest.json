@@ -1,11 +1,14 @@
 {
   "name": "il bAzAr LaMuBy",
   "short_name": "LaMuBy",
+  "description": "Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#fffde9",
   "theme_color": "#6e3b6e",
-  "orientation": "portrait-primary landscape-primary",
+  "orientation": "any",
+  "lang": "it-IT",
   "icons": [
     {
       "src": "lamuby_logo_bigtext(192).png",
