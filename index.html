@@ -15,7 +15,7 @@
 <body>
 <canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 <audio id="suono-aggiunta" src="add-to-cart-soft-pop.mp3" preload="auto"></audio>
-<!-- Loader -->
+	<!-- Loader -->
 <div id="loader">
   <div class="spinner"></div>
   <p>Caricamento articoli...</p>
@@ -49,7 +49,7 @@
   <!-- ✅ Footer versione, fissato in fondo -->
   <div class="sidebar-footer">
 	<h4 style="text-align: center; opacity: 0.6;">
-		<i class="fas fa-tag"></i> Ver. 1.07
+		<i class="fas fa-tag"></i> Ver. 1.06
 	</h4>
   </div>
 </div>
@@ -185,8 +185,8 @@
   <h2 style="margin-bottom: 2px;">📋Riepilogo dell'Ordine</h2>
   <h4 style="margin-top: 2px;">
 	Verifica i dati, dopo l’invio riceverai Info per il pagamento 
-	<i class="fab fa-paypal" style="margin-right: 4px;"></i>
-	PayPal
+	<!-- <i class="fab fa-paypal" style="margin-right: 4px;"></i> -->
+	<!-- PayPal -->
   </h4>
   <!-- Carrello -->
   <div id="riepilogo-carrello" style="margin-bottom: 15px;">
@@ -223,9 +223,9 @@
     <h2>✅ Ordine Confermato!</h2>
     <p>😄Grazie per il tuo acquisto! Ti contatteremo a breve...</p>
     <!-- Bottone Mostra Link Pagamento PayPal -->
-    <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal">
-      <i class="fab fa-paypal"></i> Paga ora con PayPal
-    </button>
+    <!-- <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal"> -->
+      <!-- <i class="fab fa-paypal"></i> Paga ora con PayPal -->
+    <!-- </button> -->
     <!-- Bottone Chiudi -->
     <button onclick="chiudiPopupConferma()" class="btn-chiudi-popup">
       <i class="fas fa-times-circle"></i> Chiudi
@@ -301,18 +301,13 @@
 <button onclick="togglePolicyModal()" class="btn btn-privacy" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
 </button>
-<button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione">
-  <i class="fas fa-info-circle"></i> Pagamento & Spedizione
-</button>
+<!-- <button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione"> -->
+  <!-- <i class="fas fa-info-circle"></i> Pagamento & Spedizione -->
+<!-- </button> -->
 </div>
 <!-- Modale Privacy Policy -->
 <div id="modal-policy" class="modal">
   <h3>Privacy & Cookie Policy</h3>
-  <p><strong>Titolare del trattamento:</strong><br>
-    LAMUBY di Piovanelli Laura<br>
-    P.IVA 04692000989<br>
-    <span id="emailpersonale-privacy"></span>
-  </p>
   <p><strong>Raccolta dati:</strong><br>
     Non raccogliamo dati personali in modo automatico.Gli ordini inviati tramite WhatsApp sono gestiti manualmente e non vengono archiviati online.I dati(preferiti,ordini)vengono salvati localmente sul dispositivo,previo consenso per il salvataggio delle informazioni di spedizione.
   </p>
@@ -320,11 +315,10 @@
     Se invii un ordine tramite WhatsApp,i tuoi dati saranno visibili solo al titolare del bAzAr LaMuBy per finalità legate alla spedizione.Non saranno condivisi o archiviati digitalmente.
   </p>
   <p><strong>Cookie:</strong><br>
-    Il sito può utilizzare cookie tecnici.Non vengono usati cookie di profilazione o pubblicità.
+    Il sito può utilizzare cookie tecnici per migliorare la navigazione. Non vengono usati cookie di profilazione o pubblicità.
   </p>
   <button onclick="togglePolicyModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
-    <i class="fas fa-times-circle"></i> Chiudi
-  </button>
+    <i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
 <!-- Overlay per la policy -->
 <div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
@@ -332,7 +326,7 @@
 <div class="modal" id="modal-pagamento-spedizione">
   <h3>Info Pagamento e Spedizione</h3>
   <p><strong>Pagamento PayPal.me:</strong> Puoi effettuare il pagamento in modo sicuro tramite il nostro link personalizzato PayPal.me. Ti forniremo il link dopo la conferma dell’ordine.</p>
-  <p>⚠️ Se non hai il link PayPal.me per il pagamento, puoi richiederlo direttamente via chat su WhatsApp.</p>
+  <p>⚠️ ""Se non hai il link PayPal.me per il pagamento, puoi richiederlo direttamente via chat su WhatsApp.""</p>
   <hr>
   <p><strong>Spedizione:</strong> Gli ordini vengono elaborati entro 1-2 giorni lavorativi. Le spedizioni sono gestite tramite corriere tracciabile e riceverai un codice di tracking via email.</p>
   <button onclick="togglePagamentoSpedizioneModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
@@ -889,7 +883,6 @@ function aggiornaListaPreferiti(articoli) {
     const email = atob(emailBase64);
     const telefono = atob(telefonoBase64);
     const emailEl = document.getElementById("emailpersonale");
-	document.getElementById("emailpersonale-privacy").textContent = email;
     const telefonoEl = document.getElementById("telefonopersonale");
     const telCarrello = document.getElementById("telefonocarrello"); /* non piu usato era per salvare numero in rubrica */
     if (emailEl && telefonoEl) {
@@ -1510,7 +1503,7 @@ function togglePagamentoSpedizioneModal() {
   });
   // se mostraDettaglio aggiorna le immagini, quando riapri il lightbox le prendiamo al volo (setSlidesSrc fa questo)
 })();
-// Mostra loader all'avvio
+	// Mostra loader all'avvio
 document.getElementById("loader").style.display = "flex";
 // Simulazione caricamento prodotti
 window.addEventListener("load", function () {
