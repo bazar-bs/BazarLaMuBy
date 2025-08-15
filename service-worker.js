@@ -25,16 +25,17 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  // Gestione della navigazione (es. index.html dinamica)
-  if (event.request.mode === 'navigate') {
+  if (!navigator.onLine) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match('offline.html'))
+      caches.match(event.request).then(cachedResponse => {
+        return cachedResponse || caches.match('offline.html');
+      })
     );
-    return;
+  } else {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-store' }).catch(() =>
+        caches.match('offline.html')
+      )
+    );
   }
-
-  // Gestione asset statici (immagini, CSS, ecc.)
-  event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request))
-  );
 });
