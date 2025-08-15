@@ -1,6 +1,5 @@
 const CACHE_NAME = 'offline-cache-v2';
 const ASSETS = [
-  'index.html',
   'offline.html',
   'style.css',
   'lamuby_logo_bigtext_trasp_bianco.png',
@@ -26,17 +25,16 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-  if (!navigator.onLine) {
+  // Gestione della navigazione (es. index.html dinamica)
+  if (event.request.mode === 'navigate') {
     event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        return cachedResponse || caches.match('offline.html');
-      })
+      fetch(event.request).catch(() => caches.match('offline.html'))
     );
-  } else {
-    event.respondWith(
-      fetch(event.request, { cache: 'no-store' }).catch(() =>
-        caches.match('offline.html')
-      )
-    );
+    return;
   }
+
+  // Gestione asset statici (immagini, CSS, ecc.)
+  event.respondWith(
+    caches.match(event.request).then(cached => cached || fetch(event.request))
+  );
 });
