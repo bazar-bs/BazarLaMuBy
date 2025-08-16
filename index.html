@@ -1629,19 +1629,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("form-email").addEventListener("submit", function(e) {
   e.preventDefault(); // blocca invio classico
 
-  // ⛔ Blocca invio se il carrello è vuoto
-  let carrelloSalvato;
-  try {
-    carrelloSalvato = JSON.parse(localStorage.getItem("carrello") || "[]");
-  } catch (_) {
-    carrelloSalvato = [];
-  }
-  if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
-    alert("Il carrello è vuoto, impossibile inviare l'ordine!");
-    location.reload(); // Ricarica la pagina manualmente
-    return;
-  }
-
   const nomeUtente = localStorage.getItem("nomeUtente") || "";
   const testoOrdine = generaTestoOrdineEmail();
   document.getElementById('campo-ordine').value =
@@ -1664,6 +1651,7 @@ document.getElementById("form-email").addEventListener("submit", function(e) {
   })
   .then(response => {
     if (response.ok) {
+      // Redirect manuale dopo invio
       window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
     } else {
       toast.innerHTML = "❌ Errore nell'invio.";
