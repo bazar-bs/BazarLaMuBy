@@ -1662,12 +1662,23 @@ if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
   })
   .then(response => {
     if (response.ok) {
-      // Redirect manuale dopo invio
-	//	window.location.href = "http://127.0.0.1:5500/?emailok=true";
-	   window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
-    } else {
-      toast.innerHTML = "❌ Errore nell'invio.";
-    }
+  // apre il client email in nuova scheda/finestra
+  const to = "rebak31771@baxidy.com"; // il tuo indirizzo reale
+  const subject = "Nuovo ordine LaMuBy";
+  const body = document.getElementById('campo-ordine').value;
+
+  const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  // window.open(mailto, '_blank', 'noopener,noreferrer');
+
+  // imposta subito emailok in URL senza aggiungere history
+  window.history.replaceState({}, document.title, window.location.pathname + "?emailok=true");
+
+  // ricarica per far comparire il popup di conferma
+  location.reload();
+} else {
+  toast.innerHTML = "❌ Errore nell'invio.";
+}
+
   })
   .catch(() => {
     toast.innerHTML = "❌ Problema di connessione.";
