@@ -210,19 +210,16 @@
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
   </button>
 </div>
-<!-- ✅ Form invio via Email -->
+<!-- ✅ Form invio via Email con AJAX -->
 <div class="invia-email-container" style="margin-top:10px; text-align:center;">
-  <form id="form-email" action="https://formsubmit.co/rebak31771@baxidy.com" method="POST">
+  <form id="form-email">
     <!-- textarea nascosta ma presente nel DOM -->
     <textarea name="ordine" id="campo-ordine" readonly style="display:none;"></textarea>
     <input type="hidden" id="campo-nome-utente" name="nomeUtente">
-	<input type="hidden" name="_subject" value="Nuovo ordine LaMuBy">
+    <input type="hidden" name="_subject" value="Nuovo ordine LaMuBy">
     <input type="hidden" name="_template" value="table">
-    <!-- <input type="hidden" name="_next" value="http://127.0.0.1:5500/?emailok=true"> -->
-	<input type="hidden" name="_next" value="https://bazar-bs.github.io/BazarLaMuBy/redirect.html">
-	 <!-- 👇 Disattiva il CAPTCHA di FormSubmit -->
     <input type="hidden" name="_captcha" value="false">
-	<input type="hidden" name="_confirmation" value="false">
+    <input type="hidden" name="_confirmation" value="false">
     <button type="submit" aria-label="Conferma e Invio Ordine via Email" title="Conferma e Invio Ordine via Email" class="btn btn-invia-email">
       <i class="fas fa-envelope"></i> Invia Ordine via Email
     </button>
@@ -1627,8 +1624,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
-document.getElementById('form-email').addEventListener('submit', function() {
-// Mostra toast subito all'invio
+document.getElementById("form-email").addEventListener("submit", function(e) {
+  e.preventDefault(); // blocca invio classico
+
+  const nomeUtente = localStorage.getItem("nomeUtente") || "";
+  const testoOrdine = generaTestoOrdineEmail();
+  document.getElementById('campo-ordine').value =
+    nomeUtente
+      ? `Nuovo ordine da ${nomeUtente}\n\n${testoOrdine}`
+      : testoOrdine;
+  document.getElementById('campo-nome-utente').value = nomeUtente;
+
   let toast = document.getElementById("toast-confirm");
   toast.innerHTML = `<i class="fas fa-envelope"></i> Invio Ordine via Email...`;
   toast.style.display = "block";
@@ -1636,21 +1642,25 @@ document.getElementById('form-email').addEventListener('submit', function() {
   toast.innerHTML += '<div id="toast-progress-bar"></div>';
   document.querySelector("#toast-progress-bar").style.animationDuration = `1500ms`;
 
-  // Dopo 2s nasconde toast (il popup arriverà al ritorno con emailok=true)
-  setTimeout(() => {
-      toast.style.display = "none";
-  }, 1500);
-  const nomeUtente = localStorage.getItem("nomeUtente") || "";
-  const testoOrdine = generaTestoOrdineEmail();
-
-  // Inserisce il nome utente all'inizio del messaggio, se presente
-  document.getElementById('campo-ordine').value =
-    nomeUtente
-      ? `Nuovo ordine da ${nomeUtente}\n\n${testoOrdine}`
-      : testoOrdine;
-
-  // Popola anche il campo hidden dedicato
-  document.getElementById('campo-nome-utente').value = nomeUtente;
+  const data = new FormData(e.target);
+  fetch("https://formsubmit.co/rebak31771@baxidy.com", {
+    method: "POST",
+    body: data
+  })
+  .then(response => {
+    if (response.ok) {
+      // Redirect manuale dopo invio
+      window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
+    } else {
+      toast.innerHTML = "❌ Errore nell'invio.";
+    }
+  })
+  .catch(() => {
+    toast.innerHTML = "❌ Problema di connessione.";
+  })
+  .finally(() => {
+    setTimeout(() => { toast.style.display = "none"; }, 1500);
+  });
 });
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
