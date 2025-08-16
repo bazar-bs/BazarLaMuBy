@@ -1638,7 +1638,7 @@ document.getElementById("form-email").addEventListener("submit", function(e) {
   }
   if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
     alert("Il carrello è vuoto, impossibile inviare l'ordine!");
-    location.reload();
+    location.reload(); // Ricarica la pagina manualmente
     return;
   }
 
@@ -1658,30 +1658,25 @@ document.getElementById("form-email").addEventListener("submit", function(e) {
   document.querySelector("#toast-progress-bar").style.animationDuration = `1500ms`;
 
   const data = new FormData(e.target);
-  const url = "https://formsubmit.co/rebak31771@baxidy.com";
-
-  // 🔹 Apri scheda temporanea
-  const tabTemp = window.open(url, "_blank", "noopener,noreferrer");
-
-  fetch(url, { method: "POST", body: data })
-    .then(response => {
-      if (response.ok) {
-        window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
-      } else {
-        toast.innerHTML = "❌ Errore nell'invio.";
-      }
-    })
-    .catch(() => {
-      toast.innerHTML = "❌ Problema di connessione.";
-    })
-    .finally(() => {
-      // 🔹 Chiudi la scheda dopo 1 secondo
-      setTimeout(() => {
-        if (tabTemp && !tabTemp.closed) tabTemp.close();
-      }, 1000);
-      setTimeout(() => { toast.style.display = "none"; }, 1500);
-    });
+  fetch("https://formsubmit.co/rebak31771@baxidy.com", {
+    method: "POST",
+    body: data
+  })
+  .then(response => {
+    if (response.ok) {
+      window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
+    } else {
+      toast.innerHTML = "❌ Errore nell'invio.";
+    }
+  })
+  .catch(() => {
+    toast.innerHTML = "❌ Problema di connessione.";
+  })
+  .finally(() => {
+    setTimeout(() => { toast.style.display = "none"; }, 1500);
+  });
 });
+
 
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
