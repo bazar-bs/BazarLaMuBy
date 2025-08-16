@@ -1628,18 +1628,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 document.getElementById("form-email").addEventListener("submit", function(e) {
   e.preventDefault(); // blocca invio classico
- // ⛔ Blocca invio se il carrello è vuoto
-let carrelloSalvato;
-try {
-  carrelloSalvato = JSON.parse(localStorage.getItem("carrello") || "[]");
-} catch (_) {
-  carrelloSalvato = [];
-}
-if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
-  alert("Il carrello è vuoto, impossibile inviare l'ordine!");
-  location.reload(); // Ricarica la pagina manualmente
-  return;
-}
+
+  // ⛔ Blocca invio se il carrello è vuoto
+  let carrelloSalvato;
+  try {
+    carrelloSalvato = JSON.parse(localStorage.getItem("carrello") || "[]");
+  } catch (_) {
+    carrelloSalvato = [];
+  }
+  if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
+    alert("Il carrello è vuoto, impossibile inviare l'ordine!");
+    location.reload();
+    return;
+  }
+
   const nomeUtente = localStorage.getItem("nomeUtente") || "";
   const testoOrdine = generaTestoOrdineEmail();
   document.getElementById('campo-ordine').value =
@@ -1656,37 +1658,31 @@ if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
   document.querySelector("#toast-progress-bar").style.animationDuration = `1500ms`;
 
   const data = new FormData(e.target);
-  fetch("https://formsubmit.co/rebak31771@baxidy.com", {
-    method: "POST",
-    body: data
-  })
-  .then(response => {
-    if (response.ok) {
-  // apre il client email in nuova scheda/finestra
-  const to = "rebak31771@baxidy.com"; // il tuo indirizzo reale
-  const subject = "Nuovo ordine LaMuBy";
-  const body = document.getElementById('campo-ordine').value;
+  const url = "https://formsubmit.co/rebak31771@baxidy.com";
 
-  const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.open(mailto, '_blank', 'noopener,noreferrer');
+  // 🔹 Apri scheda temporanea
+  const tabTemp = window.open(url, "_blank", "noopener,noreferrer");
 
-  // imposta subito emailok in URL senza aggiungere history
-  window.history.replaceState({}, document.title, window.location.pathname + "?emailok=true");
-
-  // ricarica per far comparire il popup di conferma
-  location.reload();
-} else {
-  toast.innerHTML = "❌ Errore nell'invio.";
-}
-
-  })
-  .catch(() => {
-    toast.innerHTML = "❌ Problema di connessione.";
-  })
-  .finally(() => {
-    setTimeout(() => { toast.style.display = "none"; }, 1500);
-  });
+  fetch(url, { method: "POST", body: data })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
+      } else {
+        toast.innerHTML = "❌ Errore nell'invio.";
+      }
+    })
+    .catch(() => {
+      toast.innerHTML = "❌ Problema di connessione.";
+    })
+    .finally(() => {
+      // 🔹 Chiudi la scheda dopo 1 secondo
+      setTimeout(() => {
+        if (tabTemp && !tabTemp.closed) tabTemp.close();
+      }, 1000);
+      setTimeout(() => { toast.style.display = "none"; }, 1500);
+    });
 });
+
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
