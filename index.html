@@ -211,21 +211,18 @@
   </button>
 </div>
 <!-- ✅ Form invio via Email classico -->
-<div class="invia-email-container" style="margin-top:10px; text-align:center;">
-  <form id="form-email" action="https://formsubmit.co/rebak31771@baxidy.com" method="POST">
-    <!-- textarea nascosta ma popolata via JS -->
-    <textarea name="ordine" id="campo-ordine" readonly style="display:none;"></textarea>
-    <input type="hidden" id="campo-nome-utente" name="nomeUtente">
-    <input type="hidden" name="_subject" value="Nuovo ordine LaMuBy">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_confirmation" value="false">
-    <input type="hidden" name="_next" value="https://bazar-bs.github.io/BazarLaMuBy/?emailok=true">
-    <button type="submit" aria-label="Conferma e Invio Ordine via Email" title="Conferma e Invio Ordine via Email" class="btn btn-invia-email">
-      <i class="fas fa-envelope"></i> Invia Ordine via Email
-    </button>
-  </form>
-</div>
+<form id="form-email" action="https://formsubmit.co/rebak31771@baxidy.com" method="POST">
+  <textarea name="ordine" id="campo-ordine" readonly style="display:none;"></textarea>
+  <input type="hidden" id="campo-nome-utente" name="nomeUtente">
+  <input type="hidden" name="_subject" value="📦 Nuovo ordine LaMuBy">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_confirmation" value="false">
+  <input type="hidden" name="_next" value="https://bazar-bs.github.io/BazarLaMuBy/?emailok=true">
+  <button type="submit" class="btn btn-invia-email">
+    <i class="fas fa-envelope"></i> Invia Ordine via Email
+  </button>
+</form>
 <!-- Pulsanti Indietro e Annulla affiancati sotto -->
 <div class="btn-group">
   <button onclick="tornaAllaSpedizione()" aria-label="Torna alla Spedizione" title="Torna alla Spedizione" class="btn btn-indietro">
@@ -1569,7 +1566,6 @@ function salvaOrdineLocale(nome, indirizzo, telefono, email) {
   ordiniSalvati.push(nuovoOrdine);
   localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
 }
-// Generatore testo già presente
 function generaTestoOrdineEmail() {
   const lista = document.getElementById("riepilogo-lista-carrello").innerText || "";
   const totale = document.getElementById("riepilogo-totale").innerText || "";
@@ -1578,50 +1574,17 @@ function generaTestoOrdineEmail() {
   const telefono = document.getElementById("riepilogo-telefono").innerText || "";
   const email = document.getElementById("riepilogo-email").innerText || "";
   return `Ordine LaMuBy
+
 ${lista}
 ${totale}
+
 Cliente: ${nome}
 Indirizzo: ${indirizzo}
 Telefono: ${telefono}
 Email: ${email}`;
 }
 
-// ✅ Gestione invio email "senza redirect"
 document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("emailok") === "true") {
-    const nome = localStorage.getItem("riepilogoNome") || "";
-    const indirizzo = localStorage.getItem("riepilogoIndirizzo") || "";
-    const telefono = localStorage.getItem("riepilogoTelefono") || "";
-    const email = localStorage.getItem("riepilogoEmail") || "";
-
-    const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
-    const totalePrezzo = carrelloSalvato.reduce((sum, item) => sum + (item.prezzo * item.quantita), 0);
-    const ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
-    ordiniSalvati.push({
-      data: new Date().toLocaleString(),
-      nome,
-      indirizzo,
-      telefono,
-      email,
-      prodotti: carrelloSalvato,
-      totale: totalePrezzo.toFixed(2)
-    });
-    localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));	
-    svuotaCarrello();
-
-    mostraPopupConferma("email");
-    history.replaceState({}, document.title, window.location.pathname);
-
-    const chiudiBtn = document.querySelector("#popup-conferma .btn-chiudi-popup");
-    if (chiudiBtn) {
-      chiudiBtn.addEventListener("click", () => {
-        location.reload();
-      });
-    }
-  }
-
-  // 🔹 riempi campo ordine prima dell'invio
   const form = document.getElementById("form-email");
   if (form) {
     form.addEventListener("submit", () => {
