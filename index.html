@@ -1663,15 +1663,6 @@ document.getElementById("form-email").addEventListener("submit", function(e) {
     setTimeout(() => { toast.style.display = "none"; }, 1500);
   });
 });
-  // Sostituisce la pagina attuale nella cronologia
-  history.replaceState(null, null, location.href);
-
-  // Se vuoi anche far “rimbalzare” l’utente su una pagina neutra
-  // puoi farlo dopo un evento specifico, ad esempio al caricamento:
-  window.addEventListener('load', function() {
-    // Questo rimpiazza anche il primo stato
-    history.pushState(null, null, location.href);
-  });
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
