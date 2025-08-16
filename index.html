@@ -210,16 +210,17 @@
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
   </button>
 </div>
-<!-- ✅ Form invio via Email con AJAX -->
+<!-- ✅ Form invio via Email classico -->
 <div class="invia-email-container" style="margin-top:10px; text-align:center;">
-  <form id="form-email">
-    <!-- textarea nascosta ma presente nel DOM -->
+  <form id="form-email" action="https://formsubmit.co/rebak31771@baxidy.com" method="POST">
+    <!-- textarea nascosta ma popolata via JS -->
     <textarea name="ordine" id="campo-ordine" readonly style="display:none;"></textarea>
     <input type="hidden" id="campo-nome-utente" name="nomeUtente">
     <input type="hidden" name="_subject" value="Nuovo ordine LaMuBy">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_confirmation" value="false">
+    <input type="hidden" name="_next" value="https://bazar-bs.github.io/BazarLaMuBy/?emailok=true">
     <button type="submit" aria-label="Conferma e Invio Ordine via Email" title="Conferma e Invio Ordine via Email" class="btn btn-invia-email">
       <i class="fas fa-envelope"></i> Invia Ordine via Email
     </button>
@@ -1584,17 +1585,16 @@ Indirizzo: ${indirizzo}
 Telefono: ${telefono}
 Email: ${email}`;
 }
+
 // ✅ Gestione invio email "senza redirect"
 document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get("emailok") === "true") {
-    // Recupera i dati salvati
     const nome = localStorage.getItem("riepilogoNome") || "";
     const indirizzo = localStorage.getItem("riepilogoIndirizzo") || "";
     const telefono = localStorage.getItem("riepilogoTelefono") || "";
     const email = localStorage.getItem("riepilogoEmail") || "";
 
-    // Salva ordine locale
     const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
     const totalePrezzo = carrelloSalvato.reduce((sum, item) => sum + (item.prezzo * item.quantita), 0);
     const ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
@@ -1608,16 +1608,11 @@ document.addEventListener("DOMContentLoaded", () => {
       totale: totalePrezzo.toFixed(2)
     });
     localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));	
-    // Svuota carrello
     svuotaCarrello();
-	
-	mostraPopupConferma("email");
 
-   
-    // 🔹 Trucco anti-back: rimuove il parametro dalla URL e resettala allo stato "home"
+    mostraPopupConferma("email");
     history.replaceState({}, document.title, window.location.pathname);
 
-    // 🔹 Comportamento WhatsApp: ricarica tutto quando si chiude il popup
     const chiudiBtn = document.querySelector("#popup-conferma .btn-chiudi-popup");
     if (chiudiBtn) {
       chiudiBtn.addEventListener("click", () => {
@@ -1625,46 +1620,21 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   }
+
+  // 🔹 riempi campo ordine prima dell'invio
+  const form = document.getElementById("form-email");
+  if (form) {
+    form.addEventListener("submit", () => {
+      const nomeUtente = localStorage.getItem("nomeUtente") || "";
+      const testoOrdine = generaTestoOrdineEmail();
+      document.getElementById('campo-ordine').value =
+        nomeUtente
+          ? `Nuovo ordine da ${nomeUtente}\n\n${testoOrdine}`
+          : testoOrdine;
+      document.getElementById('campo-nome-utente').value = nomeUtente;
+    });
+  }
 });
-document.getElementById("form-email").addEventListener("submit", function(e) {
-  e.preventDefault(); // blocca invio classico
-
-  const nomeUtente = localStorage.getItem("nomeUtente") || "";
-  const testoOrdine = generaTestoOrdineEmail();
-  document.getElementById('campo-ordine').value =
-    nomeUtente
-      ? `Nuovo ordine da ${nomeUtente}\n\n${testoOrdine}`
-      : testoOrdine;
-  document.getElementById('campo-nome-utente').value = nomeUtente;
-
-  let toast = document.getElementById("toast-confirm");
-  toast.innerHTML = `<i class="fas fa-envelope"></i> Invio Ordine via Email...`;
-  toast.style.display = "block";
-  toast.style.animationDuration = `1500ms`;
-  toast.innerHTML += '<div id="toast-progress-bar"></div>';
-  document.querySelector("#toast-progress-bar").style.animationDuration = `1500ms`;
-
-  const data = new FormData(e.target);
-  fetch("https://formsubmit.co/rebak31771@baxidy.com", {
-    method: "POST",
-    body: data
-  })
-  .then(response => {
-    if (response.ok) {
-      // Redirect manuale dopo invio
-      window.location.href = "https://bazar-bs.github.io/BazarLaMuBy/?emailok=true";
-    } else {
-      toast.innerHTML = "❌ Errore nell'invio.";
-    }
-  })
-  .catch(() => {
-    toast.innerHTML = "❌ Problema di connessione.";
-  })
-  .finally(() => {
-    setTimeout(() => { toast.style.display = "none"; }, 1500);
-  });
-});
-
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
