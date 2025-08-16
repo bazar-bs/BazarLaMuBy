@@ -912,6 +912,11 @@ function aggiornaListaPreferiti(articoli) {
   });
 }
  window.addEventListener("DOMContentLoaded", () => {
+	if (sessionStorage.getItem("skipSummary")) {
+		sessionStorage.removeItem("skipSummary"); // vale solo una volta
+		// qui eviti di riaprire il riepilogo se l’utente fa Back
+		return; 
+	}
     const emailBase64 = "bGF1cmEucGlvdmFuZWxsaTE5ODRAZ21haWwuY29t";
     const telefonoBase64 = "MzUxNjEwMDIzNQ==";
     const email = atob(emailBase64);
@@ -1611,6 +1616,8 @@ document.addEventListener("DOMContentLoaded", () => {
     svuotaCarrello();
 	
 	mostraPopupConferma("email");
+	sessionStorage.setItem("skipSummary", "true");
+
    
     // 🔹 Trucco anti-back: rimuove il parametro dalla URL e resettala allo stato "home"
     history.replaceState({}, document.title, window.location.pathname);
