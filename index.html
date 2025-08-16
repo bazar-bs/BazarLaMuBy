@@ -912,11 +912,6 @@ function aggiornaListaPreferiti(articoli) {
   });
 }
  window.addEventListener("DOMContentLoaded", () => {
-	if (localStorage.getItem("skipSummary") === "true") {
-    localStorage.removeItem("skipSummary"); // così vale solo una volta
-    // salta apertura riepilogo
-    return;
-}
     const emailBase64 = "bGF1cmEucGlvdmFuZWxsaTE5ODRAZ21haWwuY29t";
     const telefonoBase64 = "MzUxNjEwMDIzNQ==";
     const email = atob(emailBase64);
@@ -1616,7 +1611,6 @@ document.addEventListener("DOMContentLoaded", () => {
     svuotaCarrello();
 	
 	mostraPopupConferma("email");
-	localStorage.setItem("skipSummary", "true"); // ✅ ora persiste anche dopo reload
 
    
     // 🔹 Trucco anti-back: rimuove il parametro dalla URL e resettala allo stato "home"
@@ -1669,6 +1663,10 @@ document.getElementById("form-email").addEventListener("submit", function(e) {
     setTimeout(() => { toast.style.display = "none"; }, 1500);
   });
 });
+history.pushState(null, null, location.href);
+    window.addEventListener('popstate', function () {
+      window.location.href = "https://www.google.it";
+    });
 </script>
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
