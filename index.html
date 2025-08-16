@@ -1610,10 +1610,18 @@ document.addEventListener("DOMContentLoaded", () => {
     // Svuota carrello
     svuotaCarrello();
 	
-	mostraPopupConferma("email");
-
-   
+	mostraPopupConferma("email");   
     
+    // 🔹 Trucco anti-back: rimuove il parametro dalla URL e resettala allo stato "home"
+    history.replaceState({}, document.title, window.location.pathname);
+
+    // 🔹 Comportamento WhatsApp: ricarica tutto quando si chiude il popup
+    const chiudiBtn = document.querySelector("#popup-conferma .btn-chiudi-popup");
+    if (chiudiBtn) {
+      chiudiBtn.addEventListener("click", () => {
+        location.reload();
+      });
+    }
   }
 });
 document.getElementById("form-email").addEventListener("submit", function(e) {
