@@ -15,7 +15,7 @@
 <body>
 <canvas id="fireworks-canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:9998; display:none;"></canvas>
 <audio id="suono-aggiunta" src="add-to-cart-soft-pop.mp3" preload="auto"></audio>
-<!-- Loader -->
+	<!-- Loader -->
 <div id="loader">
   <div class="spinner"></div>
   <p>Caricamento articoli...</p>
@@ -49,7 +49,7 @@
   <!-- ✅ Footer versione, fissato in fondo -->
   <div class="sidebar-footer">
 	<h4 style="text-align: center; opacity: 0.6;">
-		<i class="fas fa-tag"></i> Ver. 1.07
+		<i class="fas fa-tag"></i> Ver. 1.06
 	</h4>
   </div>
 </div>
@@ -121,11 +121,9 @@
       <span id="contatore-carrello-modal">0</span>
     </div>
   </div>
-<p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
-    Gli ordini vengono gestiti su 
-    <i class="fab fa-whatsapp"></i> <strong style="background-color: yellow; padding: 2px;">WhatsApp</strong> 
-    o <i class="fas fa-envelope"></i> <strong style="background-color: yellow; padding: 2px;">Email</strong>.
-</p>
+  <p style="text-align: center; font-size: 1.1rem; background-color: #f2f2f2; padding: 10px; border-radius: 6px;">
+    Gli ordini vengono gestiti direttamente su <strong style="background-color: yellow; padding: 2px;">WhatsApp</strong>.
+  </p>
   <h2 style="text-align: center;">Il Carrello</h2>
   <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
   <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Totale: €0.00</p>
@@ -187,8 +185,8 @@
   <h2 style="margin-bottom: 2px;">📋Riepilogo dell'Ordine</h2>
   <h4 style="margin-top: 2px;">
 	Verifica i dati, dopo l’invio riceverai Info per il pagamento 
-	<i class="fab fa-paypal" style="margin-right: 4px;"></i>
-	PayPal
+	<!-- <i class="fab fa-paypal" style="margin-right: 4px;"></i> -->
+	<!-- PayPal -->
   </h4>
   <!-- Carrello -->
   <div id="riepilogo-carrello" style="margin-bottom: 15px;">
@@ -206,23 +204,10 @@
   </div>
 <!-- Pulsante WhatsApp centrato in alto -->
 <div class="invia-whatsapp-container">
-  <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine via Whatsapp" title="Conferma e Invio Ordine via Whatsapp" class="btn-invia-whatsapp">
+  <button type="button" onclick="inviaOrdineWhatsApp()" aria-label="Conferma e Invio Ordine" title="Conferma e Invio Ordine" class="btn-invia-whatsapp">
     <i class="fab fa-whatsapp"></i> Invia Ordine via WhatsApp
   </button>
 </div>
-<!-- ✅ Form invio via Email classico -->
-<form id="form-email" action="https://formsubmit.co/rebak31771@baxidy.com" method="POST">
-  <textarea name="ordine" id="campo-ordine" readonly style="display:none;"></textarea>
-  <input type="hidden" id="campo-nome-utente" name="nomeUtente">
-  <input type="hidden" name="_subject" value="📦 Nuovo ordine LaMuBy">
-  <input type="hidden" name="_template" value="table">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_confirmation" value="false">
-  <input type="hidden" name="_next" value="https://bazar-bs.github.io/BazarLaMuBy/?emailok=true">
-  <button type="submit" class="btn btn-invia-email">
-    <i class="fas fa-envelope"></i> Invia Ordine via Email
-  </button>
-</form>
 <!-- Pulsanti Indietro e Annulla affiancati sotto -->
 <div class="btn-group">
   <button onclick="tornaAllaSpedizione()" aria-label="Torna alla Spedizione" title="Torna alla Spedizione" class="btn btn-indietro">
@@ -238,9 +223,9 @@
     <h2>✅ Ordine Confermato!</h2>
     <p>😄Grazie per il tuo acquisto! Ti contatteremo a breve...</p>
     <!-- Bottone Mostra Link Pagamento PayPal -->
-    <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal">
-      <i class="fab fa-paypal"></i> Paga ora con PayPal
-    </button>
+    <!-- <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal"> -->
+      <!-- <i class="fab fa-paypal"></i> Paga ora con PayPal -->
+    <!-- </button> -->
     <!-- Bottone Chiudi -->
     <button onclick="chiudiPopupConferma()" class="btn-chiudi-popup">
       <i class="fas fa-times-circle"></i> Chiudi
@@ -316,33 +301,24 @@
 <button onclick="togglePolicyModal()" class="btn btn-privacy" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
 </button>
-<button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione">
-  <i class="fas fa-info-circle"></i> Pagamento & Spedizione
-</button>
+<!-- <button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione"> -->
+  <!-- <i class="fas fa-info-circle"></i> Pagamento & Spedizione -->
+<!-- </button> -->
 </div>
 <!-- Modale Privacy Policy -->
 <div id="modal-policy" class="modal">
   <h3>Privacy & Cookie Policy</h3>
-  <p><strong>Titolare del trattamento:</strong><br>
-    LAMUBY di Piovanelli Laura<br>
-    P.IVA 04692000989<br>
-    <span id="emailpersonale-privacy"></span>
+  <p><strong>Raccolta dati:</strong><br>
+    Non raccogliamo dati personali in modo automatico.Gli ordini inviati tramite WhatsApp sono gestiti manualmente e non vengono archiviati online.I dati(preferiti,ordini)vengono salvati localmente sul dispositivo,previo consenso per il salvataggio delle informazioni di spedizione.
   </p>
-<p><strong>Raccolta dati:</strong><br>
-  Non raccogliamo dati personali in modo automatico.  
-  Gli ordini inviati tramite <strong>WhatsApp</strong> o <strong>Email</strong> sono gestiti manualmente e non vengono archiviati online.  
-  I dati (preferiti, ordini) vengono salvati localmente sul dispositivo, previo consenso per il salvataggio delle informazioni di spedizione.
-</p>
-<p><strong>Ordini via WhatsApp ed Email:</strong><br>
-  Se invii un ordine tramite WhatsApp o Email, i tuoi dati saranno visibili solo al titolare del bAzAr LaMuBy per finalità legate alla spedizione.  
-  Non saranno condivisi o archiviati digitalmente.  
-</p>
+  <p><strong>Ordini via WhatsApp:</strong><br>
+    Se invii un ordine tramite WhatsApp,i tuoi dati saranno visibili solo al titolare del bAzAr LaMuBy per finalità legate alla spedizione.Non saranno condivisi o archiviati digitalmente.
+  </p>
   <p><strong>Cookie:</strong><br>
-    Il sito può utilizzare cookie tecnici.Non vengono usati cookie di profilazione o pubblicità.
+    Il sito può utilizzare cookie tecnici per migliorare la navigazione. Non vengono usati cookie di profilazione o pubblicità.
   </p>
   <button onclick="togglePolicyModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
-    <i class="fas fa-times-circle"></i> Chiudi
-  </button>
+    <i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
 <!-- Overlay per la policy -->
 <div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
@@ -350,7 +326,7 @@
 <div class="modal" id="modal-pagamento-spedizione">
   <h3>Info Pagamento e Spedizione</h3>
   <p><strong>Pagamento PayPal.me:</strong> Puoi effettuare il pagamento in modo sicuro tramite il nostro link personalizzato PayPal.me. Ti forniremo il link dopo la conferma dell’ordine.</p>
-  <p>⚠️ Se non hai il link PayPal.me per il pagamento, puoi richiederlo direttamente via chat su WhatsApp.</p>
+  <p>⚠️ ""Se non hai il link PayPal.me per il pagamento, puoi richiederlo direttamente via chat su WhatsApp.""</p>
   <hr>
   <p><strong>Spedizione:</strong> Gli ordini vengono elaborati entro 1-2 giorni lavorativi. Le spedizioni sono gestite tramite corriere tracciabile e riceverai un codice di tracking via email.</p>
   <button onclick="togglePagamentoSpedizioneModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
@@ -580,7 +556,6 @@ function inviaOrdineWhatsApp() {
     let carrelloSalvato = localStorage.getItem("carrello");
     if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
         alert("Il carrello è vuoto, impossibile inviare l'ordine!");
-		location.reload(); // Ricarica la pagina manualmente
         return;
     }
     let ordine = JSON.parse(carrelloSalvato);
@@ -609,7 +584,7 @@ function inviaOrdineWhatsApp() {
 	setTimeout(() => {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
-		mostraPopupConferma("whatsapp");
+		mostraPopupConferma();
 	}, 2000);
 	// Nasconde il toast dopo 2 secondi
 	setTimeout(() => {
@@ -690,26 +665,18 @@ function chiudiModuloSpedizione() {
     document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante -->
     sbloccaScroll()
 }
-function mostraPopupConferma(metodo) {
+function mostraPopupConferma() {
     // Chiudi il carrello
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
     // Chiudi la finestra di spedizione
-    document.getElementById("modal-spedizione").style.display = "none"; 
-    // Chiudi la finestra di riepilogo
-    document.getElementById("modal-riepilogo").style.display = "none";
-    // Imposta il messaggio in base al metodo
-    const popup = document.getElementById("popup-conferma");
-    const testo = popup.querySelector("p");
-	if (metodo === "whatsapp") {
-		testo.innerHTML = '<i class="fab fa-whatsapp"></i> Ordine inviato via WhatsApp!<br>😄 Grazie per il tuo acquisto! Ti contatteremo a breve...';
-	}	 else if (metodo === "email") {
-		testo.innerHTML = '<i class="fas fa-envelope"></i> Ordine inviato in automatico via Email!<br>😄 Grazie per il tuo acquisto! Ti contatteremo a breve...';
-	}
-    // Mostra il popup
-    popup.style.display = "block";
-    document.getElementById("overlay-conferma").classList.add("active");
-    bloccaScroll();
+    document.getElementById("modal-spedizione").style.display = "none";	
+	// Chiudi la finestra di riepilogo
+	document.getElementById("modal-riepilogo").style.display = "none";
+    // Mostra la conferma dell'ordine
+    document.getElementById("popup-conferma").style.display = "block";
+    document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
+    bloccaScroll()
 }
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
@@ -916,7 +883,6 @@ function aggiornaListaPreferiti(articoli) {
     const email = atob(emailBase64);
     const telefono = atob(telefonoBase64);
     const emailEl = document.getElementById("emailpersonale");
-	document.getElementById("emailpersonale-privacy").textContent = email;
     const telefonoEl = document.getElementById("telefonopersonale");
     const telCarrello = document.getElementById("telefonocarrello"); /* non piu usato era per salvare numero in rubrica */
     if (emailEl && telefonoEl) {
@@ -1296,12 +1262,6 @@ if (salvaDati) {
   document.getElementById("modal-riepilogo").style.display = "block";
   bloccaScroll()
   apriModaleAnimato("modal-riepilogo" , "fade");
-  // Salva i dati in localStorage per recuperarli dopo il redirect
-localStorage.setItem("riepilogoNome", nome);
-localStorage.setItem("riepilogoIndirizzo", indirizzo);
-localStorage.setItem("riepilogoTelefono", telefono);
-localStorage.setItem("riepilogoEmail", email);
-
 }
 function chiudiModuloRiepilogo() {
   document.getElementById("modal-riepilogo").style.display = "none";
@@ -1543,62 +1503,14 @@ function togglePagamentoSpedizioneModal() {
   });
   // se mostraDettaglio aggiorna le immagini, quando riapri il lightbox le prendiamo al volo (setSlidesSrc fa questo)
 })();
-// Mostra loader all'avvio
+	// Mostra loader all'avvio
 document.getElementById("loader").style.display = "flex";
 // Simulazione caricamento prodotti
 window.addEventListener("load", function () {
   // Nasconde loader quando la pagina e le immagini sono pronte
   document.getElementById("loader").style.display = "none";
 });
-function salvaOrdineLocale(nome, indirizzo, telefono, email) {
-  const carrelloSalvato = JSON.parse(localStorage.getItem("carrello")) || [];
-  const totalePrezzo = carrelloSalvato.reduce((sum, item) => sum + (item.prezzo * item.quantita), 0);
-  const ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
-  const nuovoOrdine = {
-    data: new Date().toLocaleString(),
-    nome,
-    indirizzo,
-    telefono,
-    email,
-    prodotti: carrelloSalvato,
-    totale: totalePrezzo.toFixed(2)
-  };
-  ordiniSalvati.push(nuovoOrdine);
-  localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
-}
-function generaTestoOrdineEmail() {
-  const lista = document.getElementById("riepilogo-lista-carrello").innerText || "";
-  const totale = document.getElementById("riepilogo-totale").innerText || "";
-  const nome = document.getElementById("riepilogo-nome").innerText || "";
-  const indirizzo = document.getElementById("riepilogo-indirizzo").innerText || "";
-  const telefono = document.getElementById("riepilogo-telefono").innerText || "";
-  const email = document.getElementById("riepilogo-email").innerText || "";
-  return `Ordine LaMuBy
-
-${lista}
-${totale}
-
-Cliente: ${nome}
-Indirizzo: ${indirizzo}
-Telefono: ${telefono}
-Email: ${email}`;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form-email");
-  if (form) {
-    form.addEventListener("submit", () => {
-      const nomeUtente = localStorage.getItem("nomeUtente") || "";
-      const testoOrdine = generaTestoOrdineEmail();
-      document.getElementById('campo-ordine').value =
-        nomeUtente
-          ? `Nuovo ordine da ${nomeUtente}\n\n${testoOrdine}`
-          : testoOrdine;
-      document.getElementById('campo-nome-utente').value = nomeUtente;
-    });
-  }
-});
-</script>
+</script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
 <div id="overlay" class="overlay"></div>

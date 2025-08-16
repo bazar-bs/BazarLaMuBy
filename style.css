@@ -826,6 +826,7 @@
     transform: scale(1);
   }
 }
+
 .zoom-in {
   animation: zoomIn 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -902,6 +903,7 @@
   margin: auto;
   margin-top: 1.3rem;
 }
+
 .btn-chiudi-carrello:hover {
   background: #843d84; /* leggermente più chiaro in hover */
 }
@@ -1012,29 +1014,6 @@
   font-size: 1.05rem;
   min-width: 120px; /* 👈 Allungamento */
   background: #d9534f!important;
-}
-/* Pulsante Invia Email */
-.btn-invia-email {
-  background-color: #007bff !important; /* blu elegante */
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 2px auto 0;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.btn-invia-email i {
-  font-size: 1.2rem;
-}
-.btn-invia-email:hover {
-  background-color: #0069d9;
-  transform: translateY(-1px);
 }
 .btn-privacy {
   color: white;
