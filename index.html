@@ -582,6 +582,7 @@ function inviaOrdineWhatsApp() {
     let carrelloSalvato = localStorage.getItem("carrello");
     if (!carrelloSalvato || JSON.parse(carrelloSalvato).length === 0) {
         alert("Il carrello è vuoto, impossibile inviare l'ordine!");
+		location.reload(); // Ricarica la pagina manualmente
         return;
     }
     let ordine = JSON.parse(carrelloSalvato);
