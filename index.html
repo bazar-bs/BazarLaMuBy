@@ -1668,7 +1668,7 @@ if (!Array.isArray(carrelloSalvato) || carrelloSalvato.length === 0) {
   const body = document.getElementById('campo-ordine').value;
 
   const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  // window.open(mailto, '_blank', 'noopener,noreferrer');
+  window.open(mailto, '_blank', 'noopener,noreferrer');
 
   // imposta subito emailok in URL senza aggiungere history
   window.history.replaceState({}, document.title, window.location.pathname + "?emailok=true");
