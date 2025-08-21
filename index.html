@@ -23,13 +23,6 @@
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
-<!-- Pulsante Carrello Piccolo (nascosto di default) -->
-<button id="carrello-btn-small" class="btn-carrello-small" 
-  onclick="mostraCarrello()" 
-  aria-label="Apri il carrello"
-  title="Carrello">
-  <i class="fas fa-shopping-cart"></i>
-</button>
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
   <button id="close-sidebar" class="close-btn" title="Chiudi">
@@ -1520,23 +1513,6 @@ window.addEventListener("load", function () {
   // Nasconde loader quando la pagina e le immagini sono pronte
   document.getElementById("loader").style.display = "none";
 });
-// Mostra/nascondi il carrello piccolo in base allo scroll
-window.addEventListener("scroll", function() {
-  const carrelloGrande = document.getElementById("carrello-btn");
-  const carrelloSmall = document.getElementById("carrello-btn-small");
-
-  if (!carrelloGrande || !carrelloSmall) return;
-
-  const rect = carrelloGrande.getBoundingClientRect();
-  const headerVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-
-  if (headerVisible) {
-    carrelloSmall.classList.remove("show");
-  } else {
-    carrelloSmall.classList.add("show");
-  }
-});
-
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
 <div id="overlay-conferma" class="overlay"></div>
