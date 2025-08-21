@@ -1085,6 +1085,16 @@ function toggleOrdinaPrezzo() {
     renderArticoli(window.articoliCorrenti);
   }
 }
+
+function aggiornaContatoreArticoli(lista) {
+  const contatore = document.getElementById("contatore-articoli");
+  if (contatore) {
+    const isSearchAttiva = document.getElementById("search")?.value.trim() !== "";
+    const asterisco = isSearchAttiva ? "✱" : "";
+    contatore.textContent = `(${lista.length}${asterisco})`;
+  }
+}	
+	
 function renderArticoli(articoli) {
   const container = document.querySelector('.products');
   const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
