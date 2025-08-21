@@ -1132,14 +1132,6 @@ function renderArticoli(articoli) {
   aggiornaStatoCuore();
   aggiornaContatoreArticoli(articoli);
 }
-function aggiornaContatoreArticoli(lista) {
-  const contatore = document.getElementById("contatore-articoli");
-  if (contatore) {
-    const isSearchAttiva = document.getElementById("search")?.value.trim() !== "";
-    const asterisco = isSearchAttiva ? "✱" : "";
-    contatore.textContent = `(${lista.length}${asterisco})`;
-  }
-}
 function mostraOrdini() {
   const lista = document.getElementById("lista-ordini");
   lista.innerHTML = ""; // pulisce la lista
@@ -1149,16 +1141,28 @@ function mostraOrdini() {
     return;
   }
   ordini.reverse().forEach((ordine, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div style="margin-bottom: 10px; padding: 5px; background: #6e3b6e; border-radius: 6px;">
-        <strong>Ordine #${ordini.length - index}</strong><br>
+    const numeroOrdine = ordini.length - index;
+    const prodottiHTML = ordine.prodotti
+      .map(p => `<li>${p.nome} x${p.quantita}</li>`)
+      .join("");
+    const contenuto = `
+      <div style="
+        margin-bottom: 10px;
+        padding: 5px;
+        background: #6e3b6e;
+        border-radius: 6px;
+      ">
+        <strong>Ordine #${numeroOrdine}</strong><br>
         📅 ${ordine.data}<br>
         💶 Totale: €${ordine.totale}<br>
         📦 Prodotti:
-        <ul style="padding-left: 1rem;">${ordine.prodotti.map(p => `<li>${p.nome} x${p.quantita}</li>`).join("")}</ul>
+        <ul style="padding-left: 1rem;">
+          ${prodottiHTML}
+        </ul>
       </div>
     `;
+    const li = document.createElement("li");
+    li.innerHTML = contenuto;
     lista.appendChild(li);
   });
 }
