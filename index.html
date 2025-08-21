@@ -813,11 +813,6 @@ window.addEventListener("scroll", function() {
     btn.style.display = "none";
   }
 });
-// Mostra il tasto solo quando si scrolla verso il basso
-window.addEventListener("scroll", function() {
-  const btn = document.getElementById("scroll-top-btn");
-  btn.style.display = (window.scrollY > 300) ? "block" : "none";
-});
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
