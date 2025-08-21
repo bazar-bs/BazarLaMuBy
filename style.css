@@ -359,7 +359,7 @@
 		    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 		    font-size: 16px;
 		    display: none;
-		    z-index: 1000;
+		     z-index: 12000; /* 🔼 maggiore della barra mobile (9999) */
 		    /* animation: fadeInOut 3s ease-in-out; */
 			/* ✅ SOLO definizione del nome, non durata */
 			animation-name: fadeInOut;
@@ -565,7 +565,7 @@
   backdrop-filter: blur(6px); /* Effetto sfocato dietro */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Ombra morbida */
   transition: right 0.3s ease;
-  z-index: 1002;
+  z-index: 12000; /* 🔼 sopra la barra mobile */
   padding: 1rem 0.8rem;
   display: flex;
   flex-direction: column;
@@ -583,7 +583,7 @@
   height: 100vh;
   background: rgba(0,0,0,0.4);
   display: none;
-  z-index: 1000;
+  z-index: 11999; /* appena sotto la sidebar ma sopra la barra mobile */
 }
 .sidebar-overlay.active {
   display: block;
@@ -826,7 +826,6 @@
     transform: scale(1);
   }
 }
-
 .zoom-in {
   animation: zoomIn 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
@@ -903,7 +902,6 @@
   margin: auto;
   margin-top: 1.3rem;
 }
-
 .btn-chiudi-carrello:hover {
   background: #843d84; /* leggermente più chiaro in hover */
 }
@@ -1175,4 +1173,52 @@ body.noscroll { overflow: hidden; height: 100vh; }
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+/* Carrello piccolo fisso in basso a sinistra */
+.btn-carrello-small {
+  position: fixed;
+  bottom: 140px;        
+  left: 10px;
+  background-color: #6e3b6e;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;       /* nascosto di default */
+  z-index: 11000;      /* sopra la barra */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease;
+}
+.btn-carrello-small.show {
+  display: block;
+  opacity: 1;
+}
+.overlay-attivo #toggle-sidebar,
+.overlay-attivo #carrello-btn-small,
+.overlay-attivo #scroll-top-btn {
+  z-index: 1 !important;
+  pointer-events: none;
+  opacity: 0.3;
+}
+.carrello-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#badge-carrello-small {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background-color: #6e3b6e;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 50%;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
 }

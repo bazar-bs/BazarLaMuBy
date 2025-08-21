@@ -23,6 +23,13 @@
 <div id="toggle-sidebar" class="toggle-sidebar" title="Apri preferiti">
   ❤️
 </div>
+<!-- Pulsante Carrello Piccolo (nascosto di default) -->
+<button id="carrello-btn-small" class="btn-carrello-small" onclick="mostraCarrello()" aria-label="Apri il carrello" title="Carrello">
+  <div class="carrello-icon-wrapper">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="badge-carrello-small">0</span>
+  </div>
+</button>
 <!-- Sidebar destra -->
 <div id="sidebar" class="sidebar">
   <button id="close-sidebar" class="close-btn" title="Chiudi">
@@ -380,8 +387,10 @@ function toggleModal() {
   modal.classList.toggle('active');
   overlay.classList.toggle('active');
   if (modal.classList.contains('active')) {
+    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
     bloccaScroll()
   } else {
+    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
     sbloccaScroll()
   }
   apriModaleAnimato("modal", "fade");
@@ -539,7 +548,8 @@ function aggiornaCarrello() {
     });
     document.getElementById("contatore-carrello").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);    
     document.getElementById("contatore-carrello-modal").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);   
-    document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;    
+    document.getElementById("badge-carrello-small").textContent = carrello.reduce((sum, item) => sum + item.quantita, 0);
+	document.getElementById("totale-prezzo").textContent = `Totale: €${totalePrezzo.toFixed(2)}`;    
     // Mostra o nasconde i pulsanti in base al contenuto del carrello
     let btnSvuota = document.getElementById("btn-svuota");
     let btnProcedi = document.getElementById("btn-procedi");    
@@ -612,12 +622,14 @@ localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
 function mostraCarrello() {
     document.getElementById("modal-carrello").classList.add("active");
     document.getElementById("overlay-carrello").classList.add("active");
+	document.body.classList.add("overlay-attivo"); // 👈 aggiunto
 	bloccaScroll()
 	apriModaleAnimato("modal-carrello" , "fade");
 }
 function chiudiCarrello() {
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
+	document.body.classList.remove("overlay-attivo"); // 👈 rimosso
 	sbloccaScroll()
 }
 function svuotaCarrello() {
@@ -660,13 +672,15 @@ function mostraModuloSpedizione() {
 	chiudiCarrello(); // Chiude il carrello
     document.getElementById("modal-spedizione").style.display = "block";
 	document.getElementById("overlay-carrello").classList.add("active"); // Applica overlay oscurante
+	document.body.classList.add("overlay-attivo"); // 👈 aggiunto
 	bloccaScroll()
 	apriModaleAnimato("modal-spedizione" , "fade");
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
     document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante -->
-    sbloccaScroll()
+    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	sbloccaScroll()
 }
 function mostraPopupConferma() {
     // Chiudi il carrello
@@ -679,17 +693,20 @@ function mostraPopupConferma() {
     // Mostra la conferma dell'ordine
     document.getElementById("popup-conferma").style.display = "block";
     document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
-    bloccaScroll()
+    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+	bloccaScroll()
 }
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
+	document.body.classList.remove("overlay-attivo"); // 👈 rimosso
 	sbloccaScroll()
 	mostraCarrello();
 }
 function chiudiPopupConferma() {
     svuotaCarrello(); // Svuota il carrello quando si chiude il popup
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
-    sbloccaScroll()
+    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	sbloccaScroll()
 	location.reload(); // Ricarica la pagina manualmente
 }
 let clickCounter = 0;
@@ -709,7 +726,8 @@ logo.addEventListener("click", function() {
 function chiudiModal() {
     modal.style.display = "none";
     document.getElementById("overlay-easteregg").classList.remove("active");
-    sbloccaScroll()
+    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	sbloccaScroll()
 }
 function toggleAppModal() {
   const modal = document.getElementById("app-modal");
@@ -717,9 +735,11 @@ function toggleAppModal() {
   modal.classList.toggle("active");
   overlay.classList.toggle("active");
   if (modal.classList.contains("active")) {
-    bloccaScroll()
+    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+	bloccaScroll()
   } else {
-    sbloccaScroll()
+    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	sbloccaScroll()
   }
   apriModaleAnimato("app-modal", "fade");
 }
@@ -781,21 +801,39 @@ function startFireworks() {
 // Mostra il tasto solo quando si scrolla verso il basso
 window.addEventListener("scroll", function() {
   const btn = document.getElementById("scroll-top-btn");
+  const dettaglio = document.getElementById("dettaglio-articolo");
+
+  if (!btn || !dettaglio) return;
+
+  const dettaglioAttivo = dettaglio.classList.contains("active") || dettaglio.style.display === "block";
+
+  if (window.scrollY > 300 && !dettaglioAttivo) {
+    btn.style.display = "block";
+  } else {
+    btn.style.display = "none";
+  }
+});
+// Mostra il tasto solo quando si scrolla verso il basso
+window.addEventListener("scroll", function() {
+  const btn = document.getElementById("scroll-top-btn");
   btn.style.display = (window.scrollY > 300) ? "block" : "none";
 });
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function togglePolicyModal() {
+  window.scrollTo(0, 0);
   const modal = document.getElementById("modal-policy");
   const overlay = document.getElementById("policy-overlay");
   modal.classList.toggle("active");
   overlay.classList.toggle("active");
   if (modal.classList.contains("active")) {
+    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
 	document.body.classList.add("noscroll");  // Blocca lo scroll della pagina
   } else {
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
+  document.body.classList.remove("overlay-attivo"); // 👈 rimosso
     document.body.classList.remove("noscroll");  // Sblocca lo scroll
   }
   apriModaleAnimato("modal-policy", "fade");
@@ -1347,6 +1385,7 @@ function mostraLinkPagamento() {
   // } 
 }
 function togglePagamentoSpedizioneModal() {
+  window.scrollTo(0, 0);
   const modal = document.getElementById("modal-pagamento-spedizione");
   const overlay = document.getElementById("modal-pagamento-spedizione-overlay");  
   modal.classList.toggle("active");
@@ -1512,6 +1551,21 @@ document.getElementById("loader").style.display = "flex";
 window.addEventListener("load", function () {
   // Nasconde loader quando la pagina e le immagini sono pronte
   document.getElementById("loader").style.display = "none";
+});
+// Mostra/nascondi il carrello piccolo in base allo scroll
+window.addEventListener("scroll", function() {
+  const carrelloGrande = document.getElementById("carrello-btn");
+  const carrelloSmall = document.getElementById("carrello-btn-small");
+  const dettaglio = document.getElementById("dettaglio-articolo");
+  if (!carrelloGrande || !carrelloSmall || !dettaglio) return;
+  const rect = carrelloGrande.getBoundingClientRect();
+  const headerVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+  const dettaglioAttivo = dettaglio.classList.contains("active") || dettaglio.style.display === "block";
+  if (headerVisible || dettaglioAttivo) {
+    carrelloSmall.classList.remove("show");
+  } else {
+    carrelloSmall.classList.add("show");
+  }
 });
 </script> 
 <div id="overlay-easteregg" class="overlay"></div> 
