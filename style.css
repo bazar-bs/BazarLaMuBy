@@ -1210,7 +1210,7 @@ body.noscroll { overflow: hidden; height: 100vh; }
 }
 #badge-carrello-small {
   position: absolute;
-  top: -5px;
+  top: -2px;
   right: -3px;
   background-color: #6e3b6e;
   color: white;
