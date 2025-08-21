@@ -918,6 +918,7 @@
   cursor: pointer;
   display: none; /* mostra solo quando serve */
   z-index: 9999;
+  transition: opacity 0.3s ease;
   animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
 }
 .btn-scroll-top:hover {
@@ -1190,6 +1191,7 @@ body.noscroll { overflow: hidden; height: 100vh; }
   z-index: 11000;      /* sopra la barra */
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   transition: opacity 0.3s ease;
+  animation: bounce 1s ease-in-out 2; /* Effetto di rimbalzo */
 }
 .btn-carrello-small.show {
   display: block;
@@ -1206,14 +1208,13 @@ body.noscroll { overflow: hidden; height: 100vh; }
   position: relative;
   display: inline-block;
 }
-
 #badge-carrello-small {
   position: absolute;
   top: -6px;
   right: -10px;
   background-color: #6e3b6e;
   color: white;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: bold;
   padding: 2px 5px;
   border-radius: 50%;
@@ -1221,4 +1222,7 @@ body.noscroll { overflow: hidden; height: 100vh; }
   text-align: center;
   line-height: 1;
   box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+.btn-carrello-small:hover {
+  background-color: #843d84; /* viola più chiaro in hover */
 }
