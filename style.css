@@ -1179,7 +1179,7 @@ body.noscroll { overflow: hidden; height: 100vh; }
 /* Carrello piccolo fisso in basso a sinistra */
 .btn-carrello-small {
   position: fixed;
-  bottom: 90px;        /* sopra il cuore preferiti */
+  bottom: 20px;        /* sopra il cuore preferiti */
   left: 20px;
   background-color: #6e3b6e;
   color: white;
