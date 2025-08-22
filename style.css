@@ -247,11 +247,17 @@
       text-align: center;
       padding: 1rem;
       margin-top: 0.6rem;
-      background: #ddd;
-      font-size: 0.9rem;
-    }    
+      background-color: #f4f0ff;
+      font-size: 16px;
+      font-weight: bold;
+    }   
+    .footer .piva {
+      display: block;       /* va a capo */
+      margin-top: 8px;      /* spazio fra le due righe */
+      margin-bottom: 1px;  /* spazio sotto */
+    } 
     .piva {
-      margin-top: 0.5rem;
+      margin-top: 0.8rem;
       font-size: 0.8rem;
       color: #555;
     }    
