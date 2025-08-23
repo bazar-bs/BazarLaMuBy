@@ -8,7 +8,6 @@
       as="style" crossorigin onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css?v=2"></noscript>
   <meta charset="UTF-8">
-  <meta charset="UTF-8">
   <meta name="description" content="Il bAzAr LaMuBy è un bazar online di articoli usati, unici e convenienti. Scopri offerte, oggetti rari e occasioni imperdibili.">
   <meta name="keywords" content="bazar online, articoli usati, oggetti usati, offerte usato, articoli vintage, occasioni, mercatino, LaMuBy, compra usato, oggetti da collezione">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +67,7 @@
 <div id="sidebar-overlay" class="sidebar-overlay"></div>
 	<div id="popup-annullato" class="modal">
 		    <h2>❌ Ordine Annullato</h2>
-		    <p>😅Hai annullato il tuo ordine! Stai per tornare al carrello.<p>
+		    <p>😅Hai annullato il tuo ordine! Stai per tornare al carrello.</p> 
 		    <button onclick="chiudiPopupAnnullato()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer; display: block; margin: 15px auto 0;">
 		    <i class="fas fa-times-circle"></i> Chiudi</button>
 	</div>
@@ -128,7 +127,7 @@
 <div id="modal-carrello" class="modal">
   <div class="contenitore-carrello-pagina">
     <div class="contenitore-carrello">
-      <i class="fas fas fa-luggage-cart icona-animata-carrello"></i>
+      <i class="fas fa-luggage-cart icona-animata-carrello"></i>
       <span id="contatore-carrello-modal">0</span>
     </div>
   </div>
@@ -264,11 +263,11 @@
       <span class="highlight-blink">Info e disponibilità usa Contattaci<br>in fondo alla pagina</span>
       </p>
       <div class="detail-image" aria-label="Apri immagine 1 ingrandita">
-		<img id="foto1-articolo" src="" loading="lazy" alt="Foto principale dell'articolo">
+		<img id="foto1-articolo" src="Foto principale dell'articolo" loading="lazy" alt="Foto principale dell'articolo">
 		<i class="fas fa-search img-zoom-icon" aria-hidden="true"></i>
 	  </div>
 	  <div class="detail-image" aria-label="Apri immagine 2 ingrandita">
-		<img id="foto2-articolo" src="" loading="lazy" alt="Foto aggiuntiva dell'articolo">
+		<img id="foto2-articolo" src="Foto aggiuntiva dell'articolo" loading="lazy" alt="Foto aggiuntiva dell'articolo">
         <i class="fas fa-search img-zoom-icon" aria-hidden="true"></i>
 	  </div>
 <!-- Nuovo bottone per aggiungere al carrello -->
@@ -373,15 +372,15 @@
 <div id="img-lightbox" class="img-lightbox" aria-hidden="true" role="dialog" aria-label="Galleria immagini">
   <button id="lb-close" class="lb-close" aria-label="Chiudi galleria">✕</button>
   <div id="lb-slider" class="lb-slider" aria-live="polite">
-    <div class="lb-slide"><img id="lb-img-0" src="" alt=""></div>
-    <div class="lb-slide"><img id="lb-img-1" src="" alt=""></div>
+    <div class="lb-slide"><img id="lb-img-0" src="Foto principale dell'articolo" alt="Foto principale dell'articolo"></div>
+    <div class="lb-slide"><img id="lb-img-1" src="Foto aggiuntiva dell'articolo" alt="Foto aggiuntiva dell'articolo"></div>
   </div>
   <div id="lb-indicator" class="lb-indicator" aria-hidden="true">1 / 2</div>
 </div>
 <footer class="footer">
   &copy; 2025 il bAzAr LaMuBy - Tutti i diritti riservati
   <span class="piva">P.IVA 04692000989</span>
-</footer>  
+</footer> 
 <script> 
 let ultimaPosizioneScroll = 0; 
 document.getElementById("home-btn").style.display = "none";  
@@ -682,7 +681,7 @@ function mostraModuloSpedizione() {
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
-    document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante 
+    document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
     document.body.classList.remove("overlay-attivo"); // 👈 rimosso
 	sbloccaScroll()
 }
@@ -806,11 +805,8 @@ function startFireworks() {
 window.addEventListener("scroll", function() {
   const btn = document.getElementById("scroll-top-btn");
   const dettaglio = document.getElementById("dettaglio-articolo");
-
   if (!btn || !dettaglio) return;
-
   const dettaglioAttivo = dettaglio.classList.contains("active") || dettaglio.style.display === "block";
-
   if (window.scrollY > 300 && !dettaglioAttivo) {
     btn.style.display = "block";
   } else {
@@ -1089,7 +1085,6 @@ function toggleOrdinaPrezzo() {
     renderArticoli(window.articoliCorrenti);
   }
 }
-
 function aggiornaContatoreArticoli(lista) {
   const contatore = document.getElementById("contatore-articoli");
   if (contatore) {
@@ -1097,8 +1092,7 @@ function aggiornaContatoreArticoli(lista) {
     const asterisco = isSearchAttiva ? "✱" : "";
     contatore.textContent = `(${lista.length}${asterisco})`;
   }
-}	
-	
+}		
 function renderArticoli(articoli) {
   const container = document.querySelector('.products');
   const preferiti = JSON.parse(localStorage.getItem('preferiti')) || [];
@@ -1293,7 +1287,6 @@ function apriRiepilogo() {
   document.getElementById("riepilogo-email").textContent = email;  
   // Aggiungi questa riga in alto per recuperare lo stato del checkbox
 const salvaDati = document.getElementById("consenso-salvataggio")?.checked;
-
 // Salvataggio dati spedizione SOLO se il consenso è attivo
 if (salvaDati) {
   const dati = { nome, indirizzo, telefono, email };
