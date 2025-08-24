@@ -1244,3 +1244,10 @@ body.noscroll { overflow: hidden; height: 100vh; }
   margin-right: 6px;
   font-size: 1.3rem;
 }
+.invito-acquisto {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #6e3b6e;
+  margin: 1rem 0;
+}
