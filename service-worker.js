@@ -1,41 +1,46 @@
-const CACHE_NAME = 'offline-cache-v2';
+const CACHE_NAME = 'lamuby-cache-v4';
 const ASSETS = [
-  'offline.html',
-  'style.css',
   'lamuby_logo_bigtext_trasp_bianco.png',
   'lamuby_logo_bigtext.avif',
-  'qr-lamuby.png',
-  // aggiungi eventuali immagini o font qui
+  'qr-lamuby.avif',
+  'style.css',
+  'offline.html'
 ];
 
+// Install → precache asset e offline page
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
 });
 
+// Activate → elimina vecchie cache
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      )
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
   );
 });
 
+// Fetch handler
 self.addEventListener('fetch', event => {
-  if (!navigator.onLine) {
-    event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        return cachedResponse || caches.match('offline.html');
+  event.respondWith(
+    // Prova a fare fetch (rete)
+    fetch(event.request)
+      .then(networkResponse => {
+        // Se la risposta è valida → aggiorna la cache in background
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, networkResponse.clone());
+        });
+        return caches.match(event.request).then(cachedResponse => {
+          // Se c’è cache → mostra subito cache, altrimenti rete
+          return cachedResponse || networkResponse;
+        });
       })
-    );
-  } else {
-    event.respondWith(
-      fetch(event.request, { cache: 'no-store' }).catch(() =>
-        caches.match('offline.html')
-      )
-    );
-  }
+      .catch(() => {
+        // Se offline → mostra offline.html
+        return caches.match('offline.html');
+      })
+  );
 });
