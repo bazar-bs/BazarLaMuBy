@@ -7,14 +7,12 @@ const ASSETS = [
   'style.css',
   'offline.html'
 ];
-
 // Install → precache asset e offline page
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
 });
-
 // Activate → elimina vecchie cache
 self.addEventListener('activate', event => {
   event.waitUntil(
@@ -23,24 +21,22 @@ self.addEventListener('activate', event => {
     )
   );
 });
-
 // Fetch handler
 self.addEventListener('fetch', event => {
   event.respondWith(
-    // Prova a fare fetch (rete)
     fetch(event.request)
       .then(networkResponse => {
-        // Se la risposta è valida → aggiorna la cache in background
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, networkResponse.clone());
-        });
+        // ✅ MODIFICA: cache solo se risposta è 200 OK
+        if (networkResponse.status === 200) {
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, networkResponse.clone());
+          });
+        }
         return caches.match(event.request).then(cachedResponse => {
-          // Se c’è cache → mostra subito cache, altrimenti rete
           return cachedResponse || networkResponse;
         });
       })
       .catch(() => {
-        // Se offline → mostra offline.html
         return caches.match('offline.html');
       })
   );
