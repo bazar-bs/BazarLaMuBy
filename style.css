@@ -1233,3 +1233,14 @@ body.noscroll { overflow: hidden; height: 100vh; }
 .btn-carrello-small:hover {
   background-color: #843d84; /* viola più chiaro in hover */
 }
+.icona-foto {
+  text-align: left;
+  font-size: 1.0rem;
+  color: #6e3b6e;
+  margin: 0.8rem 0;
+  font-weight: bold;
+}
+.icona-foto i {
+  margin-right: 6px;
+  font-size: 1.3rem;
+}
