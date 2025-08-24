@@ -3,6 +3,8 @@ const ASSETS = [
   'lamuby_logo_bigtext_trasp_bianco.png',
   'lamuby_logo_bigtext.avif',
   'qr-lamuby.avif',
+  'immagine-non-disponibile.webp',
+  'add-to-cart-soft-pop.mp3',
   'style.css',
   'offline.html'
 ];
