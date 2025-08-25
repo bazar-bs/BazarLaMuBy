@@ -601,21 +601,21 @@ function inviaOrdineWhatsApp() {
     let urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(messaggio)}`;
     let toast = document.getElementById("toast-confirm");
 	toast.innerHTML = `<i class="fab fa-whatsapp"></i> Apro WhatsApp:ricordati di premere“Invia”!😉`;
-	toast.style.animationDuration = `2000ms`;
+	toast.style.animationDuration = `950ms`;
 	toast.style.display = "block";
 	toast.innerHTML += '<div id="toast-progress-bar"></div>';
 	const barra = document.querySelector("#toast-progress-bar");
-    barra.style.animationDuration = `2000ms`;
+    barra.style.animationDuration = `950ms`;
 	// ✅ Attendi un attimo prima di aprire WhatsApp
 	setTimeout(() => {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
-	}, 2000);
+	}, 950);
 	// Nasconde il toast dopo 2 secondi
 	setTimeout(() => {
 		toast.style.display = "none";
-	}, 2000);    
+	}, 950);    
 	// Salva l'ordine in localStorage
 let ordiniSalvati = JSON.parse(localStorage.getItem("ordini")) || [];
 let nuovoOrdine = {
