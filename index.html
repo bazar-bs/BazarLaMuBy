@@ -720,6 +720,7 @@ function chiudiPopupConferma() {
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
     document.body.classList.remove("overlay-attivo"); // 👈 rimosso
 	sbloccaScroll()
+	window.scrollTo({ top: 0});
 	location.reload(); // Ricarica la pagina manualmente
 }
 let clickCounter = 0;
