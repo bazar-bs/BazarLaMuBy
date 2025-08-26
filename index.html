@@ -40,7 +40,7 @@
   </button>
   <nav class="sidebar-menu">    
   </nav>
-  <!-- ✅ Qui va la lista dei preferiti -->
+  <!-- Qui va la lista dei preferiti -->
   <div class="preferiti-box">
   <img src="lamuby_logo_bigtext_trasp_bianco.png" alt="Logo LaMuBy" class="logosidebar">
     <h2 id="messaggio-bentornato">
@@ -56,10 +56,10 @@
     </h3>
     <ul id="lista-ordini" style="display: none;"></ul>	
   </div>
-  <!-- ✅ Footer versione, fissato in fondo -->
+  <!-- Footer versione, fissato in fondo -->
   <div class="sidebar-footer">
 	<h4 style="text-align: center; opacity: 0.6;">
-		<i class="fas fa-tag"></i> Ver. 1.06
+		<i class="fas fa-tag"></i> Ver. 1.07
 	</h4>
   </div>
 </div>
@@ -140,7 +140,7 @@
   <h2 style="text-align: center;">Il Carrello</h2>
   <ul id="lista-carrello" style="list-style: none; padding: 0;"></ul>
   <p id="totale-prezzo" style="text-align: center; font-weight: bold; font-size: 1.4rem; margin-top: 10px;">Totale: €0.00</p>
-  <!-- 🔁 Bottoni aggiornati -->
+  <!-- Bottoni aggiornati -->
   <div class="bottoni-carrello">
     <button id="btn-svuota" onclick="svuotaCarrello()" aria-label="Svuota il carrello" title="Svuota il carrello">
       <i class="fas fa-trash"></i> Svuota
@@ -197,9 +197,8 @@
 <div id="modal-riepilogo" class="modal" style="display: none;">
   <h2 style="margin-bottom: 2px;">📋Riepilogo dell'Ordine</h2>
   <h4 style="margin-top: 2px;">
-	Verifica i dati, dopo l’invio riceverai Info per il pagamento 
-	<!-- <i class="fab fa-paypal" style="margin-right: 4px;"></i> -->
-	<!-- PayPal -->
+	  Verifica i dati: dopo l’invio si aprirà il popup per pagare con 
+    <i class="fab fa-paypal" style="margin-right: 4px;"></i> PayPal
   </h4>
   <!-- Carrello -->
   <div id="riepilogo-carrello" style="margin-bottom: 15px;">
@@ -234,11 +233,13 @@
 <!-- Popup di conferma ordine -->
 <div id="popup-conferma" class="modal">
     <h2>✅ Ordine Confermato!</h2>
-    <p>😄Grazie per il tuo acquisto! Ti contatteremo a breve...</p>
+    <p>😄 Grazie per il tuo acquisto!<br>
+    Paga subito con PayPal qui sotto.<br>
+    Ti scriveremo presto su <i class="fab fa-whatsapp"></i> WhatsApp...</p>   
     <!-- Bottone Mostra Link Pagamento PayPal -->
-    <!-- <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal"> -->
-      <!-- <i class="fab fa-paypal"></i> Paga ora con PayPal -->
-    <!-- </button> -->
+    <button type="button" onclick="mostraLinkPagamento()" class="btn-paypal" aria-label="Mostra link PayPal" title="Mostra link PayPal">
+      <i class="fab fa-paypal"></i> Paga ora con PayPal
+    </button>
     <!-- Bottone Chiudi -->
     <button onclick="chiudiPopupConferma()" class="btn-chiudi-popup">
       <i class="fas fa-times-circle"></i> Chiudi
@@ -258,14 +259,14 @@
 		<p id="prezzo-articolo" class="price" style="margin: 0;"></p>
 		<i class="fas fa-tag icon-load" style="font-size: 1.6rem; color: black;"></i>
 	  </div>
-      <p id="descrizione-articolo"></p>
+      <p id="descrizione-articolo"></p>      
       <p style="margin: 1rem 0; text-align: left;">
-      <span class="highlight-blink">
+        <span class="highlight-blink">
           Info e disponibilità usa Contattaci<br>in fondo alla pagina 
-          <i class="far fa-hand-point-down"></i>
-      </span>
+          <i class="far fa-hand-point-down" aria-hidden="true"></i>
+        </span>
       </p>
-		      <!-- Icona foto per segnalare che sotto ci sono immagini -->
+      <!-- Icona foto per segnalare che sotto ci sono immagini -->
       <div class="icona-foto">
         <i class="fas fa-camera" aria-hidden="true"></i> 2 Foto disponibili
       </div>
@@ -277,9 +278,9 @@
 		<img id="foto2-articolo" src="immagine-non-disponibile.webp" loading="lazy" alt="Foto aggiuntiva dell'articolo">
         <i class="fas fa-search img-zoom-icon" aria-hidden="true"></i>
 	  </div>
-	  <p class="invito-acquisto">
-    	  <i class="fa fa-thumbs-up" aria-hidden="true"></i>Ti piace?non lasciartelo scappare!
-      </p>
+    <p class="invito-acquisto">
+      <i class="fa fa-thumbs-up" aria-hidden="true"></i>Ti piace?non lasciartelo scappare!
+    </p>
 <!-- Nuovo bottone per aggiungere al carrello -->
   <button onclick="aggiungiAlCarrello(document.getElementById('titolo-articolo').textContent, document.getElementById('prezzo-articolo').textContent)" class="contact-button" aria-label="Aggiungi al carrello" title="Aggiungi al carrello">
     <i class="fas fa-shopping-cart"></i> Aggiungi al Carrello
@@ -309,7 +310,7 @@
       <img src="qr-lamuby.avif" alt="QR Code LaMuBy" style="width: 120px; height: 120px;">
   </div>
   <p>Siamo un piccolo bazar online dedicato alla vendita di articoli usati. La nostra missione è dare una seconda vita agli oggetti e offrire buone occasioni a chi cerca qualcosa di unico.</p>
-  <p>Contattaci per disponibilità, spedizioni e maggiori informazioni!</p>
+  <p>Contattaci per disponibilità, spedizioni e maggiori informazioni.</p>
   <p>
   <b><i class="fab fa-whatsapp"></i> Telefono: 
     <span id="telefonopersonale" onclick="copiaContatto('telefonopersonale')" style="cursor: pointer;" title="Clicca per copiare"></span>
@@ -324,13 +325,18 @@
 <button onclick="togglePolicyModal()" class="btn btn-privacy" aria-label="Privacy & Cookie Policy" title="Privacy & Cookie Policy">
   <i class="fas fa-shield-alt"></i> Privacy & Cookie Policy
 </button>
-<!-- <button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione"> -->
-  <!-- <i class="fas fa-info-circle"></i> Pagamento & Spedizione -->
-<!-- </button> -->
+<button onclick="togglePagamentoSpedizioneModal()" class="btn btn-pagamento" aria-label="Info Pagamento e Spedizione" title="Info Pagamento e Spedizione">
+  <i class="fas fa-info-circle"></i>Ordini&nbsp&nbspPaga & Spedisco&nbsp                                   
+</button>
 </div>
 <!-- Modale Privacy Policy -->
 <div id="modal-policy" class="modal">
   <h3>Privacy & Cookie Policy</h3>
+  <p><strong><i class="fas fa-user-shield"></i> Titolare del trattamento:</strong><br>
+    LAMUBY di Piovanelli Laura<br>
+    P.IVA 04692000989<br>
+    <span id="emailpersonale-privacy"></span>
+  </p>
   <p><strong><i class="fas fa-database"></i> Raccolta dati:</strong><br>
     Non raccogliamo dati personali in modo automatico.Gli ordini inviati tramite WhatsApp sono gestiti manualmente e non vengono archiviati online.I dati(preferiti,ordini)vengono salvati localmente sul dispositivo,previo consenso per il salvataggio delle informazioni di spedizione.
   </p>
@@ -347,11 +353,13 @@
 <div id="policy-overlay" class="overlay" onclick="togglePolicyModal()"></div>
 <!-- Modal Info Pagamento e Spedizione -->
 <div class="modal" id="modal-pagamento-spedizione">
-  <h3>Info Pagamento e Spedizione</h3>
-  <p><strong>Pagamento PayPal.me:</strong> Puoi effettuare il pagamento in modo sicuro tramite il nostro link personalizzato PayPal.me. Ti forniremo il link dopo la conferma dell’ordine.</p>
-  <p>⚠️ ""Se non hai il link PayPal.me per il pagamento, puoi richiederlo direttamente via chat su WhatsApp.""</p>
-  <hr>
-  <p><strong>Spedizione:</strong> Gli ordini vengono elaborati entro 1-2 giorni lavorativi. Le spedizioni sono gestite tramite corriere tracciabile e riceverai un codice di tracking via email.</p>
+  <h3>Invio Ordini Pagamento e Spedizione</h3>
+  <p><strong><i class="fab fa-whatsapp"></i> Ordine via WhatsApp:</strong>
+    Al click del tasto <b>“Invia Ordine via WhatsApp”</b> si aprirà automaticamente WhatsApp con un <u>messaggio precompilato</u> con tutti i dati dell’ordine.<br>
+    Non devi scrivere nulla: ti basterà solo <b>premere “Invia”</b> per confermare l’ordine.</p>
+  <p><strong><i class="fab fa-paypal"></i> Pagamento PayPal.me:</strong> Puoi effettuare il pagamento in modo sicuro tramite il link personalizzato PayPal.me. Dopo aver confermato l’ordine,nel popup ti basterà cliccare su “Paga ora con PayPal”.<br>
+    "Puoi richiedere altri metodi di pagamento direttamente via chat su WhatsApp."</p>
+  <p><strong><i class="fas fa-truck"></i> Spedizione:</strong> Gli ordini vengono elaborati entro 1-2 giorni lavorativi.Le spedizioni sono gestite tramite corriere tracciabile e riceverai un codice di tracking.</p> 
   <button onclick="togglePagamentoSpedizioneModal()" style="background: #6e3b6e; color: white; padding: 0.8rem; border: none; border-radius: 5px; cursor: pointer;">
     <i class="fas fa-times-circle"></i> Chiudi</button>
 </div>
@@ -400,10 +408,10 @@ function toggleModal() {
   modal.classList.toggle('active');
   overlay.classList.toggle('active');
   if (modal.classList.contains('active')) {
-    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+    document.body.classList.add("overlay-attivo"); // aggiunto
     bloccaScroll()
   } else {
-    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+    document.body.classList.remove("overlay-attivo"); // rimosso
     sbloccaScroll()
   }
   apriModaleAnimato("modal", "fade");
@@ -464,7 +472,7 @@ document.getElementById("share-btn").onclick = function () {
   }, 500);
     document.getElementById("titolo-home").style.display = "block";
     window.scrollTo(0, 0); // Salta direttamente all'inizio della pagina	
-	// ✅ Rimuove ?item=... dall'URL senza ricaricare la pagina
+	// Rimuove ?item=... dall'URL senza ricaricare la pagina
   if (window.history.replaceState) {
     const baseUrl = window.location.origin + window.location.pathname.replace(/index\.html$/, '');
     window.history.replaceState({}, document.title, baseUrl);
@@ -488,7 +496,7 @@ function aggiungiAlCarrello(nome, prezzo) {
     }
     salvaCarrelloLocalmente();
     aggiornaCarrello();
-    // ✨ ANIMAZIONE ICONA FLY TO CART
+    // ANIMAZIONE ICONA FLY TO CART
     const event = window.event;
     const clickX = event.clientX;
     const clickY = event.clientY;
@@ -508,7 +516,7 @@ function aggiungiAlCarrello(nome, prezzo) {
     setTimeout(() => {
         icona.remove();
     }, 1000);
-    // 🔔 TOAST NOTIFICATION
+    // TOAST NOTIFICATION
     let toast = document.getElementById("toast-confirm");
     toast.innerHTML = `<i class="fas fa-check-circle"></i> ${nome} aggiunto al carrello!`;
     toast.style.animationDuration = `2500ms`;
@@ -606,13 +614,13 @@ function inviaOrdineWhatsApp() {
 	toast.innerHTML += '<div id="toast-progress-bar"></div>';
 	const barra = document.querySelector("#toast-progress-bar");
     barra.style.animationDuration = `950ms`;
-	// ✅ Attendi un attimo prima di aprire WhatsApp
+	// Attendi un attimo prima di aprire WhatsApp
 	setTimeout(() => {
 		window.open(urlWhatsApp, "_blank");
 		// Mostra il popup di conferma ordine
 		mostraPopupConferma();
 	}, 950);
-	// Nasconde il toast dopo 2 secondi
+	// Nasconde il toast dopo 950m secondi
 	setTimeout(() => {
 		toast.style.display = "none";
 	}, 950);    
@@ -635,14 +643,14 @@ localStorage.setItem("ordini", JSON.stringify(ordiniSalvati));
 function mostraCarrello() {
     document.getElementById("modal-carrello").classList.add("active");
     document.getElementById("overlay-carrello").classList.add("active");
-	document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+	document.body.classList.add("overlay-attivo"); // aggiunto
 	bloccaScroll()
 	apriModaleAnimato("modal-carrello" , "fade");
 }
 function chiudiCarrello() {
     document.getElementById("modal-carrello").classList.remove("active");
     document.getElementById("overlay-carrello").classList.remove("active");
-	document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	document.body.classList.remove("overlay-attivo"); // rimosso
 	sbloccaScroll()
 }
 function svuotaCarrello() {
@@ -685,14 +693,14 @@ function mostraModuloSpedizione() {
 	chiudiCarrello(); // Chiude il carrello
     document.getElementById("modal-spedizione").style.display = "block";
 	document.getElementById("overlay-carrello").classList.add("active"); // Applica overlay oscurante
-	document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+	document.body.classList.add("overlay-attivo"); // aggiunto
 	bloccaScroll()
 	apriModaleAnimato("modal-spedizione" , "fade");
 }
 function chiudiModuloSpedizione() {
     document.getElementById("modal-spedizione").style.display = "none";
     document.getElementById("overlay-carrello").classList.remove("active"); // Rimuove overlay oscurante
-    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+    document.body.classList.remove("overlay-attivo"); // rimosso
 	sbloccaScroll()
 }
 function mostraPopupConferma() {
@@ -706,22 +714,22 @@ function mostraPopupConferma() {
     // Mostra la conferma dell'ordine
     document.getElementById("popup-conferma").style.display = "block";
     document.getElementById("overlay-conferma").classList.add("active"); //  attiva oscurante
-    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+    document.body.classList.add("overlay-attivo"); // aggiunto
 	bloccaScroll()
 }
 function chiudiPopupAnnullato() {
     document.getElementById("popup-annullato").style.display = "none";
-	document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+	document.body.classList.remove("overlay-attivo"); // rimosso
 	sbloccaScroll()
 	mostraCarrello();
 }
 function chiudiPopupConferma() {
     svuotaCarrello(); // Svuota il carrello quando si chiude il popup
     document.getElementById("overlay-conferma").classList.remove("active"); //  disattiva overlay
-    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
-	sbloccaScroll()
-	window.scrollTo({ top: 0});
-	location.reload(); // Ricarica la pagina manualmente
+    document.body.classList.remove("overlay-attivo"); // rimosso
+	  sbloccaScroll()    
+	  location.reload(); // Ricarica la pagina manualmente
+    window.scrollTo({ top: 0});
 }
 let clickCounter = 0;
 const logo = document.querySelector(".logo");
@@ -740,7 +748,7 @@ logo.addEventListener("click", function() {
 function chiudiModal() {
     modal.style.display = "none";
     document.getElementById("overlay-easteregg").classList.remove("active");
-    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+    document.body.classList.remove("overlay-attivo"); // rimosso
 	sbloccaScroll()
 }
 function toggleAppModal() {
@@ -749,10 +757,10 @@ function toggleAppModal() {
   modal.classList.toggle("active");
   overlay.classList.toggle("active");
   if (modal.classList.contains("active")) {
-    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+    document.body.classList.add("overlay-attivo"); // aggiunto
 	bloccaScroll()
   } else {
-    document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+    document.body.classList.remove("overlay-attivo"); // rimosso
 	sbloccaScroll()
   }
   apriModaleAnimato("app-modal", "fade");
@@ -834,12 +842,12 @@ function togglePolicyModal() {
   modal.classList.toggle("active");
   overlay.classList.toggle("active");
   if (modal.classList.contains("active")) {
-    document.body.classList.add("overlay-attivo"); // 👈 aggiunto
+    document.body.classList.add("overlay-attivo"); // aggiunto
 	document.body.classList.add("noscroll");  // Blocca lo scroll della pagina
   } else {
   document.getElementById("modal").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
-  document.body.classList.remove("overlay-attivo"); // 👈 rimosso
+  document.body.classList.remove("overlay-attivo"); // rimosso
     document.body.classList.remove("noscroll");  // Sblocca lo scroll
   }
   apriModaleAnimato("modal-policy", "fade");
@@ -870,7 +878,7 @@ preferiti.push(...preferitiPuliti);
 // Aggiorna l’icona cuore (🤍/❤️) in alto a destra
 aggiornaStatoCuore();
 aggiornaListaPreferiti(articoli);
-// 🔗 Mostra dettaglio articolo se URL contiene ?item=
+// Mostra dettaglio articolo se URL contiene ?item=
 const urlParams = new URLSearchParams(window.location.search);
 const articoloRichiesto = urlParams.get("item");
 if (articoloRichiesto) {
@@ -957,7 +965,7 @@ function aggiornaListaPreferiti(articoli) {
 	  localStorage.setItem("nomeModificato", "true"); /*serve per reset preferiti e ordini */
     }
   }
-  // 🔁 Disattiva subito il flag dopo l'uso
+  // Disattiva subito il flag dopo l'uso
   if (nomeAppenaInserito === "true") {
     localStorage.setItem("nomeAppenaInserito", "false");
   }  
@@ -988,14 +996,14 @@ if (localStorage.getItem("nomeModificato") === "true") {
       salutoLabel.textContent = "Benvenuto/a";
 	  document.getElementById("icona-modifica").style.display = "none";
 	  localStorage.setItem("nomeModificato", "true");  /*serve per reset preferiti e ordini */
-       // ✅ Aggiorna subito preferiti e ordini nella UI
+       // Aggiorna subito preferiti e ordini nella UI
     aggiornaListaPreferiti(window.articoliOriginali); // aggiorna lista preferiti
     aggiornaStatoCuore(); // aggiorna icona cuore
     const listaOrdini = document.getElementById("lista-ordini");
     if (listaOrdini && listaOrdini.style.display !== "none") {
       mostraOrdini(); // aggiorna lista visiva se è aperta
     }	
-	// ✅ Aggiorna pulsanti ❤️/🤍 negli articoli della home
+	// Aggiorna pulsanti ❤️/🤍 negli articoli della home
     renderArticoli(window.articoliCorrenti);
 	}
   });
@@ -1197,7 +1205,7 @@ function toggleOrdini() {
     freccia.textContent = "⬇️";
   }
 }
-// ⏳ INATTIVITÀ
+// INATTIVITÀ
 let inattivitaTimer;
 // Reset timer su ogni attività
 function resetInattivitaTimer() {
@@ -1206,7 +1214,7 @@ function resetInattivitaTimer() {
     mostraToast("Tutto ok? Ti aspettiamo 👋");
   }, 2 * 60 * 1000); // 2 minuti
 }
-// 👁️ VISIBILITY: torna da background
+// VISIBILITY: torna da background
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) {
     // Quando torna visibile
@@ -1222,11 +1230,11 @@ document.addEventListener("visibilitychange", () => {
 });
 // Avvio iniziale
 resetInattivitaTimer();
-// 📢 Funzione toast riutilizzabile
+// Funzione toast riutilizzabile
 function mostraToast(messaggio) {
   const toast = document.getElementById("toast-confirm");
   if (!toast) return;
-  // 🚫 NON mostrare il toast se il popup conferma è visibile
+  // NON mostrare il toast se il popup conferma è visibile
   const confermaVisibile = document.getElementById("popup-conferma")?.style.display === "block";
   if (confermaVisibile) return;
   // Posizione: sempre in basso a destra per ora
@@ -1342,7 +1350,7 @@ function inizializzaSpedizione() {
       document.getElementById("indirizzo").value = dati.indirizzo || "";
       document.getElementById("telefono").value = dati.telefono || "";
       document.getElementById("email").value = dati.email || "";
-      // ✅ Mostra messaggio se i dati sono validi
+      // Mostra messaggio se i dati sono validi
       if (dati.nome || dati.indirizzo || dati.telefono || dati.email) {
         h4Spedizione.textContent = "(Dati spedizione recuperati)";
       }
@@ -1378,28 +1386,48 @@ function bloccaScroll() {
 function sbloccaScroll() {
   document.body.classList.remove("noscroll");
 }
-function mostraLinkPagamento() {
+function mostraLinkPagamento() { 
   const totaleTesto = document.getElementById("riepilogo-totale")?.textContent || "";
   const totale = parseFloat(totaleTesto.replace(/[^\d.]/g, "")); // estrai solo numero
   if (isNaN(totale) || totale <= 0) {
     alert("Importo non valido per il pagamento.");
     return;
+  }  
+  const usernamePayPal = "PiovanelliLaura"; // <-- cambia con il tuo PayPal.me
+  const link = `https://www.paypal.com/paypalme/${usernamePayPal}/${totale.toFixed(2)}?noapp=1`;  
+  // Copia negli appunti
+  navigator.clipboard.writeText(link).catch(err => console.warn("Impossibile copiare:", err));
+  let toast = document.getElementById("toast-confirm");
+  toast.innerHTML = `<i class="fab fa-paypal"></i> Apro PayPal.me tra pochi secondi..😉`;
+  toast.style.animationDuration = `5000ms`;
+  toast.style.display = "block";
+  toast.innerHTML += '<div id="toast-progress-bar"></div>';
+  const barra = toast.querySelector("#toast-progress-bar");
+  barra.style.animationDuration = `5000ms`;
+  // --- rilevamento browser ---
+  const ua = navigator.userAgent;
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isChrome = /Chrome/i.test(ua) && !/SamsungBrowser/i.test(ua) && !/Firefox/i.test(ua);
+  const isSamsung = /SamsungBrowser/i.test(ua);
+  const isFirefox = /Firefox/i.test(ua);
+  const isSafari = isIOS && /Safari/i.test(ua) && !/CriOS/i.test(ua); // Safari su iOS
+  // --- logica comportamento ---
+  if (isAndroid && isChrome) {
+    // SOLO Chrome su Android --> ritardo di 5 secondi
+    setTimeout(() => { 
+      window.open(link, "_blank");
+      chiudiPopupConferma();
+    }, 5000);
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 5000); 
+  } else {
+    // Tutti gli altri (Samsung Internet, Firefox, Safari iOS, desktop ecc.)
+    window.open(link, "_blank");
+    chiudiPopupConferma();
+    toast.style.display = "none"
   }
-  const usernamePayPal = "AntimoN"; // <-- cambia con il tuo PayPal.me
-  const link = 'Ciao'      // `https://paypal.me/${usernamePayPal}/${totale.toFixed(2)}`;   
-    // Copia negli appunti
-  navigator.clipboard.writeText(link)
-    .then(() => {
-      console.log("Link copiato negli appunti:", link);
-    })
-    .catch(err => {
-      console.warn("Impossibile copiare il link:", err);
-    });
-  // Conferma e apertura
-  // if (confirm(`🅿️ Paga ora con PayPal\n${link}`)) { 
-    // window.open(link, "_blank");
-	alert("Link non disponibile al momento, scivere in chat WhatsApp.");
-  // } 
 }
 function togglePagamentoSpedizioneModal() {
   window.scrollTo(0, 0);
