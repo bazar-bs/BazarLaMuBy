@@ -797,7 +797,6 @@
   transform: scale(1.03);
 }
 .descrizione-scarabocchio {
-  /* background-image: url('sfondo-scarabocchio.svg'); */
   font-weight: bold;
   padding: 1rem;
   border-radius: 8px;
